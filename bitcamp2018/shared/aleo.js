@@ -6,7 +6,7 @@ function aleofy(Component, fontStyle='Regular') {
   return (props) => (
 
       <Component {...props}
-        style={[{ fontFamily: `Arial` }, props.style]}>
+        style={[{ fontFamily: `Aleo-${fontStyle}` }, props.style]}>
 
         {props.children}
       </Component>

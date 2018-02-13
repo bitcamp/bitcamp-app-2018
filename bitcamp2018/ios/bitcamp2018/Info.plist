@@ -64,6 +64,12 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Aleo-Bold.ttf</string>
+		<string>Aleo-BoldItalic.ttf</string>
+		<string>Aleo-Italic.ttf</string>
+		<string>Aleo-Light.ttf</string>
+		<string>Aleo-LightItalic.ttf</string>
+		<string>Aleo.ttf</string>
 	</array>
 </dict>
 </plist>
