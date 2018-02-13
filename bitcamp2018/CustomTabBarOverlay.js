@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   StyleSheet,
   Text,
@@ -39,9 +41,9 @@ class CustomTabBarOverlay extends Component {
 }
 
 CustomTabBarOverlay.propTypes = {
-  goToPage: React.PropTypes.func,
-  activeTab: React.PropTypes.number,
-  tabs: React.PropTypes.array
+  goToPage: PropTypes.func,
+  activeTab: PropTypes.number,
+  tabs: PropTypes.array
 };
 
 const styles = StyleSheet.create({

@@ -1,6 +1,8 @@
 //credit for some of code goes to https://github.com/naoufal/react-native-accordion/tree/master/examples/AccordionExample
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 import tweenState from 'react-tween-state';
 import {
   StyleSheet,
@@ -9,6 +11,8 @@ import {
   View,
   Text
 } from 'react-native';
+
+
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { colors } from '../shared/styles';
@@ -43,13 +47,13 @@ class HeaderComponent extends Component {
   }
 }
 
-const Accordion = React.createClass({
+const Accordion = createReactClass({
   mixins: [tweenState.Mixin],
 
   propTypes: {
-    children: React.PropTypes.element.isRequired,
-    time: React.PropTypes.string,
-    title: React.PropTypes.string
+    children: PropTypes.element.isRequired,
+    time: PropTypes.string,
+    title: PropTypes.string
   },
 
   getInitialState() {

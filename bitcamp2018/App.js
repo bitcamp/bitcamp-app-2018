@@ -12,7 +12,6 @@ import {
   View
 } from 'react-native';
 import Orientation from 'react-native-orientation';
-
 import MenuTab from './MenuTab';
 
 
