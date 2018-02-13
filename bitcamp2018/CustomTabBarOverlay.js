@@ -35,7 +35,7 @@ class CustomTabBarOverlay extends Component {
           />
         </TouchableOpacity>;
       })}
-      <Animated.View style={[styles.tabUnderlineStyle, eachTabWidth, { left, }, ]} />
+      <Animated.View style={[styles.tabUnderlineStyle, eachTabWidth, ]} />
     </View>;
   }
 }

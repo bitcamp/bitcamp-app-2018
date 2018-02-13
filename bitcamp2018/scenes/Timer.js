@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View, Platform, Dimensions, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
+import { Text, Image, ImageBackground, View, Platform, Dimensions, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
 
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
@@ -81,18 +81,18 @@ class Timer extends Component {
 
     if (this.state.totalPresses < 7) {
       logo = (
-        <TouchableHighlight 
+        <TouchableHighlight
           onPress={this._logoPress.bind(this)}
           underlayColor="rgba(0,0,0,0)"
           >
-          <Image
+          <ImageBackground
             source={require('./images/fire-bg-copy-copy.png')}
             style={styles.fireBackground}>
             <Image
               source={require('./images/flame3.gif')}
               style={styles.fire} />
             <Image source={require('./images/logs.png')} />
-          </Image>
+          </ImageBackground>
         </TouchableHighlight>);
     } else {
       logo = (
