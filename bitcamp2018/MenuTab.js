@@ -21,7 +21,7 @@ export default function MenuTab(props) {
   let iconPrefix = 'ios';
   let style = { flex: 1 };
   let iOS = true;
-  let topBar = <View style={{flex:0, backgroundColor:colors.lightBrown, height:20}}/>;
+  // let topBar = <View style={{flex:0, backgroundColor:colors.lightBrown, height:20}}/>;
 
   if (Platform.OS === 'android') {
     menuTabPosition = 'top';
@@ -33,7 +33,7 @@ export default function MenuTab(props) {
 
   return (
     <View style={{flex:1}}>
-      {iOS && topBar}
+      {/* {iOS && topBar} */}
       <ScrollableTabView
         tabBarPosition={menuTabPosition}
         style={style}

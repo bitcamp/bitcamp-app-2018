@@ -9,10 +9,23 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  StatusBar
 } from 'react-native';
+import {
+  Container,
+  Content,
+  Header,
+  Body,
+  Title,
+  Left,
+  Right,
+  Button,
+  Icon
+} from 'native-base';
 import Orientation from 'react-native-orientation';
 import MenuTab from './MenuTab';
+import { colors } from './shared/styles';
 
 
 // const instructions = Platform.select({
@@ -22,29 +35,47 @@ import MenuTab from './MenuTab';
 //     'Shake or press menu button for dev menu',
 // });
 
-export default class App extends Component<{}> {
+// export default class App extends Component<{}> {
+//   render() {
+//     return (
+//       <View style={styles.container}>
+//         <StatusBar
+//           backgroundColor="blue"
+//           barStyle="light-content"
+//         />
+//       </View>
+//     );
+//   }
+// }
+//
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     // justifyContent: 'center',
+//     // alignItems: 'center',
+//     // backgroundColor: '#F5FCFF',
+//   },
+// });
+
+export default class App extends React.Component {
   render() {
     return (
-      <MenuTab />
+      <Container>
+        <Header style={{backgroundColor: colors.mediumBrown }}>
+          <StatusBar barStyle="light-content"/>
+          <Left>
+            <Button transparent>
+              <Icon name='menu' style={{ color: 'white' }}/>
+            </Button>
+          </Left>
+          <Body>
+            <Title style={{color:'#FFF'}}>Bitcamp 2018</Title>
+          </Body>
+          <Right>
+          </Right>
+        </Header>
+        <MenuTab />
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
