@@ -23,20 +23,22 @@ class CustomTabBarOverlay extends Component {
       inputRange: [0, 1, ], outputRange: [0,  containerWidth / numberOfTabs, ],
     });
 
-    return <View style={[styles.tabs, this.props.style, ]}>
-      {this.props.tabs.map((tab, i) => {
-        return <TouchableOpacity key={tab}
-          onPress={() => this.props.goToPage(i)} style={styles.tab}>
-          <Icon
-            name={tab}
-            size={30}
-            color={this.props.activeTab === i ?
-              colors.cloudWhite : colors.lightBrown}
-          />
-        </TouchableOpacity>;
-      })}
-      <Animated.View style={[styles.tabUnderlineStyle, eachTabWidth, ]} />
-    </View>;
+    return (
+      <View style={[styles.tabs, this.props.style, ]}>
+        {this.props.tabs.map((tab, i) => {
+          return <TouchableOpacity key={tab}
+            onPress={() => this.props.goToPage(i)} style={styles.tab}>
+            <Icon
+              name={tab}
+              size={30}
+              color={this.props.activeTab === i ?
+                colors.cloudWhite : colors.lightBrown}
+            />
+          </TouchableOpacity>;
+        })}
+        <Animated.View style={[styles.tabUnderlineStyle, eachTabWidth, ]} />
+      </View>
+    );
   }
 }
 

@@ -39,6 +39,7 @@ export default function MenuTab(props) {
         style={style}
         initialPage={0}
         renderTabBar={() => <CustomTabBarOverlay />}
+        tabBarPosition="bottom"
       >
         <CountdownScene   tabLabel={`${iconPrefix}-home`} />
         <ScheduleScene    tabLabel={`${iconPrefix}-calendar`} />
