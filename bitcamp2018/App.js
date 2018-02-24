@@ -64,7 +64,7 @@ export default class App extends React.Component {
     return (
       <Container>
         <Header style={{backgroundColor: colors.mediumBrown }}>
-          <StatusBar barStyle="light-content"/>
+          <StatusBar backgroundColor={ colors.darkBrown } barStyle="light-content"/>
           {/* Required to center the Title on iOS */}
           {
             (Platform.OS === 'ios') ? <Left /> : null
