@@ -6,10 +6,12 @@
 
 import React, { Component } from 'react';
 import {
+  Platform,
   AppRegistry,
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
   StatusBar
 } from 'react-native';
 import {
@@ -63,15 +65,18 @@ export default class App extends React.Component {
       <Container>
         <Header style={{backgroundColor: colors.mediumBrown }}>
           <StatusBar barStyle="light-content"/>
-          <Left>
-            <Button transparent>
-              <Icon name='menu' style={{ color: 'white' }}/>
-            </Button>
-          </Left>
+          {/* Required to center the Title on iOS */}
+          {
+            (Platform.OS === 'ios') ? <Left /> : null
+          }
           <Body>
             <Title style={{color:'#FFF'}}>Bitcamp 2018</Title>
           </Body>
+          {/* TODO swap the icon with a QR icon */}
           <Right>
+            <TouchableOpacity>
+              <Icon name='menu' style={{ color: 'white' }}/>
+            </TouchableOpacity>
           </Right>
         </Header>
         <MenuTab />
