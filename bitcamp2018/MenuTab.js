@@ -4,7 +4,7 @@ import { Platform, View } from 'react-native';
 import ScheduleScene from './scenes/ScheduleScene';
 import ChallengesScene from './scenes/ChallengesScene';
 import MapScene from './scenes/MapScene';
-import MentorsScene from './scenes/MentorsScene';
+// import MentorsScene from './scenes/MentorsScene';
 import CountdownScene from './scenes/CountdownScene';
 
 //credit to/documentation at
