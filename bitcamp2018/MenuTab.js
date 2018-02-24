@@ -44,9 +44,9 @@ export default function MenuTab(props) {
       >
         <CountdownScene   tabLabel={`${iconPrefix}-home`} />
         <ScheduleScene    tabLabel={`${iconPrefix}-calendar`} />
-        <MapScene         tabLabel={`${iconPrefix}-map`} />
         <ChallengesScene  tabLabel={`${iconPrefix}-trophy`} />
-        <MentorsScene     tabLabel={`logo-twitter`} />
+        <MapScene         tabLabel={`${iconPrefix}-map`} />
+        {/* <MentorsScene     tabLabel={`logo-twitter`} /> */}
       </ScrollableTabView>
     </View>
   );

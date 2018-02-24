@@ -33,9 +33,9 @@ import { colors } from './shared/styles';
 const pageNumberTitles = [
   "Bitcamp 2018",
   "Schedule",
-  "Map",
   "Announcements",
-  "Twitter"
+  "Map",
+  // "Twitter"
 ]
 
 export default class App extends React.Component {
