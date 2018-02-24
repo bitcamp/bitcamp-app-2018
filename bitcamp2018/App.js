@@ -30,36 +30,25 @@ import MenuTab from './MenuTab';
 import { colors } from './shared/styles';
 
 
-// const instructions = Platform.select({
-//   ios: 'Press Cmd+R to reload,\n' +
-//     'Cmd+D or shake for dev menu',
-//   android: 'Double tap R on your keyboard to reload,\n' +
-//     'Shake or press menu button for dev menu',
-// });
-
-// export default class App extends Component<{}> {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <StatusBar
-//           backgroundColor="blue"
-//           barStyle="light-content"
-//         />
-//       </View>
-//     );
-//   }
-// }
-//
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     // justifyContent: 'center',
-//     // alignItems: 'center',
-//     // backgroundColor: '#F5FCFF',
-//   },
-// });
+const pageNumberTitles = [
+  "Bitcamp 2018",
+  "Schedule",
+  "Map",
+  "Announcements",
+  "Twitter"
+]
 
 export default class App extends React.Component {
+  state = {
+    title: pageNumberTitles[0]
+  }
+
+  changeHeaderTitle(pageNumber) {
+    this.setState({
+      title: pageNumberTitles[pageNumber]
+    })
+  }
+
   render() {
     return (
       <Container>
@@ -70,7 +59,7 @@ export default class App extends React.Component {
             (Platform.OS === 'ios') ? <Left /> : null
           }
           <Body>
-            <Title style={{color:'#FFF'}}>Bitcamp 2018</Title>
+            <Title style={{color:'#FFF'}}>{this.state.title}</Title>
           </Body>
           {/* TODO swap the icon with a QR icon */}
           <Right>
@@ -79,7 +68,7 @@ export default class App extends React.Component {
             </TouchableOpacity>
           </Right>
         </Header>
-        <MenuTab />
+        <MenuTab changeHeaderTitle={ this.changeHeaderTitle.bind(this) } />
       </Container>
     );
   }
