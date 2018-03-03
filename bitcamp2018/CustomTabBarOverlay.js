@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import {
+  Platform,
   StyleSheet,
   Text,
   View,
@@ -23,20 +24,31 @@ class CustomTabBarOverlay extends Component {
       inputRange: [0, 1, ], outputRange: [0,  containerWidth / numberOfTabs, ],
     });
 
-    return <View style={[styles.tabs, this.props.style, ]}>
-      {this.props.tabs.map((tab, i) => {
-        return <TouchableOpacity key={tab}
-          onPress={() => this.props.goToPage(i)} style={styles.tab}>
-          <Icon
-            name={tab}
-            size={30}
-            color={this.props.activeTab === i ?
-              colors.cloudWhite : colors.lightBrown}
-          />
-        </TouchableOpacity>;
-      })}
-      <Animated.View style={[styles.tabUnderlineStyle, eachTabWidth, ]} />
-    </View>;
+    return (
+      <View style={[styles.tabs, this.props.style, ]}>
+        {this.props.tabs.map((tab, i) => {
+          return (
+            <TouchableOpacity key={tab}
+              onPress={() => this.props.goToPage(i)}
+              style={styles.tab}
+              style={
+                this.props.activeTab === i ?
+                [styles.tab, styles.tabActive] : styles.tab
+              }
+            >
+              <Icon
+                name={tab}
+                size={28}
+                color={this.props.activeTab === i ?
+                  colors.bitcampOrange : colors.lightBrown}
+              />
+            </TouchableOpacity>
+          );
+        })}
+        {/* Animated underline for active view is BROKEN FOR NOW */}
+        {/* <Animated.View style={[styles.tabUnderlineStyle, eachTabWidth, ]} /> */}
+      </View>
+    );
   }
 }
 
@@ -57,19 +69,32 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 10,
-
+    ...Platform.select({
+      ios: {
+        paddingBottom: 10,
+      },
+      android: {
+        paddingBottom: 12,
+      },
+    }),
+    paddingTop: 10,
+    borderTopColor: colors.cloudWhite,
+    borderTopWidth: 4,
+  },
+  tabActive: {
+    borderTopColor: colors.bitcampOrange,
   },
   tabs: {
+    // borderTopColor: colors.lightBrown,
+    borderTopWidth: 0,
     height: 45,
     flexDirection: 'row',
-    backgroundColor: colors.darkBrown,
-    paddingTop: 8,
+    backgroundColor: colors.cloudWhite,
+    // paddingTop: 8,
     borderWidth: 1,
-    borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderBottomColor: 'rgba(0,0,0,0.05)',
+    borderBottomWidth: 0
   },
 });
 

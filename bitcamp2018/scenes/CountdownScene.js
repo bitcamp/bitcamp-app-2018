@@ -1,113 +1,192 @@
 import React, { Component } from 'react';
-import { Image, View, StyleSheet, Dimensions } from 'react-native';
-import Timer from './Timer.js';
+import { Text, Image, ImageBackground, View, Platform, Dimensions, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
+
+import { colors } from '../shared/styles';
+import aleofy from '../shared/aleo';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+const BoldAleoText = aleofy(Text, 'Bold');
 
 const window = Dimensions.get('window');
 
-// Variable background image
+// wraps a component with styles.shadow
+function shadowify(Component) {
+  return (props) => (
+    <Component {...props} style={[styles.shadow, props.style]}>
+      {props.children}
+    </Component>
+  );
+}
+const TimerText = shadowify(aleofy(Text, 'Bold'));
+
+// A countdown to the event and then to end of hacking
 class CountdownScene extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      time: new Date(),
+      totalPresses: 0,
+      fill:100,
+    };
+  };
 
-  _getOpacity(image) {
-    var time = new Date().getTime();
-    var seconds = Math.floor((time % 86400000) / 1000);
-    var hour = 3600;
-    if (seconds > 4 * hour) {
-      seconds = seconds - 4 * hour;
-    } else {
-      seconds = 24 * hour - 4 * hour + seconds;
-    }
-    var opacity;
-
-    switch(image) {
-      case 'day':
-        if (seconds < 8 * hour || seconds > 18 * hour) {
-          opacity = 0;
-        } else if (seconds > 10 * hour && seconds <= 16 * hour) {
-            opacity = 1;
-        } else if (seconds < 10 * hour) {
-            opacity = (seconds - 8 * hour) / (2 * hour);
-        } else {
-            opacity = (18 * hour - seconds) / (2 * hour);
-        }
-        break;
-      case 'dawn':
-        if (seconds < 4 * hour || seconds > 10 * hour) {
-          opacity = 0;
-        } else if (seconds > 6 * hour && seconds <= 8 * hour) {
-          opacity = 1;
-        } else if (seconds < 6 * hour) {
-          opacity = (seconds - 4 * hour) / (2 * hour);
-        } else {
-          opacity = (10 * hour - seconds) / (2 * hour);
-        }
-        break;
-      case 'dusk':
-        if (seconds < 16 * hour || seconds > 22 * hour) {
-          opacity = 0;
-        } else if (seconds > 18 * hour && seconds <= 20 * hour) {
-          opacity = 1;
-        } else if (seconds < 18 * hour) {
-          opacity = (seconds - 16 * hour) / (2 * hour);
-        } else {
-          opacity = (22 * hour - seconds) / (2 * hour);
-        }
-        break;
-      case 'night':
-        if (seconds > 6 * hour && seconds < 20 * hour) {
-          opacity = 0;
-        } else if (seconds > 22 * hour || seconds <= 4 * hour) {
-          opacity = 1;
-        } else if (seconds < 6 * hour) {
-          opacity = 1 - (seconds - 4 * hour) / (2 * hour);
-        } else {
-          opacity = 1 - ((22 * hour - seconds) / (2 * hour));
-        }
-        break;
-    }
-    return opacity;
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState({
+        time: new Date(),
+      });
+    }, 1000);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
   render() {
-    return (
+    const eventTime      = new Date(2018, 4, 6, 22, 0, 0, 0); // when hacking begins
+    const endHackingTime = new Date(2018, 4, 8, 10, 0, 0, 0);
 
-      <View
-        style={styles.container}>
-        <Image
-          source={require('./images/bg1dawn4.png')}
-          style={[styles.background, { opacity: this._getOpacity('dawn') }]} />
-        <Image
-          source={require('./images/bg2day4.png')}
-          style={[styles.background, { opacity: this._getOpacity('day') }]} />
-        <Image
-          source={require('./images/bg3dusk4.png')}
-          style={[styles.background, { opacity: this._getOpacity('dusk') }]} />
-        <Image
-          source={require('./images/bg4night4.png')}
-          style={[styles.background, { opacity: this._getOpacity('night') }]} />
-        <Timer />
+    let numberStyles = styles.numbers;
+    let remain;  // the time remaining until the next 'event' (either hacking begins or hacking ends)
+
+    if (Platform.OS === "ios"){
+      if (window.height/window.width < 1.7) numberStyles = styles.numbersIPad;
+    }
+
+    if (this.state.time <= eventTime) {
+      remain = eventTime.getTime() - this.state.time.getTime();
+
+    } else if (this.state.time > eventTime && this.state.time < endHackingTime) {
+      remain = endHackingTime.getTime() - this.state.time.getTime();
+
+    } else {
+      remain = 0;
+    }
+
+    const days    = Math.floor((remain / 86400000));
+    const hours   = Math.floor((remain % 86400000) / 3600000);
+    const minutes = Math.floor((remain % 86400000 % 3600000) / 60000);
+    const seconds = Math.floor((remain % 86400000 % 3600000 % 60000) / 1000);
+
+    let daysText;
+    let hoursText;
+    let minutesText;
+    let secondsText;
+    if(days < 10){
+      daysText = "0" + days;
+    }else{
+      daysText = "" + days;
+    }
+    if(hours < 10){
+      hoursText = "0" + hours;
+    }else{
+      hoursText = "" + hours;
+    }
+    if(minutes < 10){
+      minutesText = "0" + minutes;
+    }else{
+      minutesText = "" + minutes;
+    }
+    if(seconds < 10){
+      secondsText = "0" + seconds;
+    }else{
+      secondsText = "" + seconds;
+    }
+    return (
+      <View style={styles.scene}>
+        <AnimatedCircularProgress
+          size={350}
+          width={15}
+          fill={this.state.fill}
+          tintColor="#FAAE44"
+          backgroundColor="#FAAE44"
+          rotation={0}
+          style={styles.circle}>
+          {
+            (fill) => (
+              <View>
+                <Image
+                  source={require('./images/flame.gif')}
+                  style={styles.fire} 
+                />
+                <Image
+                  source={require('./images/logs.png')}
+                  style={styles.logs}
+                />
+              </View>
+            )
+          }
+        </AnimatedCircularProgress>
+        <View style={styles.row}>
+          <View style={styles.col}>
+            <TimerText style={numberStyles}>{daysText}</TimerText>
+            <TimerText style={styles.dhms}>D</TimerText>
+          </View>
+          <TimerText style={numberStyles}>:</TimerText>
+          <View style={styles.col}>
+            <TimerText style={numberStyles}>{hoursText}</TimerText>
+            <TimerText style={styles.dhms}>H</TimerText>
+          </View>
+          <TimerText style={numberStyles}>:</TimerText>
+          <View style={styles.col}>
+            <TimerText style={numberStyles}>{minutesText}</TimerText>
+            <TimerText style={styles.dhms}>M</TimerText>
+          </View>
+          <TimerText style={numberStyles}>:</TimerText>
+          <View style={styles.col}>
+            <TimerText style={numberStyles}>{secondsText}</TimerText>
+            <TimerText style={styles.dhms}>S</TimerText>
+          </View>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  scene: {
     flex: 1,
-    height: window.height,
-    width: window.width,
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
+    justifyContent: 'center'
   },
-  // common styles for the background - to be merged into each Image's styles
-  background: {
+  circle: {
+    marginBottom: 15,
+  },
+  fire: {
+    height:150,
+    width:150
+  },
+  logs: {
+    height:65,
+    width:150
+  },
+  fireBackground: {
+    alignItems: 'center'
+  },
+  // text sizes
+  shadow: {
+    color: colors.DarkBrown,
+    textAlign: 'center'
+  },
+  numbersIPad:{
+    fontSize: 40,
+    marginTop: 20,
+    marginBottom: 10
+  },
+  numbers: {
+    fontSize: 70,
+  },
+  dhms: {
+    fontSize: 20
+  },
+  api: {
+    fontSize: 25
+  },
+  col: {
     flex: 1,
-    height: window.height,
-    width: window.width,
-    backgroundColor: 'transparent',
-    position: 'absolute'
-  }
+    flexDirection: 'column'
+  },
+  row: {
+    flexDirection: 'row'
+  },
 });
 
 export default CountdownScene;
