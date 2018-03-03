@@ -6,7 +6,8 @@
 4. Install our dependencies: run `npm install` in the directory `package.json` is in
 5. For Android: install Android Studio, start an emulator, and run `react-native run-android`
 6. For iOS: install Xcode and run `react-native run-ios`
-7. Try editing `index.js` and reloading the app
+7. Try editing `App.js` and reloading the app
+8. **NEW** You might need to run react-native link to get dependencies to work.
 
 Most of this comes from the [React Native Docs](https://facebook.github.io/react-native/docs/getting-started.html).
 
