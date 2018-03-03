@@ -3,6 +3,7 @@ import { Text, Image, ImageBackground, View, Platform, Dimensions, StyleSheet, S
 
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 const BoldAleoText = aleofy(Text, 'Bold');
 
 const window = Dimensions.get('window');
@@ -19,6 +20,10 @@ const TimerText = shadowify(aleofy(Text, 'Bold'));
 
 // A countdown to the event and then to end of hacking
 class Timer extends Component {
+
+  state = {
+    fill:100,
+  }
 
   constructor(props) {
     super(props);
@@ -76,34 +81,30 @@ class Timer extends Component {
     const hours   = Math.floor((remain % 86400000) / 3600000);
     const minutes = Math.floor((remain % 86400000 % 3600000) / 60000);
     const seconds = Math.floor((remain % 86400000 % 3600000 % 60000) / 1000);
-
-    var logo;
-
-    if (this.state.totalPresses < 7) {
-      logo = (
-        <TouchableHighlight
-          onPress={this._logoPress.bind(this)}
-          underlayColor="rgba(0,0,0,0)"
-          >
-          <ImageBackground
-            source={require('./images/fire-bg-copy-copy.png')}
-            style={styles.fireBackground}>
-            <Image
-              source={require('./images/flame3.gif')}
-              style={styles.fire} />
-            <Image source={require('./images/logs.png')} />
-          </ImageBackground>
-        </TouchableHighlight>);
-    } else {
-      logo = (
-        <TimerText style={styles.api}>
-          https://jackjackjackjack.herokuapp.com/check
-        </TimerText>);
-    }
-
     return (
       <View style={styles.scene}>
-        {logo}
+        <AnimatedCircularProgress
+          size={350}
+          width={10}
+          fill={100}
+          tintColor="#FAAE44"
+          backgroundColor="#FAAE44"
+          rotation={0}>
+          {
+            (fill) => (
+              <View>
+                <Image
+                  source={require('./images/flame.gif')}
+                  style={styles.fire} 
+                />
+                <Image
+                  source={require('./images/logs.png')}
+                  style={styles.logs}
+                />
+              </View>
+            )
+          }
+        </AnimatedCircularProgress>
         <View style={styles.row}>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{days}</TimerText>
@@ -134,7 +135,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   fire: {
-    marginTop: 40 // position the gif inside the ring
+    height:150,
+    width:150
+  },
+  logs: {
+    height:65,
+    width:150
   },
   fireBackground: {
     alignItems: 'center'
@@ -154,8 +160,6 @@ const styles = StyleSheet.create({
   },
   numbers: {
     fontSize: 40,
-    marginTop: 50,
-    marginBottom: 20
   },
   dhms: {
     fontSize: 15
