@@ -3,7 +3,7 @@ import { Text, Image, ImageBackground, View, Platform, Dimensions, StyleSheet, S
 
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
+// import { AnimatedCircularProgress } from 'react-native-circular-progress';
 const BoldAleoText = aleofy(Text, 'Bold');
 
 const window = Dimensions.get('window');
@@ -92,7 +92,7 @@ class CountdownScene extends Component {
     }
     return (
       <View style={styles.scene}>
-        <AnimatedCircularProgress
+        {/* <AnimatedCircularProgress
           size={350}
           width={15}
           fill={this.state.fill}
@@ -105,7 +105,7 @@ class CountdownScene extends Component {
               <View>
                 <Image
                   source={require('./images/flame.gif')}
-                  style={styles.fire} 
+                  style={styles.fire}
                 />
                 <Image
                   source={require('./images/logs.png')}
@@ -114,7 +114,7 @@ class CountdownScene extends Component {
               </View>
             )
           }
-        </AnimatedCircularProgress>
+        </AnimatedCircularProgress> */}
         <View style={styles.row}>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{daysText}</TimerText>
