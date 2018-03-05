@@ -3,7 +3,6 @@ import { Text, Image, ImageBackground, View, Platform, Dimensions, StyleSheet, S
 
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
-// import { AnimatedCircularProgress } from 'react-native-circular-progress';
 const BoldAleoText = aleofy(Text, 'Bold');
 
 const window = Dimensions.get('window');
@@ -91,30 +90,18 @@ class CountdownScene extends Component {
       secondsText = "" + seconds;
     }
     return (
-      <View style={styles.scene}>
-        {/* <AnimatedCircularProgress
-          size={350}
-          width={15}
-          fill={this.state.fill}
-          tintColor="#FAAE44"
-          backgroundColor="#FAAE44"
-          rotation={0}
-          style={styles.circle}>
-          {
-            (fill) => (
-              <View>
-                <Image
-                  source={require('./images/flame.gif')}
-                  style={styles.fire}
-                />
-                <Image
-                  source={require('./images/logs.png')}
-                  style={styles.logs}
-                />
-              </View>
-            )
-          }
-        </AnimatedCircularProgress> */}
+        <ImageBackground
+         style={styles.container}
+         source={require('./images/background.png')}>
+         
+        <Image
+          source={require('./images/flame.gif')}
+          style={styles.fire} 
+        />
+        <Image
+          source={require('./images/logs.png')}
+          style={styles.logs}
+        />
         <View style={styles.row}>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{daysText}</TimerText>
@@ -136,7 +123,7 @@ class CountdownScene extends Component {
             <TimerText style={styles.dhms}>S</TimerText>
           </View>
         </View>
-      </View>
+        </ImageBackground>
     );
   }
 }
@@ -187,6 +174,14 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row'
   },
+  container: {
+    flex: 1,
+    // remove width and height to override fixed static size
+    width: null,
+    height: null,
+    alignItems:'center',
+    justifyContent: 'center' 
+  }
 });
 
 export default CountdownScene;

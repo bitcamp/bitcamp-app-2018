@@ -35,7 +35,7 @@ import { colors } from './shared/styles';
 import Modal from "react-native-modal";
 
 const pageNumberTitles = [
-  "Campfire Countdown",
+  "Bitcamp 2018",
   "Schedule",
   "Announcements",
   "Map",
@@ -118,14 +118,14 @@ export default class App extends React.Component {
   render() {
     return (
       <Container>
-        <Header style={{backgroundColor: colors.mediumBrown, textAlign:'center'}}>
+        <Header style={{backgroundColor: colors.mediumBrown}}>
           <StatusBar backgroundColor={ colors.darkBrown } barStyle="light-content"/>
           {/* Required to center the Title on iOS */}
           {
             (Platform.OS === 'ios') ? <Left /> : null
           }
           <Body>
-            <Title style={{color:'#FFF', textAlign:'center'}}>{this.state.title}</Title>
+            <Title style={{color:'#FFF',}}>{this.state.title}</Title>
           </Body>
           {/* TODO swap the icon with a QR icon */}
           <Right>
