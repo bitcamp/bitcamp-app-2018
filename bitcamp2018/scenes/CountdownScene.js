@@ -61,6 +61,7 @@ class CountdownScene extends Component {
     }
 
     const days    = Math.floor((remain / 86400000));
+    // const hours   = Math.floor((remain % 86400000) / 3600000) + (24 * days);
     const hours   = Math.floor((remain % 86400000) / 3600000);
     const minutes = Math.floor((remain % 86400000 % 3600000) / 60000);
     const seconds = Math.floor((remain % 86400000 % 3600000 % 60000) / 1000);
@@ -76,7 +77,7 @@ class CountdownScene extends Component {
     }
     if(hours < 10){
       hoursText = "0" + hours;
-    }else{
+    } else{
       hoursText = "" + hours;
     }
     if(minutes < 10){
@@ -93,16 +94,19 @@ class CountdownScene extends Component {
         <ImageBackground
          style={styles.container}
          source={require('./images/background.png')}>
-         
+
         <Image
           source={require('./images/flame.gif')}
-          style={styles.fire} 
+          style={styles.fire}
         />
         <Image
           source={require('./images/logs.png')}
           style={styles.logs}
         />
         <View style={styles.row}>
+          <TimerText style={styles.timerHeading}>Time Remaining</TimerText>
+        </View>
+        <View style={[styles.row, styles.timer]}>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{daysText}</TimerText>
             <TimerText style={styles.dhms}>D</TimerText>
@@ -110,17 +114,17 @@ class CountdownScene extends Component {
           <TimerText style={numberStyles}>:</TimerText>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{hoursText}</TimerText>
-            <TimerText style={styles.dhms}>H</TimerText>
+            <TimerText style={styles.dhms}>hours</TimerText>
           </View>
           <TimerText style={numberStyles}>:</TimerText>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{minutesText}</TimerText>
-            <TimerText style={styles.dhms}>M</TimerText>
+            <TimerText style={styles.dhms}>minutes</TimerText>
           </View>
           <TimerText style={numberStyles}>:</TimerText>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{secondsText}</TimerText>
-            <TimerText style={styles.dhms}>S</TimerText>
+            <TimerText style={styles.dhms}>seconds</TimerText>
           </View>
         </View>
         </ImageBackground>
@@ -150,7 +154,6 @@ const styles = StyleSheet.create({
   },
   // text sizes
   shadow: {
-    color: colors.DarkBrown,
     textAlign: 'center'
   },
   numbersIPad:{
@@ -158,11 +161,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10
   },
+  timerHeading: {
+    color: colors.yellowOrange,
+    paddingTop: 40,
+    fontSize: 20,
+  },
   numbers: {
-    fontSize: 70,
+    fontSize: 60,
+    color: colors.midnightBlue,
   },
   dhms: {
-    fontSize: 20
+    fontSize: 16,
+    color: colors.darkBrown,
   },
   api: {
     fontSize: 25
@@ -172,7 +182,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+  },
+  timer: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 20,
   },
   container: {
     flex: 1,
@@ -180,7 +195,7 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
     alignItems:'center',
-    justifyContent: 'center' 
+    justifyContent: 'center'
   }
 });
 
