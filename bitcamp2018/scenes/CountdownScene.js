@@ -134,12 +134,12 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   fire: {
-    height:150,
-    width:150
+    height:90,
+    width:90
   },
   logs: {
     height:65,
-    width:150
+    width:150,
   },
   fireBackground: {
     alignItems: 'center'
