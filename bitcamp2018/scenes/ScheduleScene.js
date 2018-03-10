@@ -3,15 +3,28 @@ import React, { Component } from 'react';
 import {AppRegistry,
         View,
         Text,
-        ListView,
         StyleSheet,
+        FlatList,
+        Image,
         AsyncStorage} from 'react-native';
+
+import { List, ListItem} from "react-native-elements"
 import Accordion from './Accordion'
+
+import {
+  Card,
+  CardImage,
+  CardTitle,
+  CardContent,
+  CardAction
+} from 'react-native-card-view';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
 import firebaseApp from '../shared/firebase';
+
+import scheduleData from '../assets/schedule.json'
 
 /*// Initialize Firebase
 const firebaseConfig = {
@@ -32,91 +45,130 @@ class ScheduleScene extends Component {
 
   constructor(props) {
     super(props);
-    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    // this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: this.ds.cloneWithRows([]),
+       dataSource: scheduleData.Schedule
     };
-    console.log(firebaseApp);
-    this.itemsRef = firebaseApp.database().ref();
+    // console.log(firebaseApp);
+    // this.itemsRef = firebaseApp.database().ref();
   }
 
-  listenForItems() {
-    this.itemsRef.on('value', (snap) => {
-      const jsonDataBlob = snap.exportVal();
-      this.setState({
-        dataSource: this.ds.cloneWithRows(jsonDataBlob.Schedule)
-      });
+  // listenForItems() {
+  //   this.itemsRef.on('value', (snap) => {
+  //     const jsonDataBlob = snap.exportVal();
+  //     this.setState({
+  //       dataSource: this.ds.cloneWithRows(jsonDataBlob.Schedule)
+  //     });
+  //
+  //     AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(jsonDataBlob.Schedule), function(error){
+  //       if (error){
+  //         console.log("Error: " + error);
+  //       }
+  //     });
+  //   });
+  // }
 
-      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(jsonDataBlob.Schedule), function(error){
-        if (error){
-          console.log("Error: " + error);
-        }
-      });
-    });
-  }
-
-  async fetchData(){
-    let savedData = [];
-    try{
-      savedData = await AsyncStorage.getItem(STORAGE_KEY);
-      savedData = JSON.parse(savedData);
-      if (savedData === null) savedData = [{type:"DATEHEADER", date:"Schedule coming soon!"}];
-
-    }catch(error){
-      console.log('Error grabbing item from storage');
-      console.log(error);
-      savedData = [{type:"DATEHEADER", date:"Schedule coming soon!"}];
-    }
-    this.setState({
-      dataSource: this.ds.cloneWithRows(savedData)
-    });
-  }
+  // async fetchData(){
+  //   let savedData = [];
+  //   try{
+  //     savedData = await AsyncStorage.getItem(STORAGE_KEY);
+  //     savedData = JSON.parse(savedData);
+  //     if (savedData === null) savedData = [{type:"DATEHEADER", date:"Schedule coming soon!"}];
+  //
+  //   }catch(error){
+  //     console.log('Error grabbing item from storage');
+  //     console.log(error);
+  //     savedData = [{type:"DATEHEADER", date:"Schedule coming soon!"}];
+  //   }
+  //   this.setState({
+  //     dataSource: this.ds.cloneWithRows(savedData)
+  //   });
+  // }
 
 
   componentDidMount() {
     // make sure we aren't overwriting Firebase data with locally cached data
-    this.fetchData().then(this.listenForItems.bind(this));
+    //this.fetchData().then(this.listenForItems.bind(this));
+    console.log(scheduleData);
   }
 
   render() {
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
-        enableEmptySections // consider using section headers for each day
+      <FlatList
+        data={this.state.dataSource[0][1]}
+        renderItem={this._renderRow}
+        keyExtractor = {(item, index) => index}
       />
     );
   }
 
   _renderRow(rowData) {
     //if the header is just a DATEHEADER, then create a new kind of date header
-    if (rowData.type === 'DATEHEADER') {
-      return (
-        <View style={styles.dateHeader}>
-          <BoldAleoText style={{color: '#ffffff'}}>{rowData.date}</BoldAleoText>
-        </View>
-      );
-    } else {
-      var company;
-      var location;
-      if (rowData.company.length != 0) {
-        company = (<AleoText style={styles.content}>Company: {rowData.company}</AleoText>);
-      }
-      if (rowData.location.length != 0) {
-        location = (<AleoText style={styles.content}>Location: {rowData.location}</AleoText>);
-      }
-      return (
-        <Accordion time={rowData.time} title={rowData.name}>
-          <View style={{
-            backgroundColor: '#ffffff'
-          }}>
-            <AleoText style={styles.content}>{rowData.description}</AleoText>
-            {company}
-            {location}
+    console.log(rowData.item.title);
+    return (
+      <Card>
+        <View style = {{ flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center'}}>
+          <View
+            syle = {{
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+            <CardImage>
+              <Image
+                source={{uri: rowData.item.pictureUrl}}
+                style={
+                  {width: 100,
+                   height: 100,
+                   resizeMode: "stretch",
+                  }
+                }/>
+            </CardImage>
           </View>
-        </Accordion>
-      );
-    }
+          <View style = {{ flex: 1, flexDirection: 'column'}}>
+            <CardTitle>
+              <Text>{rowData.item.title}</Text>
+            </CardTitle>
+            <CardContent>
+              <Text>{rowData.item.startTime} - {rowData.item.endTime}</Text>
+              <Text>{rowData.item.location}</Text>
+              <Text>{rowData.item.description}</Text>
+            </CardContent>
+          </View>
+        </View>
+      </Card>
+
+    );
+
+  //   if (rowData.type === 'DATEHEADER') {
+  //     return (
+  //       <View style={styles.dateHeader}>
+  //         <BoldAleoText style={{color: '#ffffff'}}>{rowData.date}</BoldAleoText>
+  //       </View>
+  //     );
+  //   } else {
+  //     var company;
+  //     var location;
+  //     if (rowData.company.length != 0) {
+  //       company = (<AleoText style={styles.content}>Company: {rowData.company}</AleoText>);
+  //     }
+  //     if (rowData.location.length != 0) {
+  //       location = (<AleoText style={styles.content}>Location: {rowData.location}</AleoText>);
+  //     }
+  //     return (
+  //       <Accordion time={rowData.time} title={rowData.name}>
+  //         <View style={{
+  //           backgroundColor: '#ffffff'
+  //         }}>
+  //           <AleoText style={styles.content}>{rowData.description}</AleoText>
+  //           {company}
+  //           {location}
+  //         </View>
+  //       </Accordion>
+  //     );
+  //   }
   }
 }
 

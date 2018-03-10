@@ -1,0 +1,38 @@
+{"Schedule": [
+  [ "Friday" ,
+    [{
+      "title" : "Introduction Talk",
+      "startTime" : "2018-04-06 08:00",
+      "endTime" : "2018-04-06 08:30",
+      "location" : "By the bonfire",
+      "description": "Meet everyone by the bonfire to kickoff bitcamp 2018",
+      "pictureUrl" : "https://i.imgur.com/9enlRkH.png"
+    },
+    {
+      "title" : "Get your snacks",
+      "startTime" : "2018-04-06 08:30",
+      "endTime" : "2018-04-06 09:00",
+      "location" : "Everywhere",
+      "description": "I love chocolate chip cookies",
+      "pictureUrl" : "https://i.imgur.com/9enlRkH.png"
+    }
+  ]],
+  [ "Saturday" ,
+    [{
+      "title" : "Introduction Talk",
+      "startTime" : "2018-04-06 08:00",
+      "endTime" : "2018-04-06 08:30",
+      "location" : "By the bonfire",
+      "description": "Meet everyone by the bonfire to kickoff bitcamp 2018",
+      "pictureUrl" : "https://i.imgur.com/9enlRkH.png"
+    },
+    {
+      "title" : "Get your snacks",
+      "startTime" : "2018-04-06 08:30",
+      "endTime" : "2018-04-06 09:00",
+      "location" : "Everywhere",
+      "description": "I love chocolate chip cookies8",
+      "pictureUrl" : "https://i.imgur.com/9enlRkH.png"
+    }
+  ]]
+]}
