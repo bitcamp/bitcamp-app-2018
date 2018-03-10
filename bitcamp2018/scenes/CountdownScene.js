@@ -49,46 +49,39 @@ class CountdownScene extends Component {
       if (window.height/window.width < 1.7) numberStyles = styles.numbersIPad;
     }
 
-    if (this.state.time <= eventTime) {
-      remain = moment.duration(moment(eventTime).diff(moment(this.state.time)));
+    let days;
+    let hours;
+    let minutes;
+    let seconds;
 
-    } else if (this.state.time > eventTime && this.state.time < endHackingTime) {
-      remain = moment.duration(moment(endHackingTime).diff(moment(this.state.time)));
+    // If hacking is over
+    if (this.state.time > endHackingTime) {
+      days = 0;
+      hours = 0;
+      minutes = 0;
+      seconds = 0;
 
     } else {
-      remain = 0; //TODO
+      // If hacking hasn't begun
+      // Calculate time until hacking begins
+      if (this.state.time <= eventTime) {
+        remain = moment.duration(moment(eventTime).diff(moment(this.state.time)));
+      // If hacking has begun
+      // Calculate time until hacking finishes
+      } else if (this.state.time > eventTime && this.state.time < endHackingTime) {
+        remain = moment.duration(moment(endHackingTime).diff(moment(this.state.time)));
+      }
+      days    = remain.days();
+      hours   = remain.hours();
+      minutes = remain.minutes();
+      seconds = remain.seconds();
     }
 
-    const days    = remain.days();
-    // const hours   = Math.floor((remain % 86400000) / 3600000) + (24 * days);
-    const hours   = remain.hours();
-    const minutes = remain.minutes();
-    const seconds = remain.seconds();
+    let daysText = (days < 10) ? `0${days}` : `${days}`;
+    let hoursText = (hours < 10) ? `0${hours}` : `${hours}`
+    let minutesText = (minutes < 10) ? `0${minutes}` : `${minutes}`;
+    let secondsText = (seconds < 10) ? `0${seconds}` : `${seconds}`;
 
-    let daysText;
-    let hoursText;
-    let minutesText;
-    let secondsText;
-    if(days < 10){
-      daysText = "0" + days;
-    }else{
-      daysText = "" + days;
-    }
-    if(hours < 10){
-      hoursText = "0" + hours;
-    } else{
-      hoursText = "" + hours;
-    }
-    if(minutes < 10){
-      minutesText = "0" + minutes;
-    }else{
-      minutesText = "" + minutes;
-    }
-    if(seconds < 10){
-      secondsText = "0" + seconds;
-    }else{
-      secondsText = "" + seconds;
-    }
     return (
         <ImageBackground
          style={styles.container}
