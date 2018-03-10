@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, Image, ImageBackground, View, Platform, Dimensions, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
-
+import moment from 'moment';
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
 const BoldAleoText = aleofy(Text, 'Bold');
@@ -22,16 +22,14 @@ class CountdownScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: new Date(),
-      totalPresses: 0,
-      fill:100,
+      time: moment(),
     };
   };
 
   componentDidMount() {
     this.timer = setInterval(() => {
       this.setState({
-        time: new Date(),
+        time: moment(),
       });
     }, 1000);
   }
@@ -39,9 +37,10 @@ class CountdownScene extends Component {
   componentWillUnmount() {
     clearInterval(this.timer);
   }
+
   render() {
-    const eventTime      = new Date(2018, 4, 6, 22, 0, 0, 0); // when hacking begins
-    const endHackingTime = new Date(2018, 4, 8, 10, 0, 0, 0);
+    const eventTime      = moment("2018-04-06 07:00"); // when hacking begins
+    const endHackingTime = moment("2018-04-08 12:00"); // when hacking ends
 
     let numberStyles = styles.numbers;
     let remain;  // the time remaining until the next 'event' (either hacking begins or hacking ends)
@@ -51,20 +50,20 @@ class CountdownScene extends Component {
     }
 
     if (this.state.time <= eventTime) {
-      remain = eventTime.getTime() - this.state.time.getTime();
+      remain = moment.duration(moment(eventTime).diff(moment(this.state.time)));
 
     } else if (this.state.time > eventTime && this.state.time < endHackingTime) {
-      remain = endHackingTime.getTime() - this.state.time.getTime();
+      remain = moment.duration(moment(endHackingTime).diff(moment(this.state.time)));
 
     } else {
-      remain = 0;
+      remain = 0; //TODO
     }
 
-    const days    = Math.floor((remain / 86400000));
+    const days    = remain.days();
     // const hours   = Math.floor((remain % 86400000) / 3600000) + (24 * days);
-    const hours   = Math.floor((remain % 86400000) / 3600000);
-    const minutes = Math.floor((remain % 86400000 % 3600000) / 60000);
-    const seconds = Math.floor((remain % 86400000 % 3600000 % 60000) / 1000);
+    const hours   = remain.hours();
+    const minutes = remain.minutes();
+    const seconds = remain.seconds();
 
     let daysText;
     let hoursText;
@@ -109,7 +108,7 @@ class CountdownScene extends Component {
         <View style={[styles.row, styles.timer]}>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{daysText}</TimerText>
-            <TimerText style={styles.dhms}>D</TimerText>
+            <TimerText style={styles.dhms}>days</TimerText>
           </View>
           <TimerText style={numberStyles}>:</TimerText>
           <View style={styles.col}>
