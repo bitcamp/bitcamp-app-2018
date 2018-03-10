@@ -16,6 +16,7 @@
     "create-react-class": "^15.6.3",
     "crypto-js": "https://registry.npmjs.org/crypto-js/-/crypto-js-3.1.9-1.tgz",
     "firebase": "^3.6.8",
+    "moment": "^2.21.0",
     "native-base": "^2.3.9",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
