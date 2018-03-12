@@ -36,6 +36,7 @@ export default function MenuTab(props) {
         tabBarPosition={menuTabPosition}
         style={style}
         initialPage={0}
+        locked = {true}
         renderTabBar={() => <CustomTabBarOverlay />}
         tabBarPosition="bottom"
         onChangeTab={(event) => {

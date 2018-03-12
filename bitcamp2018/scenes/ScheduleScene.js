@@ -9,7 +9,9 @@ import {AppRegistry,
         AsyncStorage} from 'react-native';
 
 import { List, ListItem} from "react-native-elements"
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Accordion from './Accordion'
+import moment from 'moment'
 
 import {
   Card,
@@ -94,54 +96,120 @@ class ScheduleScene extends Component {
 
   render() {
     return (
-      <FlatList
-        data={this.state.dataSource[0][1]}
-        renderItem={this._renderRow}
-        keyExtractor = {(item, index) => index}
-      />
+      <ScrollableTabView
+        tabBarPosition={'top'}
+        style ={{flex: 1}}
+        initialPage={0}
+        keyExtractor = {(iterm, index) => index}
+        tabBarUnderlineStyle = {{opacity: 0}}
+      >
+        {this._renderScheduleTabs()}
+      </ScrollableTabView>
     );
   }
 
+  _renderScheduleTabs(){
+
+    return this.state.dataSource.
+      map((scheduleForDay) => this._renderScheduleForDay(scheduleForDay))
+
+  }
+
+  _renderScheduleForDay(scheduleArray){
+
+    scheduleArray[1] = scheduleArray[1].sort((event1, event2) => {
+      start1 = moment(event1.startTime);
+      start2 = moment(event2.startTime);
+
+      end1 = moment(event1.endTime);
+      end2 = moment(event2.endTime);
+
+      if(start1 - start2 == 0){
+        return end1 - end2;
+      }
+
+      return start1 - start2;
+    })
+
+    takenLabels = new Set(); //keeps track of which days have labels on them
+
+    alteredData = JSON.parse(JSON.stringify(scheduleArray[1]));
+
+
+    for (var i in alteredData){
+      startTime = alteredData[i].startTime;
+
+      label = this.normalizeTimeLabel(startTime);
+
+      if(takenLabels.has(label)){
+        alteredData[i].sizeLabel = '';
+      }
+      else {
+        alteredData[i].sizeLabel = label;
+        takenLabels.add(label);
+      }
+
+    }
+    return (<FlatList
+      tabLabel={scheduleArray[0]}
+      data={alteredData}
+      renderItem={this._renderRow}
+      keyExtractor = {(item, index) => index}
+    />)
+  }
+
+
+  normalizeTimeLabel(t){
+
+    return moment(t).format("h:mm A")
+  }
+
   _renderRow(rowData) {
-    //if the header is just a DATEHEADER, then create a new kind of date header
     console.log(rowData.item.title);
     return (
-      <Card>
-        <View style = {{ flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center'}}>
-          <View
-            syle = {{
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}>
-            <CardImage>
-              <Image
-                source={{uri: rowData.item.pictureUrl}}
-                style={
-                  {width: 100,
-                   height: 100,
-                   resizeMode: "stretch",
-                  }
-                }/>
-            </CardImage>
+      <View style = {{ flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+    }}>
+        <Text style = {{flex: 1}}>{rowData.item.sizeLabel}</Text>
+        <Card style = {{flex: 4}}>
+          <View style = {{ flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center'}}>
+            <View
+              syle = {{
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+              <CardImage>
+                <Image
+                  source={{uri: rowData.item.pictureUrl}}
+                  style={
+                    {width: 100,
+                     height: 100,
+                     resizeMode: "stretch",
+                    }
+                  }/>
+              </CardImage>
+            </View>
+            <View style = {{ flex: 1, flexDirection: 'column'}}>
+              <CardTitle>
+                <Text>{rowData.item.title}</Text>
+              </CardTitle>
+              <CardContent>
+                <Text>{rowData.item.startTime} - {rowData.item.endTime}</Text>
+                <Text>{rowData.item.location}</Text>
+                <Text>{rowData.item.description}</Text>
+              </CardContent>
+            </View>
           </View>
-          <View style = {{ flex: 1, flexDirection: 'column'}}>
-            <CardTitle>
-              <Text>{rowData.item.title}</Text>
-            </CardTitle>
-            <CardContent>
-              <Text>{rowData.item.startTime} - {rowData.item.endTime}</Text>
-              <Text>{rowData.item.location}</Text>
-              <Text>{rowData.item.description}</Text>
-            </CardContent>
-          </View>
-        </View>
-      </Card>
-
+        </Card>
+      </View>
     );
+  }
 
+}
   //   if (rowData.type === 'DATEHEADER') {
   //     return (
   //       <View style={styles.dateHeader}>
@@ -169,8 +237,6 @@ class ScheduleScene extends Component {
   //       </Accordion>
   //     );
   //   }
-  }
-}
 
 const styles = StyleSheet.create({
 
