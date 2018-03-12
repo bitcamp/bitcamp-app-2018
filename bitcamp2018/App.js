@@ -16,7 +16,8 @@ import {
   Image,
   ScrollView,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  Alert
 } from 'react-native';
 import {
   Container,
@@ -33,6 +34,7 @@ import Orientation from 'react-native-orientation';
 import MenuTab from './MenuTab';
 import { colors } from './shared/styles';
 import Modal from "react-native-modal";
+import QRCode from 'react-native-qrcode';
 
 const pageNumberTitles = [
   "Bitcamp 2018",
@@ -75,6 +77,9 @@ export default class App extends React.Component {
   state = {
     title: pageNumberTitles[0],
     isModalVisible: false,
+    email: "",
+    password: "",
+    id: ""
   }
 
   changeHeaderTitle(pageNumber) {
@@ -97,25 +102,78 @@ export default class App extends React.Component {
     </TouchableOpacity>
   );
 
+  async _sendData(){
+  	let password = this.state.password;
+  	let email = this.state.email;
+  	try {
+	  	let response = await fetch('http://35.174.30.108:3000/auth/login', {
+		  method: 'POST',	
+		  headers: {
+		    'Accept': 'application/json',
+		    'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify({
+		    email: email,
+		    password: password,
+		  }),
+		});
+		let status = unescape(JSON.parse(response['ok']));
+		if(status === "true"){
+			let token = unescape(JSON.parse(response['_bodyText'])['token']);
+			let id = JSON.parse(response['_bodyText'])['user']['id'];
+			this.setState({ id: id })
+			
+		}else{
+			Alert.alert(	
+			  "Incorrect credentials.",
+			  "Try again.",
+			  [
+			    {text: 'OK', onPress: () => console.log('OK Pressed')},
+			  ],
+			  { cancelable: false });
+		}
+		
+	}catch(error){
+		Alert.alert(	
+			  "Could not connect.",
+			  "Try again.",
+			  [
+			    {text: 'OK', onPress: () => console.log('OK Pressed')},
+			  ],
+			  { cancelable: false });
+	}
+
+	//let responseJson = await response.json();
+
+  }
+
+
    _renderModalContent = () => (
     <View style={{padding: 20}}>
 	    <Text 
 	        style={{fontSize: 27}}>
 	        Login
 	    </Text>
-	    <TextInput placeholder='Username' />
-	    <TextInput placeholder='Password' />
+	    <TextInput placeholder='email' onChangeText={(email) => this.setState({email})} />
+	    <TextInput placeholder='password' secureTextEntry={true} onChangeText={(password) => this.setState({password})} />
 	    <View style={{margin:7}} />
-	    <Button 
-            onPress={this.props.onLoginPress}
-            title="Submit"
-        	/>
-	        {this._renderButton("Close", () => this.setState({ isModalVisible: false }))}
+	    {this._renderButton("Submit", () => this._sendData())}
+	    {this._renderButton("Close", () => this.setState({ isModalVisible: false }))}
 
     </View>
   );
 
   render() {
+  	let content;
+  	if(this.state.id === ""){
+  		content = (this._renderModalContent());
+  	}else{
+  		content = (<QRCode
+	          value={this.state.id}
+	          size={200}
+	          bgColor='purple'
+	          fgColor='white'/>);
+  	}
     return (
       <Container>
         <Header style={{backgroundColor: colors.mediumBrown}}>
@@ -150,7 +208,7 @@ export default class App extends React.Component {
 	          backdropTransitionOutTiming={500}
 	          avoidKeyboard={true}
         	>
-          {this._renderModalContent()}
+        	{content}         
         </Modal>
       </View>
 
