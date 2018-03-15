@@ -166,13 +166,35 @@ export default class App extends React.Component {
   render() {
   	let content;
   	if(this.state.id === ""){
-  		content = (this._renderModalContent());
+  		content = (
+  	<View style={{padding: 20}}>
+	    <Text 
+	        style={{fontSize: 27}}>
+	        Login
+	    </Text>
+	    <TextInput placeholder='email' onChangeText={(email) => this.setState({email})} />
+	    <TextInput placeholder='password' secureTextEntry={true} onChangeText={(password) => this.setState({password})} />
+	    <View style={{margin:7}} />
+	    {this._renderButton("Submit", () => this._sendData())}
+	    {this._renderButton("Close", () => this.setState({ isModalVisible: false }))}
+
+    </View>);
   	}else{
-  		content = (<QRCode
+  		content = (
+		<View style={{padding: 20, alignItems:'center', justifyContent: 'center'}}>
+		    <Text 
+		        style={{fontSize: 27}}>
+		        Your QR Code
+		    </Text>
+  			<QRCode
 	          value={this.state.id}
 	          size={200}
-	          bgColor='purple'
-	          fgColor='white'/>);
+	          bgColor='black'
+	          fgColor='white'/>
+	        {this._renderButton("Logout", () => this._sendData())}
+	    	{this._renderButton("Close", () => this.setState({ isModalVisible: false }))}
+		</View>
+	          );
   	}
     return (
       <Container>
