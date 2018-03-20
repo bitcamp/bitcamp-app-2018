@@ -27,12 +27,18 @@ import {
   Left,
   Right,
   Button,
+  Form,
+  Item,
+  Input,
   Icon
 } from 'native-base';
 import Orientation from 'react-native-orientation';
 import MenuTab from './MenuTab';
 import { colors } from './shared/styles';
 import Modal from "react-native-modal";
+import aleofy from './shared/aleo';
+
+const AleoText = aleofy(Text);
 
 const pageNumberTitles = [
   "Bitcamp 2018",
@@ -48,14 +54,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  button: {
-    backgroundColor: "lightblue",
-    padding: 12,
-    margin: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 4,
-    borderColor: "rgba(0, 0, 0, 0.1)"
+  btn: {
+    width: '100%',
+    justifyContent: 'center',
+    backgroundColor: colors.bitcampOrange,
+    borderRadius: 2,
+  },
+  altBtn: {
+    width: '100%',
+    marginTop: 10,
+    justifyContent: 'center',
+    backgroundColor: colors.mediumBlue,
+    borderRadius: 2,
+  },
+  btnText: {
+    color: 'white',
+    fontSize: 16,
   },
   modalContent: {
     backgroundColor: "white",
@@ -89,29 +103,48 @@ export default class App extends React.Component {
   _closeModal = () =>
     this.setState({ isModalVisible: false });
 
-  _renderButton = (text, onPress) => (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.button}>
-        <Text>{text}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-
    _renderModalContent = () => (
-    <View style={{padding: 20}}>
-	    <Text 
-	        style={{fontSize: 27}}>
-	        Login
-	    </Text>
-	    <TextInput placeholder='Username' />
-	    <TextInput placeholder='Password' />
-	    <View style={{margin:7}} />
-	    <Button 
-            onPress={this.props.onLoginPress}
-            title="Submit"
-        	/>
-	        {this._renderButton("Close", () => this.setState({ isModalVisible: false }))}
+    <View>
+        <Text
+  	        style={{
+              fontSize: 27,
+              paddingLeft: 5,
+              marginBottom: 10,
+              color: colors.midnightBlue,
+            }}>
+  	        Login
+  	    </Text>
+        <Text
+  	        style={{
+              fontSize: 18,
+              paddingLeft: 5,
+              marginBottom: 20,
+              color: "#808080",
+            }}>
+  	        Enter your login for your QR code.
+  	    </Text>
 
+        <Item>
+          <Input placeholder="Username" />
+        </Item>
+        <Item>
+          <Input placeholder="Password" />
+        </Item>
+	    <View style={{margin:7}} />
+	    <Button
+        primary
+        style={styles.btn}
+        onPress={this.props.onLoginPress}
+      >
+        <AleoText style={styles.btnText}>Login</AleoText>
+      </Button>
+      <Button
+        primary
+        style={styles.altBtn}
+        onPress={() => this.setState({ isModalVisible: false })}
+      >
+        <AleoText style={styles.btnText}>Close</AleoText>
+      </Button>
     </View>
   );
 
@@ -131,7 +164,7 @@ export default class App extends React.Component {
           <Right>
             <TouchableOpacity
 	            onPress={this._toggleModal}>
-              <Image source={require('./assets/icons/qr_icon.png')} style={{width: 30, height: 30}} />
+              <Image source={require('./assets/icons/qr_icon.png')} style={{width: 24, height: 24}} />
             </TouchableOpacity>
           </Right>
         </Header>
@@ -140,15 +173,16 @@ export default class App extends React.Component {
         <View>
 	        <Modal
 	          isVisible={this.state.isModalVisible}
-	          backdropColor={"white"}
-	          backdropOpacity={0.85}
-	          animationIn="zoomInDown"
-	          animationOut="zoomOutUp"
-	          animationInTiming={500}
-	          animationOutTiming={500}
-	          backdropTransitionInTiming={500}
-	          backdropTransitionOutTiming={500}
+	          backdropColor={'white'}
+	          backdropOpacity={0.8}
+	          animationIn="slideInUp"
+	          animationOut="slideOutDown"
+	          animationInTiming={250}
+	          animationOutTiming={250}
+	          backdropTransitionInTiming={250}
+	          backdropTransitionOutTiming={250}
 	          avoidKeyboard={true}
+            onBackdropPress={() => this.setState({ isModalVisible: false })}
         	>
           {this._renderModalContent()}
         </Modal>
