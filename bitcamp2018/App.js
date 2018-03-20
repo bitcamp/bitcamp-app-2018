@@ -57,6 +57,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+  headerTitle: {
+    color:'#FFF',
+    width: 300,
+    textAlign: (Platform.OS === 'ios') ? 'center' : 'left',
+  },
   btn: {
     width: '100%',
     justifyContent: 'center',
@@ -237,7 +242,7 @@ export default class App extends React.Component {
             (Platform.OS === 'ios') ? <Left /> : null
           }
           <Body>
-            <Title style={{color:'#FFF', width: 500}}>
+            <Title style={styles.headerTitle}>
               <BoldAleoText>{this.state.title}</BoldAleoText>
             </Title>
           </Body>
