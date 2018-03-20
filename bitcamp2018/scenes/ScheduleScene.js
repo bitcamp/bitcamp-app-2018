@@ -23,7 +23,6 @@ import {
   CardAction
 } from 'react-native-card-view';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
 import firebaseApp from '../shared/firebase';
@@ -42,8 +41,6 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
-const downIcon = (<Icon name="chevron-down"/>);
-const upIcon = (<Icon name="chevron-up"/>);
 const STORAGE_KEY = '@bitcampapp:schedule'; // the @ may need to be modified...
 
 class ScheduleScene extends Component {
@@ -151,7 +148,6 @@ class ScheduleScene extends Component {
 
 
   normalizeTimeLabel(t){
-
     return moment(t).format("h:mm A")
   }
 

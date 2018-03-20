@@ -237,7 +237,7 @@ export default class App extends React.Component {
             (Platform.OS === 'ios') ? <Left /> : null
           }
           <Body>
-            <Title style={{color:'#FFF',}}>
+            <Title style={{color:'#FFF', width: 500}}>
               <BoldAleoText>{this.state.title}</BoldAleoText>
             </Title>
           </Body>

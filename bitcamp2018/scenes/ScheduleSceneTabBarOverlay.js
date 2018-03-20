@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
   },
   defaultText: {
     fontSize: 16,
-    color: colors.mediumBrown,
-    opacity: .8,
+    color: colors.midnightBlue,
+    opacity: .4,
   },
   tab: {
     flex: 1,
