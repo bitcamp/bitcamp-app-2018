@@ -41,6 +41,7 @@ import QRCode from 'react-native-qrcode';
 import aleofy from './shared/aleo';
 
 const AleoText = aleofy(Text);
+const BoldAleoText = aleofy(Text, 'Bold');
 
 const pageNumberTitles = [
   "Bitcamp 2018",
@@ -236,7 +237,9 @@ export default class App extends React.Component {
             (Platform.OS === 'ios') ? <Left /> : null
           }
           <Body>
-            <Title style={{color:'#FFF',}}>{this.state.title}</Title>
+            <Title style={{color:'#FFF',}}>
+              <BoldAleoText>{this.state.title}</BoldAleoText>
+            </Title>
           </Body>
           {/* TODO swap the icon with a QR icon */}
           <Right>

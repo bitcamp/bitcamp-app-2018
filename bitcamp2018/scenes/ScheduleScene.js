@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 
-import {AppRegistry,
-        View,
-        Text,
-        StyleSheet,
-        FlatList,
-        Image,
-        AsyncStorage} from 'react-native';
+import {
+  AppRegistry,
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  AsyncStorage
+} from 'react-native';
 
-import { List, ListItem} from "react-native-elements"
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Accordion from './Accordion'
 import moment from 'moment'
+import ScheduleSceneTabBarOverlay from './ScheduleSceneTabBarOverlay';
 
 import {
   Card,
@@ -37,6 +39,7 @@ const firebaseConfig = {
 };
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 */
+
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
 const downIcon = (<Icon name="chevron-down"/>);
@@ -94,20 +97,6 @@ class ScheduleScene extends Component {
     console.log(scheduleData);
   }
 
-  render() {
-    return (
-      <ScrollableTabView
-        tabBarPosition={'top'}
-        style ={{flex: 1}}
-        initialPage={0}
-        keyExtractor = {(iterm, index) => index}
-        tabBarUnderlineStyle = {{opacity: 0}}
-      >
-        {this._renderScheduleTabs()}
-      </ScrollableTabView>
-    );
-  }
-
   _renderScheduleTabs(){
 
     return this.state.dataSource.
@@ -133,7 +122,7 @@ class ScheduleScene extends Component {
 
     takenLabels = new Set(); //keeps track of which days have labels on them
 
-    alteredData = JSON.parse(JSON.stringify(scheduleArray[1]));
+    alteredData = scheduleArray[1];
 
 
     for (var i in alteredData){
@@ -150,12 +139,14 @@ class ScheduleScene extends Component {
       }
 
     }
-    return (<FlatList
-      tabLabel={scheduleArray[0]}
-      data={alteredData}
-      renderItem={this._renderRow}
-      keyExtractor = {(item, index) => index}
-    />)
+    return (
+      <FlatList
+        tabLabel={scheduleArray[0]}
+        data={alteredData}
+        renderItem={this._renderRow}
+        keyExtractor = {(item, index) => index}
+      />
+    );
   }
 
 
@@ -167,45 +158,60 @@ class ScheduleScene extends Component {
   _renderRow(rowData) {
     console.log(rowData.item.title);
     return (
-      <View style = {{ flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-    }}>
-        <Text style = {{flex: 1}}>{rowData.item.sizeLabel}</Text>
-        <Card style = {{flex: 4}}>
-          <View style = {{ flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center'}}>
-            <View
-              syle = {{
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-              <CardImage>
-                <Image
-                  source={{uri: rowData.item.pictureUrl}}
-                  style={
-                    {width: 100,
-                     height: 100,
-                     resizeMode: "stretch",
-                    }
-                  }/>
-              </CardImage>
+      <View style = {styles.container}>
+        <View style={styles.timeCol}>
+          <AleoText style={styles.sideTimeText}>{rowData.item.sizeLabel}</AleoText>
+        </View>
+        <View style = {styles.cardCol}>
+          <Card>
+            <View style = {{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              {/* <View style={styles.cardImgContainer}>
+                <CardImage>
+                  <Image
+                    source={{uri: rowData.item.pictureUrl}}
+                    style={styles.cardImg} />
+                </CardImage>
+              </View> */}
+              <View style = {{ flex: 1, flexDirection: 'column'}}>
+                <CardContent>
+                  <BoldAleoText style={styles.heading}>
+                    {rowData.item.title}
+                  </BoldAleoText>
+                  <Text style={styles.timeText}>
+                    {rowData.item.startTime} - {rowData.item.endTime}
+                  </Text>
+                  <Text style={styles.location}>
+                    {rowData.item.location}
+                  </Text>
+                  <Text style={styles.description}>
+                    {rowData.item.description}
+                  </Text>
+                </CardContent>
+              </View>
             </View>
-            <View style = {{ flex: 1, flexDirection: 'column'}}>
-              <CardTitle>
-                <Text>{rowData.item.title}</Text>
-              </CardTitle>
-              <CardContent>
-                <Text>{rowData.item.startTime} - {rowData.item.endTime}</Text>
-                <Text>{rowData.item.location}</Text>
-                <Text>{rowData.item.description}</Text>
-              </CardContent>
-            </View>
-          </View>
-        </Card>
+          </Card>
+        </View>
       </View>
+    );
+  }
+
+  render() {
+    return (
+      <ScrollableTabView
+        renderTabBar={() => <ScheduleSceneTabBarOverlay />}
+        tabBarPosition={'top'}
+        style ={styles.tabView}
+        initialPage={0}
+        keyExtractor = {(iterm, index) => index}
+        tabBarUnderlineStyle = {{opacity: 0}}
+      >
+        {this._renderScheduleTabs()}
+      </ScrollableTabView>
     );
   }
 
@@ -239,7 +245,61 @@ class ScheduleScene extends Component {
   //   }
 
 const styles = StyleSheet.create({
-
+  description: {
+    fontSize: 16,
+    opacity: .8,
+    color: colors.midnightBlue,
+  },
+  location: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: colors.mediumBlue,
+  },
+  sideTimeText: {
+    fontSize: 14,
+    color: colors.midnightBlue,
+    opacity: .7,
+  },
+  timeText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: colors.midnightBlue,
+    marginBottom: 4,
+  },
+  heading: {
+    fontSize: 18,
+    color: colors.yellowOrange,
+    marginBottom: 10,
+  },
+  tabView: {
+    flex: 1,
+    backgroundColor: '#f4f4f4',
+  },
+  timeCol: {
+    flex: 1,
+    paddingTop: 4,
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  cardCol: {
+    flex: 4,
+    paddingRight: 6,
+    paddingBottom: 6,
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  cardImgContainer: {
+    paddingTop: 20,
+    paddingLeft: 20,
+  },
+  cardImg: {
+    width: 60,
+    height: 60,
+    resizeMode: "stretch",
+  },
   dateHeader: {
     paddingTop: 10,
     paddingRight: 15,
