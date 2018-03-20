@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, Image, ImageBackground, View, Platform, Dimensions, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
-
+import moment from 'moment';
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
 const BoldAleoText = aleofy(Text, 'Bold');
@@ -22,16 +22,14 @@ class CountdownScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: new Date(),
-      totalPresses: 0,
-      fill:100,
+      time: moment(),
     };
   };
 
   componentDidMount() {
     this.timer = setInterval(() => {
       this.setState({
-        time: new Date(),
+        time: moment(),
       });
     }, 1000);
   }
@@ -39,9 +37,10 @@ class CountdownScene extends Component {
   componentWillUnmount() {
     clearInterval(this.timer);
   }
+
   render() {
-    const eventTime      = new Date(2018, 4, 6, 22, 0, 0, 0); // when hacking begins
-    const endHackingTime = new Date(2018, 4, 8, 10, 0, 0, 0);
+    const eventTime      = moment("2018-04-06 07:00"); // when hacking begins
+    const endHackingTime = moment("2018-04-08 12:00"); // when hacking ends
 
     let numberStyles = styles.numbers;
     let remain;  // the time remaining until the next 'event' (either hacking begins or hacking ends)
@@ -50,77 +49,74 @@ class CountdownScene extends Component {
       if (window.height/window.width < 1.7) numberStyles = styles.numbersIPad;
     }
 
-    if (this.state.time <= eventTime) {
-      remain = eventTime.getTime() - this.state.time.getTime();
+    let days;
+    let hours;
+    let minutes;
+    let seconds;
 
-    } else if (this.state.time > eventTime && this.state.time < endHackingTime) {
-      remain = endHackingTime.getTime() - this.state.time.getTime();
+    // If hacking is over
+    if (this.state.time > endHackingTime) {
+      days = 0;
+      hours = 0;
+      minutes = 0;
+      seconds = 0;
 
     } else {
-      remain = 0;
+      // If hacking hasn't begun
+      // Calculate time until hacking begins
+      if (this.state.time <= eventTime) {
+        remain = moment.duration(moment(eventTime).diff(moment(this.state.time)));
+      // If hacking has begun
+      // Calculate time until hacking finishes
+      } else if (this.state.time > eventTime && this.state.time < endHackingTime) {
+        remain = moment.duration(moment(endHackingTime).diff(moment(this.state.time)));
+      }
+      days    = remain.days();
+      hours   = remain.hours();
+      minutes = remain.minutes();
+      seconds = remain.seconds();
     }
 
-    const days    = Math.floor((remain / 86400000));
-    const hours   = Math.floor((remain % 86400000) / 3600000);
-    const minutes = Math.floor((remain % 86400000 % 3600000) / 60000);
-    const seconds = Math.floor((remain % 86400000 % 3600000 % 60000) / 1000);
+    let daysText = (days < 10) ? `0${days}` : `${days}`;
+    let hoursText = (hours < 10) ? `0${hours}` : `${hours}`
+    let minutesText = (minutes < 10) ? `0${minutes}` : `${minutes}`;
+    let secondsText = (seconds < 10) ? `0${seconds}` : `${seconds}`;
 
-    let daysText;
-    let hoursText;
-    let minutesText;
-    let secondsText;
-    if(days < 10){
-      daysText = "0" + days;
-    }else{
-      daysText = "" + days;
-    }
-    if(hours < 10){
-      hoursText = "0" + hours;
-    }else{
-      hoursText = "" + hours;
-    }
-    if(minutes < 10){
-      minutesText = "0" + minutes;
-    }else{
-      minutesText = "" + minutes;
-    }
-    if(seconds < 10){
-      secondsText = "0" + seconds;
-    }else{
-      secondsText = "" + seconds;
-    }
     return (
         <ImageBackground
          style={styles.container}
          source={require('./images/background.png')}>
-         
+
         <Image
           source={require('./images/flame.gif')}
-          style={styles.fire} 
+          style={styles.fire}
         />
         <Image
           source={require('./images/logs.png')}
           style={styles.logs}
         />
         <View style={styles.row}>
+          <TimerText style={styles.timerHeading}>Time Remaining</TimerText>
+        </View>
+        <View style={[styles.row, styles.timer]}>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{daysText}</TimerText>
-            <TimerText style={styles.dhms}>D</TimerText>
+            <TimerText style={styles.dhms}>days</TimerText>
           </View>
           <TimerText style={numberStyles}>:</TimerText>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{hoursText}</TimerText>
-            <TimerText style={styles.dhms}>H</TimerText>
+            <TimerText style={styles.dhms}>hours</TimerText>
           </View>
           <TimerText style={numberStyles}>:</TimerText>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{minutesText}</TimerText>
-            <TimerText style={styles.dhms}>M</TimerText>
+            <TimerText style={styles.dhms}>minutes</TimerText>
           </View>
           <TimerText style={numberStyles}>:</TimerText>
           <View style={styles.col}>
             <TimerText style={numberStyles}>{secondsText}</TimerText>
-            <TimerText style={styles.dhms}>S</TimerText>
+            <TimerText style={styles.dhms}>seconds</TimerText>
           </View>
         </View>
         </ImageBackground>
@@ -138,19 +134,18 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   fire: {
-    height:150,
-    width:150
+    height:90,
+    width:90
   },
   logs: {
     height:65,
-    width:150
+    width:150,
   },
   fireBackground: {
     alignItems: 'center'
   },
   // text sizes
   shadow: {
-    color: colors.DarkBrown,
     textAlign: 'center'
   },
   numbersIPad:{
@@ -158,11 +153,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10
   },
+  timerHeading: {
+    color: colors.yellowOrange,
+    paddingTop: 40,
+    fontSize: 20,
+  },
   numbers: {
-    fontSize: 70,
+    fontSize: 60,
+    color: colors.midnightBlue,
   },
   dhms: {
-    fontSize: 20
+    fontSize: 16,
+    color: colors.darkBrown,
   },
   api: {
     fontSize: 25
@@ -172,7 +174,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+  },
+  timer: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 20,
   },
   container: {
     flex: 1,
@@ -180,7 +187,7 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
     alignItems:'center',
-    justifyContent: 'center' 
+    justifyContent: 'center'
   }
 });
 
