@@ -28,6 +28,9 @@ import {
   Left,
   Right,
   Button,
+  Form,
+  Item,
+  Input,
   Icon
 } from 'native-base';
 import Orientation from 'react-native-orientation';
@@ -35,6 +38,9 @@ import MenuTab from './MenuTab';
 import { colors } from './shared/styles';
 import Modal from "react-native-modal";
 import QRCode from 'react-native-qrcode';
+import aleofy from './shared/aleo';
+
+const AleoText = aleofy(Text);
 
 const pageNumberTitles = [
   "Bitcamp 2018",
@@ -50,14 +56,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  button: {
-    backgroundColor: "lightblue",
-    padding: 12,
-    margin: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 4,
-    borderColor: "rgba(0, 0, 0, 0.1)"
+  btn: {
+    width: '100%',
+    justifyContent: 'center',
+    backgroundColor: colors.bitcampOrange,
+    borderRadius: 2,
+  },
+  altBtn: {
+    width: '100%',
+    marginTop: 10,
+    justifyContent: 'center',
+    backgroundColor: colors.mediumBlue,
+    borderRadius: 2,
+  },
+  btnText: {
+    color: 'white',
+    fontSize: 16,
   },
   modalContent: {
     backgroundColor: "white",
@@ -94,107 +108,117 @@ export default class App extends React.Component {
   _closeModal = () =>
     this.setState({ isModalVisible: false });
 
-  _renderButton = (text, onPress) => (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.button}>
-        <Text>{text}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-
   async _sendData(){
   	let password = this.state.password;
   	let email = this.state.email;
   	try {
 	  	let response = await fetch('http://35.174.30.108:3000/auth/login', {
-		  method: 'POST',	
-		  headers: {
-		    'Accept': 'application/json',
-		    'Content-Type': 'application/json',
-		  },
-		  body: JSON.stringify({
-		    email: email,
-		    password: password,
-		  }),
-		});
-		let status = unescape(JSON.parse(response['ok']));
-		if(status === "true"){
-			let token = unescape(JSON.parse(response['_bodyText'])['token']);
-			let id = JSON.parse(response['_bodyText'])['user']['id'];
-			this.setState({ id: id })
-			
-		}else{
-			Alert.alert(	
-			  "Incorrect credentials.",
-			  "Try again.",
-			  [
-			    {text: 'OK', onPress: () => console.log('OK Pressed')},
-			  ],
-			  { cancelable: false });
-		}
-		
-	}catch(error){
-		Alert.alert(	
-			  "Could not connect.",
-			  "Try again.",
-			  [
-			    {text: 'OK', onPress: () => console.log('OK Pressed')},
-			  ],
-			  { cancelable: false });
-	}
-
+  		  method: 'POST',
+  		  headers: {
+  		    'Accept': 'application/json',
+  		    'Content-Type': 'application/json',
+  		  },
+  		  body: JSON.stringify({
+  		    email: email,
+  		    password: password,
+  		  }),
+  		});
+  		let status = unescape(JSON.parse(response['ok']));
+  		if (status === "true") {
+  			let token = unescape(JSON.parse(response['_bodyText'])['token']);
+  			let id = JSON.parse(response['_bodyText'])['user']['id'];
+  			this.setState({ id: id })
+  		} else {
+  			Alert.alert(
+  			  "Incorrect credentials.",
+  			  "Try again.",
+  			  [
+  			    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  			  ],
+  			  { cancelable: false }
+        );
+      }
+  	} catch (error) {
+  		Alert.alert(
+  			  "Could not connect.",
+  			  "Try again.",
+  			  [
+  			    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  			  ],
+  			  { cancelable: false });
+  	}
 	//let responseJson = await response.json();
-
   }
+
+  _renderButton = (text, btnStyles, onPress) => (
+    <Button
+      primary
+      style={btnStyles}
+      onPress={onPress}
+    >
+      <AleoText style={styles.btnText}>{text}</AleoText>
+    </Button>
+  );
 
 
    _renderModalContent = () => (
     <View style={{padding: 20}}>
-	    <Text 
-	        style={{fontSize: 27}}>
-	        Login
-	    </Text>
-	    <TextInput placeholder='email' onChangeText={(email) => this.setState({email})} />
-	    <TextInput placeholder='password' secureTextEntry={true} onChangeText={(password) => this.setState({password})} />
-	    <View style={{margin:7}} />
-	    {this._renderButton("Submit", () => this._sendData())}
-	    {this._renderButton("Close", () => this.setState({ isModalVisible: false }))}
+      <Text
+          style={{
+            fontSize: 27,
+            paddingLeft: 5,
+            marginBottom: 10,
+            color: colors.midnightBlue,
+          }}>
+          Login
+      </Text>
+      <Text
+          style={{
+            fontSize: 18,
+            paddingLeft: 5,
+            marginBottom: 20,
+            color: "#808080",
+          }}>
+          Enter your login for your QR code.
+      </Text>
+      <Item>
+        <Input placeholder="Email" onChangeText={(email) => this.setState({email})} />
+      </Item>
+      <Item>
+        <Input placeholder="Password" secureTextEntry={true} onChangeText={(password) => this.setState({password})} />
+      </Item>
+	    <View style={{margin:7}}/>
+      {
+        this._renderButton("Submit", styles.btn, () => this._sendData())
+      }
+	    {
+        this._renderButton("Close", styles.altBtn, () => this._closeModal())
+      }
+    </View>
+  );
 
+  _renderQRContent = () => (
+    <View style={{padding: 20, alignItems:'center', justifyContent: 'center'}}>
+        <Text
+            style={{fontSize: 27}}>
+            Your QR Code
+        </Text>
+        <QRCode
+            value={this.state.id}
+            size={200}
+            bgColor='black'
+            fgColor='white'/>
+          {this._renderButton("Logout", styles.btn, () => this._sendData())}
+        {this._renderButton("Close", styles.altBtn, () => this.this._closeModal())}
     </View>
   );
 
   render() {
   	let content;
-  	if(this.state.id === ""){
-  		content = (
-  	<View style={{padding: 20}}>
-	    <Text 
-	        style={{fontSize: 27}}>
-	        Login
-	    </Text>
-	    <TextInput placeholder='email' onChangeText={(email) => this.setState({email})} />
-	    <TextInput placeholder='password' secureTextEntry={true} onChangeText={(password) => this.setState({password})} />
-	    <View style={{margin:7}} />
-	    {this._renderButton("Submit", () => this._sendData())}
-	    {this._renderButton("Close", () => this.setState({ isModalVisible: false }))}
-
-    </View>);
-  	}else{
-  		content = (
-		<View style={{padding: 20, alignItems:'center', justifyContent: 'center'}}>
-		    <Text 
-		        style={{fontSize: 27}}>
-		        Your QR Code
-		    </Text>
-  			<QRCode
-	          value={this.state.id}
-	          size={200}
-	          bgColor='black'
-	          fgColor='white'/>
-	        {this._renderButton("Logout", () => this._sendData())}
-	    	{this._renderButton("Close", () => this.setState({ isModalVisible: false }))}
-		</View>
-	          );
+  	if (this.state.id === "") {
+  		content = this._renderModalContent();
+  	} else{
+  		content = this._renderQRContent();
   	}
     return (
       <Container>
@@ -211,7 +235,7 @@ export default class App extends React.Component {
           <Right>
             <TouchableOpacity
 	            onPress={this._toggleModal}>
-              <Image source={require('./assets/icons/qr_icon.png')} style={{width: 30, height: 30}} />
+              <Image source={require('./assets/icons/qr_icon.png')} style={{width: 24, height: 24}} />
             </TouchableOpacity>
           </Right>
         </Header>
@@ -220,17 +244,18 @@ export default class App extends React.Component {
         <View>
 	        <Modal
 	          isVisible={this.state.isModalVisible}
-	          backdropColor={"white"}
-	          backdropOpacity={0.85}
-	          animationIn="zoomInDown"
-	          animationOut="zoomOutUp"
-	          animationInTiming={500}
-	          animationOutTiming={500}
-	          backdropTransitionInTiming={500}
-	          backdropTransitionOutTiming={500}
+	          backdropColor={'white'}
+	          backdropOpacity={0.8}
+	          animationIn="slideInUp"
+	          animationOut="slideOutDown"
+	          animationInTiming={250}
+	          animationOutTiming={250}
+	          backdropTransitionInTiming={250}
+	          backdropTransitionOutTiming={250}
 	          avoidKeyboard={true}
+            onBackdropPress={() => this.setState({ isModalVisible: false })}
         	>
-        	{content}         
+        	{content}
         </Modal>
       </View>
 

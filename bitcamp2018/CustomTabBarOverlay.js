@@ -40,7 +40,7 @@ class CustomTabBarOverlay extends Component {
                 name={tab}
                 size={28}
                 color={this.props.activeTab === i ?
-                  colors.bitcampOrange : colors.lightBrown}
+                  colors.yellowOrange : colors.lightBrown}
               />
             </TouchableOpacity>
           );
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 4,
   },
   tabActive: {
-    borderTopColor: colors.bitcampOrange,
+    borderTopColor: colors.yellowOrange,
   },
   tabs: {
     // borderTopColor: colors.lightBrown,
