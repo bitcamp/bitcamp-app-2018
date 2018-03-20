@@ -161,14 +161,14 @@ export default class App extends React.Component {
       style={btnStyles}
       onPress={onPress}
     >
-      <AleoText style={styles.btnText}>{text}</AleoText>
+      <BoldAleoText style={styles.btnText}>{text}</BoldAleoText>
     </Button>
   );
 
 
    _renderModalContent = () => (
     <View style={{padding: 20}}>
-      <Text
+      <AleoText
           style={{
             fontSize: 27,
             paddingLeft: 5,
@@ -176,8 +176,8 @@ export default class App extends React.Component {
             color: colors.midnightBlue,
           }}>
           Login
-      </Text>
-      <Text
+      </AleoText>
+      <AleoText
           style={{
             fontSize: 18,
             paddingLeft: 5,
@@ -185,7 +185,7 @@ export default class App extends React.Component {
             color: "#808080",
           }}>
           Enter your login for your QR code.
-      </Text>
+      </AleoText>
       <Item>
         <Input placeholder="Email" onChangeText={(email) => this.setState({email})} />
       </Item>
@@ -204,10 +204,10 @@ export default class App extends React.Component {
 
   _renderQRContent = () => (
     <View style={{padding: 20, alignItems:'center', justifyContent: 'center'}}>
-        <Text
+        <BoldAleoText
             style={{fontSize: 27, color: colors.midnightBlue}}>
             Your QR Code
-        </Text>
+        </BoldAleoText>
         <View style={styles.qr}>
           <QRCode
               value={this.state.id}
