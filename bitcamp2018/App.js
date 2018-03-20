@@ -85,6 +85,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     margin: 0
   },
+  qr: {
+    marginBottom: 80,
+    marginTop: 40,
+  }
 });
 
 export default class App extends React.Component {
@@ -200,16 +204,19 @@ export default class App extends React.Component {
   _renderQRContent = () => (
     <View style={{padding: 20, alignItems:'center', justifyContent: 'center'}}>
         <Text
-            style={{fontSize: 27}}>
+            style={{fontSize: 27, color: colors.midnightBlue}}>
             Your QR Code
         </Text>
-        <QRCode
-            value={this.state.id}
-            size={200}
-            bgColor='black'
-            fgColor='white'/>
-          {this._renderButton("Logout", styles.btn, () => this._sendData())}
-        {this._renderButton("Close", styles.altBtn, () => this.this._closeModal())}
+        <View style={styles.qr}>
+          <QRCode
+              value={this.state.id}
+              size={200}
+              bgColor='black'
+              fgColor='white'
+          />
+        </View>
+        {this._renderButton("Logout", styles.btn, () => this._sendData())}
+        {this._renderButton("Close", styles.altBtn, () => this._closeModal())}
     </View>
   );
 
@@ -245,7 +252,7 @@ export default class App extends React.Component {
 	        <Modal
 	          isVisible={this.state.isModalVisible}
 	          backdropColor={'white'}
-	          backdropOpacity={0.8}
+	          backdropOpacity={0.9}
 	          animationIn="slideInUp"
 	          animationOut="slideOutDown"
 	          animationInTiming={250}
