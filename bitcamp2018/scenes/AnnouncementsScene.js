@@ -7,7 +7,8 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  ImageBackground,
 } from 'react-native';
 
 import Accordion from './Accordion'
@@ -75,7 +76,7 @@ class AnnouncementsScene extends Component {
           </CardContent>
         </View>
       </View>
-          
+
         </Card>
       </View>
     )
@@ -97,13 +98,17 @@ class AnnouncementsScene extends Component {
       },
     ]
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={fakeData}
-          renderItem={this._renderRow}
-          keyExtractor = {(item, index) => index}
-        />
-      </View>
+      <ImageBackground
+       style={styles.container}
+       source={require('./images/background.png')}>
+        <View style={styles.container}>
+          <FlatList
+            data={fakeData}
+            renderItem={this._renderRow}
+            keyExtractor = {(item, index) => index}
+          />
+        </View>
+      </ImageBackground>
     )
   }
 }
@@ -138,7 +143,6 @@ class AnnouncementsScene extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f4f4f4',
   },
   description: {
     fontSize: 16,
