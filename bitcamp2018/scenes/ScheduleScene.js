@@ -7,7 +7,8 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  ImageBackground,
 } from 'react-native';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -198,6 +199,9 @@ class ScheduleScene extends Component {
 
   render() {
     return (
+      <ImageBackground
+       style={styles.container}
+       source={require('./images/background.png')}>
       <ScrollableTabView
         renderTabBar={() => <ScheduleSceneTabBarOverlay />}
         tabBarPosition={'top'}
@@ -208,6 +212,7 @@ class ScheduleScene extends Component {
       >
         {this._renderScheduleTabs()}
       </ScrollableTabView>
+    </ImageBackground>
     );
   }
 
