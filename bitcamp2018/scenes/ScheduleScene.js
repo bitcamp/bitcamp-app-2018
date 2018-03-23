@@ -138,9 +138,10 @@ class ScheduleScene extends Component {
     }
     return (
       <FlatList
+        key = {scheduleArray[0]}
         tabLabel={scheduleArray[0]}
         data={alteredData}
-        renderItem={this._renderRow}
+        renderItem={this._renderRow.bind(this)}
         keyExtractor = {(item, index) => index}
       />
     );
@@ -154,7 +155,8 @@ class ScheduleScene extends Component {
   _renderRow(rowData) {
     console.log(rowData.item.title);
     return (
-      <View style = {styles.container}>
+      <View
+      style = {styles.container}>
         <View style={styles.timeCol}>
           <AleoText style={styles.sideTimeText}>{rowData.item.sizeLabel}</AleoText>
         </View>
@@ -179,7 +181,7 @@ class ScheduleScene extends Component {
                     {rowData.item.title}
                   </BoldAleoText>
                   <Text style={styles.timeText}>
-                    {rowData.item.startTime} - {rowData.item.endTime}
+                    {this.normalizeTimeLabel(rowData.item.startTime)} - {this.normalizeTimeLabel(rowData.item.endTime)}
                   </Text>
                   <Text style={styles.location}>
                     {rowData.item.location}
