@@ -25,6 +25,8 @@ import {
   CardAction
 } from 'react-native-card-view';
 
+import Icon from 'react-native-vector-icons/FontAwesome'
+
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
 import firebaseApp from '../shared/firebase';
@@ -44,6 +46,68 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
 const STORAGE_KEY = '@bitcampapp:schedule'; // the @ may need to be modified...
+
+class EventCard extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      favorited: false
+    };
+  }
+
+  render() {
+    return (
+      <View
+      style = {styles.container}>
+        <View style={styles.timeCol}>
+          <AleoText style={styles.sideTimeText}>{this.props.sizeLabel}</AleoText>
+        </View>
+        <View style = {styles.cardCol}>
+          <View style = {styles.cardShadow}>
+            <Card>
+              <View style = {styles.cardLayout}>
+                {/* <View style={styles.cardImgContainer}>
+                  <CardImage>
+                    <Image
+                      source={{uri: rowData.item.pictureUrl}}
+                      style={styles.cardImg} />
+                  </CardImage>
+                </View> */}
+                <View style = {styles.cardText}>
+                  <CardContent>
+                    <View style = {styles.cardHeader}>
+                      <BoldAleoText style={styles.heading}>
+                        {this.props.title}
+                      </BoldAleoText>
+                      <View style = {styles.starIcon}>
+                        <Icon
+                          name = {this.state.favorited ? 'star' : 'star-o'}
+                          size = {24}
+                          color={colors.bitcampOrange}
+                        />
+                      </View>
+                    </View>
+                    <Text style={styles.timeText}>
+                      {this.props.startTimeFormatted} - {this.props.endTimeFormatted}
+                    </Text>
+                    <Text style={styles.location}>
+                      {this.props.location}
+                    </Text>
+                    <Text style={styles.description}>
+                      {this.props.description}
+                    </Text>
+                  </CardContent>
+                </View>
+              </View>
+            </Card>
+          </View>
+        </View>
+      </View>
+    );
+  }
+}
 
 class ScheduleScene extends Component {
 
@@ -156,46 +220,16 @@ class ScheduleScene extends Component {
 
 
   _renderRow(rowData) {
-    console.log(rowData.item.title);
     return (
-      <View
-      style = {styles.container}>
-        <View style={styles.timeCol}>
-          <AleoText style={styles.sideTimeText}>{rowData.item.sizeLabel}</AleoText>
-        </View>
-        <View style = {styles.cardCol}>
-          <View style = {styles.cardShadow}>
-            <Card>
-              <View style = {styles.cardLayout}>
-                {/* <View style={styles.cardImgContainer}>
-                  <CardImage>
-                    <Image
-                      source={{uri: rowData.item.pictureUrl}}
-                      style={styles.cardImg} />
-                  </CardImage>
-                </View> */}
-                <View style = {styles.cardText}>
-                  <CardContent>
-                    <BoldAleoText style={styles.heading}>
-                      {rowData.item.title}
-                    </BoldAleoText>
-                    <Text style={styles.timeText}>
-                      {rowData.item.startTime} - {rowData.item.endTime}
-                    </Text>
-                    <Text style={styles.location}>
-                      {rowData.item.location}
-                    </Text>
-                    <Text style={styles.description}>
-                      {rowData.item.description}
-                    </Text>
-                  </CardContent>
-                </View>
-              </View>
-            </Card>
-          </View>
-        </View>
-      </View>
-    );
+      <EventCard
+        sizeLabel = {rowData.item.sizeLabel}
+        title = {rowData.item.title}
+        startTime = {rowData.item.startTime}
+        endTime = {rowData.item.endTime}
+        startTimeFormatted = {this.normalizeTimeLabel(rowData.item.startTime)}
+        endTimeFormatted = {this.normalizeTimeLabel(rowData.item.endTime)}
+        location = {rowData.item.location}
+        description = {rowData.item.description}/>);
   }
 
   render() {
@@ -218,33 +252,7 @@ class ScheduleScene extends Component {
   }
 
 }
-  //   if (rowData.type === 'DATEHEADER') {
-  //     return (
-  //       <View style={styles.dateHeader}>
-  //         <BoldAleoText style={{color: '#ffffff'}}>{rowData.date}</BoldAleoText>
-  //       </View>
-  //     );
-  //   } else {
-  //     var company;
-  //     var location;
-  //     if (rowData.company.length != 0) {
-  //       company = (<AleoText style={styles.content}>Company: {rowData.company}</AleoText>);
-  //     }
-  //     if (rowData.location.length != 0) {
-  //       location = (<AleoText style={styles.content}>Location: {rowData.location}</AleoText>);
-  //     }
-  //     return (
-  //       <Accordion time={rowData.time} title={rowData.name}>
-  //         <View style={{
-  //           backgroundColor: '#ffffff'
-  //         }}>
-  //           <AleoText style={styles.content}>{rowData.description}</AleoText>
-  //           {company}
-  //           {location}
-  //         </View>
-  //       </Accordion>
-  //     );
-  //   }
+
 
 const styles = StyleSheet.create({
   description: {
@@ -273,6 +281,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.yellowOrange,
     marginBottom: 10,
+    flex: 5,
   },
   tabView: {
     flex: 1,
@@ -301,6 +310,13 @@ const styles = StyleSheet.create({
   cardText: {
     flex: 1,
     flexDirection: 'column'
+  },
+  cardHeader: {
+    flexDirection: 'row'
+  },
+  starIcon: {
+    flexDirection: 'row-reverse',
+    flex: 1
   },
   container: {
     flex: 1,
