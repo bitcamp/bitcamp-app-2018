@@ -9,6 +9,7 @@ import {
   Image,
   AsyncStorage,
   ImageBackground,
+  Platform,
 } from 'react-native';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -23,6 +24,8 @@ import {
   CardContent,
   CardAction
 } from 'react-native-card-view';
+
+import {BoxShadow} from 'react-native-shadow'
 
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
@@ -43,6 +46,97 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
 const STORAGE_KEY = '@bitcampapp:schedule'; // the @ may need to be modified...
+
+class DynamicCardShadow extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      width: 300,
+      height: 150,
+      dimsCalculated: false
+    }
+  }
+
+
+  render(){
+
+    const shadowOpt = {
+      width: this.state.width,
+      height: this.state.height,
+      color: "#000",
+      border: 1,
+      radius: 2,
+      opacity: 0.1,
+      x:0,
+      y:1,
+    }
+
+    if(! this.state.dimsCalculated){
+      return (
+        <View onLayout = { (event) => {this.overlayShadow(event.nativeEvent.layout)}}>
+          {this._renderCard()}
+        </View>
+      );
+    }
+    else {
+      return (
+        <BoxShadow setting = {shadowOpt}>
+          {this._renderCard()}
+        </BoxShadow>
+      );
+    }
+  }
+
+  _renderCard(){
+    return (
+      <Card>
+        <View>
+          {/* <View style={styles.cardImgContainer}>
+            <CardImage>
+              <Image
+                source={{uri: rowData.item.pictureUrl}}
+                style={styles.cardImg} />
+            </CardImage>
+          </View> */}
+          <View>
+            <CardContent>
+              <BoldAleoText style={styles.heading}>
+                {this.props.title}
+              </BoldAleoText>
+              <Text style={styles.timeText}>
+                {this.props.startTime} - {this.props.endTime}
+              </Text>
+              <Text style={styles.location}>
+                {this.props.location}
+              </Text>
+              <Text style={styles.description}>
+                {this.props.description}
+              </Text>
+            </CardContent>
+          </View>
+        </View>
+      </Card>
+    )
+  }
+
+  overlayShadow(layout){
+    if(Platform.OS == 'android'){
+      this.setState(
+        previousState => {
+          return {
+            width: layout.width,
+            height: layout.height,
+            dimsCalculated: true
+          };
+        }
+      );
+    }
+
+  }
+}
+
 
 class ScheduleScene extends Component {
 
@@ -153,6 +247,7 @@ class ScheduleScene extends Component {
     return moment(t).format("h:mm A")
   }
 
+
   _renderRow(rowData) {
     console.log(rowData.item.title);
     return (
@@ -162,38 +257,12 @@ class ScheduleScene extends Component {
           <AleoText style={styles.sideTimeText}>{rowData.item.sizeLabel}</AleoText>
         </View>
         <View style = {styles.cardCol}>
-          <Card>
-            <View style = {{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}>
-              {/* <View style={styles.cardImgContainer}>
-                <CardImage>
-                  <Image
-                    source={{uri: rowData.item.pictureUrl}}
-                    style={styles.cardImg} />
-                </CardImage>
-              </View> */}
-              <View style = {{ flex: 1, flexDirection: 'column'}}>
-                <CardContent>
-                  <BoldAleoText style={styles.heading}>
-                    {rowData.item.title}
-                  </BoldAleoText>
-                  <Text style={styles.timeText}>
-                    {this.normalizeTimeLabel(rowData.item.startTime)} - {this.normalizeTimeLabel(rowData.item.endTime)}
-                  </Text>
-                  <Text style={styles.location}>
-                    {rowData.item.location}
-                  </Text>
-                  <Text style={styles.description}>
-                    {rowData.item.description}
-                  </Text>
-                </CardContent>
-              </View>
-            </View>
-          </Card>
+          <DynamicCardShadow
+          title = {rowData.item.title}
+          startTime = {this.normalizeTimeLabel(rowData.item.startTime)}
+          endTime = {this.normalizeTimeLabel(rowData.item.endTime)}
+          location = {rowData.item.location}
+          description = {rowData.item.description}/>
         </View>
       </View>
     );
