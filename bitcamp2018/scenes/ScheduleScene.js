@@ -7,7 +7,8 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  ImageBackground,
 } from 'react-native';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -200,16 +201,20 @@ class ScheduleScene extends Component {
 
   render() {
     return (
-      <ScrollableTabView
-        renderTabBar={() => <ScheduleSceneTabBarOverlay />}
-        tabBarPosition={'top'}
-        style ={styles.tabView}
-        initialPage={0}
-        keyExtractor = {(iterm, index) => index}
-        tabBarUnderlineStyle = {{opacity: 0}}
-      >
-        {this._renderScheduleTabs()}
-      </ScrollableTabView>
+      <ImageBackground
+       style={styles.container}
+       source={require('./images/background.png')}>
+        <ScrollableTabView
+          renderTabBar={() => <ScheduleSceneTabBarOverlay />}
+          tabBarPosition={'top'}
+          style ={styles.tabView}
+          initialPage={0}
+          keyExtractor = {(iterm, index) => index}
+          tabBarUnderlineStyle = {{opacity: 0}}
+        >
+          {this._renderScheduleTabs()}
+        </ScrollableTabView>
+      </ImageBackground>
     );
   }
 
@@ -272,7 +277,6 @@ const styles = StyleSheet.create({
   },
   tabView: {
     flex: 1,
-    backgroundColor: '#f4f4f4',
   },
   timeCol: {
     flex: 1,
