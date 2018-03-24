@@ -182,7 +182,7 @@ class ScheduleScene extends Component {
       thisBinded.setState({dataSource:thisBinded.ds});
       console.log("NDS");
       console.log(this.state.dataSource);
-      
+
       AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
         if(result == null){
           AsyncStorage.setItem(STORAGE_KEY, thisBinded.ds, function(error){
@@ -243,7 +243,7 @@ class ScheduleScene extends Component {
         tabLabel={scheduleArray[0]}
         data={alteredData}
         renderItem={this._renderRow.bind(this)}
-        keyExtractor = {(item, index) => index}
+        keyExtractor = {(item, index) => item.key.toString()}
       />
     );
   }
