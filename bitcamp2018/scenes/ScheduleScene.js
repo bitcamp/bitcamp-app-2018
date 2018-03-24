@@ -45,7 +45,9 @@ class ScheduleScene extends Component {
        dataSource: this.ds.Schedule,
     };
     this.itemRef = firebase.database().ref();
+    this.fetchPrelim = this.fetchPrelim.bind(this);
     this.fetchData = this.fetchData.bind(this);
+    this._renderScheduleTabs = this._renderScheduleTabs.bind(this);
     // console.log(firebaseApp);
     // this.itemsRef = firebaseApp.database().ref();
   }
@@ -86,7 +88,19 @@ class ScheduleScene extends Component {
   componentDidMount() {
     // make sure we aren't overwriting Firebase data with locally cached data
     //this.fetchData().then(this.listenForItems.bind(this));
+    //this.fetchPrelim();
     this.fetchData();
+  }
+
+  fetchPrelim(){
+    var thisBinded = this;
+    AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
+        if(result != null){
+          this.res = result;
+          thisBinded.ds = this.res;
+          thisBinded.setState({dataSource:thisBinded.ds});
+        }
+    });
   }
 
   fetchData(){
@@ -98,13 +112,23 @@ class ScheduleScene extends Component {
       thisBinded.setState({dataSource:thisBinded.ds});
       console.log("NDS");
       console.log(this.state.dataSource);
+      
+      AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
+        if(result == null){
+          AsyncStorage.setItem(STORAGE_KEY, thisBinded.ds, function(error){
+            if (error){
+              console.log("Error: " + error);
+            }
+          });
+        }
+      });
     });
   }
 
   _renderScheduleTabs(){
-
+    var thisBinded = this;
     return this.state.dataSource.
-      map((scheduleForDay) => this._renderScheduleForDay(scheduleForDay))
+      map((scheduleForDay) => thisBinded._renderScheduleForDay(scheduleForDay))
 
   }
 

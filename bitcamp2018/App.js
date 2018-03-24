@@ -17,6 +17,7 @@ import {
   ScrollView,
   TextInput,
   TouchableHighlight,
+  AsyncStorage,
   Alert
 } from 'react-native';
 import {
@@ -42,6 +43,7 @@ import aleofy from './shared/aleo';
 
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
+const ID = '@bitcampapp:userid';
 
 const pageNumberTitles = [
   "Bitcamp 2018",
@@ -97,14 +99,27 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class App extends React.Component {
-  state = {
-    title: pageNumberTitles[0],
-    isModalVisible: false,
-    email: "",
-    password: "",
-    id: ""
+class App extends Component {
+  constructor(props) {
+
+    super(props);
+    this.savedData = "";
+
+    this.state = {
+      title: pageNumberTitles[0],
+      isModalVisible: false,
+      email: "",
+      password: "",
+      id: this.savedData,
+      loaded: false,
+    }
+    this.getID = this.getID.bind(this);
   }
+
+  componentDidMount(){
+    this.getID();
+  }
+
 
   changeHeaderTitle(pageNumber) {
     this.setState({
@@ -133,11 +148,17 @@ export default class App extends React.Component {
   		    password: password,
   		  }),
   		});
+      console.log("RESPONSE: " + unescape(JSON.parse(response)));
   		let status = unescape(JSON.parse(response['ok']));
   		if (status === "true") {
   			let token = unescape(JSON.parse(response['_bodyText'])['token']);
   			let id = JSON.parse(response['_bodyText'])['user']['id'];
   			this.setState({ id: id })
+        /*AsyncStorage.setItem(ID, this.state.id, function(error){
+          if (error){
+            console.log("Error: " + error);
+          }
+        });*/
   		} else {
   			Alert.alert(
   			  "Incorrect credentials.",
@@ -149,13 +170,7 @@ export default class App extends React.Component {
         );
       }
   	} catch (error) {
-  		Alert.alert(
-  			  "Could not connect.",
-  			  "Try again.",
-  			  [
-  			    {text: 'OK', onPress: () => console.log('OK Pressed')},
-  			  ],
-  			  { cancelable: false });
+  		throw error;
   	}
 	//let responseJson = await response.json();
   }
@@ -207,6 +222,25 @@ export default class App extends React.Component {
     </View>
   );
 
+  async getID() {
+    /*var thisBinded = this;
+    thisBinded.savedData = "";
+    thisBinded.savedData = await AsyncStorage.getItem(ID);
+    thisBinded.savedData = JSON.parse(savedData);
+    if (savedData !== null) {
+      thisBinded.setState({id: thisBinded.savedData});
+    }*/
+  }
+
+  async _logout_qr() {
+    await AsyncStorage.removeItem(ID, function (err){
+        if (err){
+          console.log("Error: " + err);
+        }
+    });
+    this._closeModal();
+  }
+
   _renderQRContent = () => (
     <View style={{padding: 20, alignItems:'center', justifyContent: 'center'}}>
         <BoldAleoText
@@ -221,18 +255,17 @@ export default class App extends React.Component {
               fgColor='white'
           />
         </View>
-        {this._renderButton("Logout", styles.btn, () => this._sendData())}
+        {this._renderButton("Logout", styles.btn, () => this._logout_qr())}
         {this._renderButton("Close", styles.altBtn, () => this._closeModal())}
     </View>
   );
 
   render() {
-  	let content;
-  	if (this.state.id === "") {
-  		content = this._renderModalContent();
-  	} else{
-  		content = this._renderQRContent();
-  	}
+    if(this.state.id === ""){
+      content = this._renderModalContent();
+    }else{
+      content = this._renderQRContent();
+    }
     return (
       <Container>
         <Header style={{backgroundColor: colors.mediumBrown}}>
@@ -278,3 +311,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default App;
