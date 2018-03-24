@@ -594,10 +594,7 @@
 				00E356EF1AD99517003FC87E /* bitcamp2018Tests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-<<<<<<< ours
 				8C6CDB6A4AA3465C9BE1B120 /* Resources */,
-=======
->>>>>>> theirs
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
