@@ -1,64 +1,32 @@
 {"Schedule": [
   [ "Friday" ,
     [{
-      "title" : "Introduction Talk",
-      "startTime" : "2018-04-06 08:00",
-      "endTime" : "2018-04-06 08:30",
-      "location" : "By the bonfire",
-      "description": "Meet everyone by the bonfire to kickoff bitcamp 2018",
-      "pictureUrl" : "https://i.imgur.com/9enlRkH.png"
-    },
-    {
-      "title" : "Get to know each other",
-      "startTime" : "2018-04-06 08:00",
-      "endTime" : "2018-04-06 09:00",
-      "location" : "Mordor",
-      "description": "It's time to make some groups",
-      "pictureUrl" : "https://vignette.wikia.nocookie.net/lotr/images/6/6a/Mordor.png/revision/latest?cb=20050929122727"
-    },
-    {
-      "title" : "Get your snacks",
-      "startTime" : "2018-04-06 08:30",
-      "endTime" : "2018-04-06 09:00",
-      "location" : "Everywhere",
-      "description": "I love chocolate chip cookies",
-      "pictureUrl" : "https://i.imgur.com/skSpO.jpg"
+      "title" : "Coming soon!",
+      "startTime" : "",
+      "endTime" : "",
+      "location" : "",
+      "description": "",
+      "pictureUrl" : ""
     }
   ]],
   [ "Saturday" ,
     [{
-      "title" : "Closing Ceremony",
-      "startTime" : "2018-04-06 08:00",
-      "endTime" : "2018-04-06 08:30",
-      "location" : "By the bonfire",
-      "description": "Meet everyone by the bonfire to kickoff bitcamp 2018",
-      "pictureUrl" : "https://i.imgur.com/mPHKdox.jpg"
-    },
-    {
-      "title" : "Meme sesh",
-      "startTime" : "2018-04-06 08:30",
-      "endTime" : "2018-04-06 09:00",
-      "location" : "Everywhere",
-      "description": "I love chocolate chip cookies8",
-      "pictureUrl" : "https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/challenge_thumbnails/000/497/926/datas/original.png"
+      "title" : "Coming soon!",
+      "startTime" : "",
+      "endTime" : "",
+      "location" : "",
+      "description": "",
+      "pictureUrl" : ""
     }
   ]],
   [ "Sunday" ,
     [{
-      "title" : "Iribe Strip tease",
-      "startTime" : "2018-04-06 08:00",
-      "endTime" : "2018-04-06 08:30",
-      "location" : "By the bonfire",
-      "description": "Meet everyone by the bonfire to kickoff bitcamp 2018",
-      "pictureUrl" : "https://pbs.twimg.com/profile_images/714235145306390528/8iKJ6UeV_400x400.jpg"
-    },
-    {
-      "title" : "Vincent Talks about a swamp",
-      "startTime" : "2018-04-06 08:30",
-      "endTime" : "2018-04-06 09:00",
-      "location" : "Everywhere",
-      "description": "I love chocolate chip cookies8",
-      "pictureUrl" : "https://beta.techcrunch.com/wp-content/uploads/2017/02/gettyimages-495845075.jpg?w=1390&crop=1"
+      "title" : "Coming soon!",
+      "startTime" : "",
+      "endTime" : "",
+      "location" : "",
+      "description": "",
+      "pictureUrl" : ""
     }
   ]]
 ]}

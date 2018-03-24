@@ -17,6 +17,7 @@ import {
   ScrollView,
   TextInput,
   TouchableHighlight,
+  AsyncStorage,
   Alert
 } from 'react-native';
 import {
@@ -39,9 +40,11 @@ import { colors } from './shared/styles';
 import Modal from "react-native-modal";
 import QRCode from 'react-native-qrcode';
 import aleofy from './shared/aleo';
+import firebase from 'react-native-firebase';
 
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
+const ID = '@bitcampapp:userid';
 
 const pageNumberTitles = [
   "Bitcamp 2018",
@@ -97,14 +100,35 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class App extends React.Component {
-  state = {
-    title: pageNumberTitles[0],
-    isModalVisible: false,
-    email: "",
-    password: "",
-    id: ""
+class App extends Component {
+
+  constructor(props) {
+
+    super(props);
+    this.savedData = "";
+
+    this.state = {
+      title: pageNumberTitles[0],
+      isModalVisible: false,
+      email: "",
+      password: "",
+      id: this.savedData,
+      loaded: false,
+    }
+    this.getID = this.getID.bind(this);
   }
+
+  componentDidMount(){
+    this.getID();
+    FCM = firebase.messaging();
+    FCM.requestPermissions();
+    FCM.onMessage(function(payload) {
+      console.log('Message received. ' + JSON.stringify(payload));
+      // ...
+    });
+
+  }
+
 
   changeHeaderTitle(pageNumber) {
     this.setState({
@@ -122,7 +146,7 @@ export default class App extends React.Component {
   	let password = this.state.password;
   	let email = this.state.email;
   	try {
-	  	let response = await fetch('http://35.174.30.108:3000/auth/login', {
+	  	let response = await fetch('https://apply.bit.camp/auth/login', {
   		  method: 'POST',
   		  headers: {
   		    'Accept': 'application/json',
@@ -133,11 +157,20 @@ export default class App extends React.Component {
   		    password: password,
   		  }),
   		});
-  		let status = unescape(JSON.parse(response['ok']));
+      let responseJson = await response.json();
+      console.log("RESPONSE: " + JSON.stringify(responseJson));
+      console.log("RESPONSE: " + JSON.stringify(response));
+  		let status = unescape(response['ok']);
   		if (status === "true") {
-  			let token = unescape(JSON.parse(response['_bodyText'])['token']);
-  			let id = JSON.parse(response['_bodyText'])['user']['id'];
-  			this.setState({ id: id })
+  			let token = unescape(responseJson['token']);
+  			let id = unescape(responseJson['user']['id']);
+        console.log("TOKEN: " + token + "ID: " + id);
+  			this.setState({ id: id });
+        AsyncStorage.setItem(ID, this.state.id, function(error){
+          if (error){
+            console.log("Error: " + error);
+          }
+        });
   		} else {
   			Alert.alert(
   			  "Incorrect credentials.",
@@ -150,15 +183,17 @@ export default class App extends React.Component {
       }
   	} catch (error) {
   		Alert.alert(
-  			  "Could not connect.",
-  			  "Try again.",
-  			  [
-  			    {text: 'OK', onPress: () => console.log('OK Pressed')},
-  			  ],
-  			  { cancelable: false });
+          "Cound not connect.",
+          "Try again.",
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+          ],
+          { cancelable: false }
+        );
+      }
   	}
 	//let responseJson = await response.json();
-  }
+
 
   _renderButton = (text, btnStyles, onPress) => (
     <Button
@@ -207,6 +242,29 @@ export default class App extends React.Component {
     </View>
   );
 
+  async getID() {
+    console.log("HERE");
+    var thisBinded = this;
+    thisBinded.savedData = "";
+    thisBinded.savedData = await AsyncStorage.getItem(ID);
+    console.log("DATA: " + JSON.stringify(thisBinded.savedData));
+    thisBinded.savedData = JSON.stringify(thisBinded.savedData);
+    if (thisBinded.savedData != null) {
+      console.log("INSIDE");
+      thisBinded.setState({id: thisBinded.savedData});
+    }
+  }
+
+  async _logout_qr() {
+    await AsyncStorage.removeItem(ID, function (err){
+        if (err){
+          console.log("Error: " + err);
+        }
+    });
+    this.setState({id: ""});
+    this._closeModal();
+  }
+
   _renderQRContent = () => (
     <View style={{padding: 20, alignItems:'center', justifyContent: 'center'}}>
         <BoldAleoText
@@ -221,18 +279,17 @@ export default class App extends React.Component {
               fgColor='white'
           />
         </View>
-        {this._renderButton("Logout", styles.btn, () => this._sendData())}
+        {this._renderButton("Logout", styles.btn, () => this._logout_qr())}
         {this._renderButton("Close", styles.altBtn, () => this._closeModal())}
     </View>
   );
 
   render() {
-  	let content;
-  	if (this.state.id === "") {
-  		content = this._renderModalContent();
-  	} else{
-  		content = this._renderQRContent();
-  	}
+    if(this.state.id === ""){
+      content = this._renderModalContent();
+    }else{
+      content = this._renderQRContent();
+    }
     return (
       <Container>
         <Header style={{backgroundColor: colors.mediumBrown}}>
@@ -278,3 +335,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default App;

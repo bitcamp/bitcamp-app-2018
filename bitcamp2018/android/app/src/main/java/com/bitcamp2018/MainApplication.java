@@ -3,6 +3,9 @@ package com.bitcamp2018;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.database.RNFirebaseDatabasePackage; // <-- Add this line
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactnative.photoview.PhotoViewPackage;
 import com.github.yamill.orientation.OrientationPackage;
@@ -27,10 +30,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFirebasePackage(),
             new VectorIconsPackage(),
             new PhotoViewPackage(),
             new OrientationPackage(),
-            new RNFetchBlobPackage()
+            new RNFetchBlobPackage(),
+            new RNFirebaseDatabasePackage(), // <-- Add this line
+            new RNFirebaseMessagingPackage()
       );
     }
 
