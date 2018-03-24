@@ -57,6 +57,11 @@ class EventCard extends Component {
     };
   }
 
+  triggerButtonPress(){
+
+    console.log("hello world");
+  }
+
   render() {
     return (
       <View
@@ -86,6 +91,7 @@ class EventCard extends Component {
                           name = {this.state.favorited ? 'star' : 'star-o'}
                           size = {24}
                           color={colors.bitcampOrange}
+                          onPress = {this.triggerButtonPress()}
                         />
                       </View>
                     </View>
