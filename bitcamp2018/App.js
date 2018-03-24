@@ -157,17 +157,20 @@ class App extends Component {
   		    password: password,
   		  }),
   		});
-      console.log("RESPONSE: " + unescape(JSON.stringify(response)));
+      let responseJson = await response.json();
+      console.log("RESPONSE: " + JSON.stringify(responseJson));
+      console.log("RESPONSE: " + JSON.stringify(response));
   		let status = unescape(response['ok']);
   		if (status === "true") {
-  			let token = unescape(JSON.parse(response['_bodyText'])['token']);
-  			let id = JSON.parse(response['_bodyText'])['user']['id'];
-  			this.setState({ id: id })
-        /*AsyncStorage.setItem(ID, this.state.id, function(error){
+  			let token = unescape(responseJson['token']);
+  			let id = unescape(responseJson['user']['id']);
+        console.log("TOKEN: " + token + "ID: " + id);
+  			this.setState({ id: id });
+        AsyncStorage.setItem(ID, this.state.id, function(error){
           if (error){
             console.log("Error: " + error);
           }
-        });*/
+        });
   		} else {
   			Alert.alert(
   			  "Incorrect credentials.",
@@ -179,10 +182,18 @@ class App extends Component {
         );
       }
   	} catch (error) {
-  		throw error;
+  		Alert.alert(
+          "Cound not connect.",
+          "Try again.",
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+          ],
+          { cancelable: false }
+        );
+      }
   	}
 	//let responseJson = await response.json();
-  }
+
 
   _renderButton = (text, btnStyles, onPress) => (
     <Button
@@ -232,13 +243,16 @@ class App extends Component {
   );
 
   async getID() {
-    /*var thisBinded = this;
+    console.log("HERE");
+    var thisBinded = this;
     thisBinded.savedData = "";
     thisBinded.savedData = await AsyncStorage.getItem(ID);
-    thisBinded.savedData = JSON.parse(savedData);
-    if (savedData !== null) {
+    console.log("DATA: " + JSON.stringify(thisBinded.savedData));
+    thisBinded.savedData = JSON.stringify(thisBinded.savedData);
+    if (thisBinded.savedData != null) {
+      console.log("INSIDE");
       thisBinded.setState({id: thisBinded.savedData});
-    }*/
+    }
   }
 
   async _logout_qr() {
@@ -247,6 +261,7 @@ class App extends Component {
           console.log("Error: " + err);
         }
     });
+    this.setState({id: ""});
     this._closeModal();
   }
 
