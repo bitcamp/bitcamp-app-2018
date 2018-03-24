@@ -249,7 +249,7 @@ class App extends Component {
     thisBinded.savedData = await AsyncStorage.getItem(ID);
     console.log("DATA: " + JSON.stringify(thisBinded.savedData));
     thisBinded.savedData = JSON.stringify(thisBinded.savedData);
-    if (thisBinded.savedData != null) {
+    if (thisBinded.savedData != null && thisBinded.savedData != "" && thisBinded.savedData != "null") {
       console.log("INSIDE");
       thisBinded.setState({id: thisBinded.savedData});
     }

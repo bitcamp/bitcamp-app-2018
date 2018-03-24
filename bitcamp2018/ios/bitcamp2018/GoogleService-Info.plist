@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>829730937369-5fm7mqak0kmbtvcp3kdskhfg93vee3dv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.829730937369-5fm7mqak0kmbtvcp3kdskhfg93vee3dv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCiG7oS3F1EXU8beGQ0Dqop64k4-zDo-3g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>829730937369</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.bitcamp.bitcamp2018</string>
+	<key>PROJECT_ID</key>
+	<string>bitcamp2018-3f061</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bitcamp2018-3f061.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:829730937369:ios:c8ea5adb003f9730</string>
+	<key>DATABASE_URL</key>
+	<string>https://bitcamp2018-3f061.firebaseio.com</string>
+</dict>
+</plist>

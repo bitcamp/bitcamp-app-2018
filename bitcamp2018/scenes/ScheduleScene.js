@@ -110,89 +110,61 @@ class ScheduleScene extends Component {
   constructor(props) {
     super(props);
     this.ds = scheduleData;
-    // this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
     this.state = {
        dataSource: this.ds.Schedule,
     };
+
     this.itemRef = firebase.database().ref();
     this.fetchPrelim = this.fetchPrelim.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this._renderScheduleTabs = this._renderScheduleTabs.bind(this);
-    // console.log(firebaseApp);
-    // this.itemsRef = firebaseApp.database().ref();
+
   }
-
-  // listenForItems() {
-  //   this.itemsRef.on('value', (snap) => {
-  //     const jsonDataBlob = snap.exportVal();
-  //     this.setState({
-  //       dataSource: this.ds.cloneWithRows(jsonDataBlob.Schedule)
-  //     });
-  //
-  //     AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(jsonDataBlob.Schedule), function(error){
-  //       if (error){
-  //         console.log("Error: " + error);
-  //       }
-  //     });
-  //   });
-  // }
-
-  // async fetchData(){
-  //   let savedData = [];
-  //   try{
-  //     savedData = await AsyncStorage.getItem(STORAGE_KEY);
-  //     savedData = JSON.parse(savedData);
-  //     if (savedData === null) savedData = [{type:"DATEHEADER", date:"Schedule coming soon!"}];
-  //
-  //   }catch(error){
-  //     console.log('Error grabbing item from storage');
-  //     console.log(error);
-  //     savedData = [{type:"DATEHEADER", date:"Schedule coming soon!"}];
-  //   }
-  //   this.setState({
-  //     dataSource: this.ds.cloneWithRows(savedData)
-  //   });
-  // }
 
 
   componentDidMount() {
     // make sure we aren't overwriting Firebase data with locally cached data
-    //this.fetchData().then(this.listenForItems.bind(this));
-    //this.fetchPrelim();
-    this.fetchData();
+    let timeoutObj = setTimeout(() => {this.fetchPrelim()}, 5000)
+
+    this.fetchData(timeoutObj)
+
   }
 
   fetchPrelim(){
-    var thisBinded = this;
+
     AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
         if(result != null){
-          this.res = result;
-          thisBinded.ds = this.res;
-          thisBinded.setState({dataSource:thisBinded.ds});
+          console.log("Result:")
+          console.log(result);
+          this.ds = JSON.parse(result);
+          console.log(this.ds);
+          this.setState({dataSource:this.ds.Schedule});
         }
+
+        //alert user that there is no connection
     });
   }
 
-  fetchData(){
-    var thisBinded = this;
-    this.itemRef.on('value', async function(snapshot) {
+  fetchData(timeoutObj){
+    // var thisBinded = this;
+    this.itemRef.on('value', async (snapshot) => {
       //this.setState({dataSource:snapshot.val().Schedule});
-      var data = snapshot.val().Schedule;
+      var data = snapshot.val();
       this.ds = data;
-      this.setState({dataSource:this.ds});
-      console.log("NDS");
-      console.log(this.state.dataSource);
+      console.log(data);
+      this.setState({dataSource:this.ds.Schedule});
 
-      AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
-        if(result == null){
-          AsyncStorage.setItem(STORAGE_KEY, this.ds, function(error){
-            if (error){
-              console.log("Error: " + error);
-            }
-          });
+      clearTimeout(timeoutObj);
+
+      console.log("Updating store:")
+      console.log(this.ds);
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(this.ds), function(error){
+        if (error){
+          throw error;
         }
       });
-    }).bind(this);
+    })
   }
 
   _renderScheduleTabs(){
@@ -204,7 +176,7 @@ class ScheduleScene extends Component {
 
   _renderScheduleForDay(scheduleArray){
 
-    scheduleArray[1] = scheduleArray[1].sort((event1, event2) => {
+    alteredData = scheduleArray[1].sort((event1, event2) => {
       start1 = moment(event1.startTime);
       start2 = moment(event2.startTime);
 
@@ -219,8 +191,6 @@ class ScheduleScene extends Component {
     })
 
     takenLabels = new Set(); //keeps track of which days have labels on them
-
-    alteredData = scheduleArray[1];
 
 
     for (var i in alteredData){
