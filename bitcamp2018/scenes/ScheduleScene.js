@@ -29,16 +29,7 @@ import aleofy from '../shared/aleo';
 import firebaseApp from '../shared/firebase';
 
 import scheduleData from '../assets/schedule.json'
-
-/*// Initialize Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyCDA47vn27sRJVu575IcduceK7ahZsWrJA",
-  authDomain: "bitcamp-app.firebaseapp.com",
-  databaseURL: "https://bitcamp-app.firebaseio.com/",
-  storageBucket: ""
-};
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-*/
+import firebase from 'react-native-firebase';
 
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
@@ -48,10 +39,13 @@ class ScheduleScene extends Component {
 
   constructor(props) {
     super(props);
+    this.ds = scheduleData;
     // this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-       dataSource: scheduleData.Schedule
+       dataSource: this.ds.Schedule,
     };
+    this.itemRef = firebase.database().ref();
+    this.fetchData = this.fetchData.bind(this);
     // console.log(firebaseApp);
     // this.itemsRef = firebaseApp.database().ref();
   }
@@ -92,7 +86,19 @@ class ScheduleScene extends Component {
   componentDidMount() {
     // make sure we aren't overwriting Firebase data with locally cached data
     //this.fetchData().then(this.listenForItems.bind(this));
-    console.log(scheduleData);
+    this.fetchData();
+  }
+
+  fetchData(){
+    var thisBinded = this;
+    this.itemRef.on('value', async function(snapshot) {
+      //this.setState({dataSource:snapshot.val().Schedule});
+      this.data = snapshot.val().Schedule;
+      thisBinded.ds = this.data;
+      thisBinded.setState({dataSource:thisBinded.ds});
+      console.log("NDS");
+      console.log(this.state.dataSource);
+    });
   }
 
   _renderScheduleTabs(){
