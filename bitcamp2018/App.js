@@ -40,6 +40,7 @@ import { colors } from './shared/styles';
 import Modal from "react-native-modal";
 import QRCode from 'react-native-qrcode';
 import aleofy from './shared/aleo';
+import firebase from 'react-native-firebase';
 
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
 });
 
 class App extends Component {
+
   constructor(props) {
 
     super(props);
@@ -118,6 +120,13 @@ class App extends Component {
 
   componentDidMount(){
     this.getID();
+    FCM = firebase.messaging();
+    FCM.requestPermissions();
+    FCM.onMessage(function(payload) {
+      console.log('Message received. ' + JSON.stringify(payload));
+      // ...
+    });
+
   }
 
 
@@ -137,7 +146,7 @@ class App extends Component {
   	let password = this.state.password;
   	let email = this.state.email;
   	try {
-	  	let response = await fetch('http://35.174.30.108:3000/auth/login', {
+	  	let response = await fetch('https://apply.bit.camp/auth/login', {
   		  method: 'POST',
   		  headers: {
   		    'Accept': 'application/json',
@@ -148,8 +157,8 @@ class App extends Component {
   		    password: password,
   		  }),
   		});
-      console.log("RESPONSE: " + unescape(JSON.parse(response)));
-  		let status = unescape(JSON.parse(response['ok']));
+      console.log("RESPONSE: " + unescape(JSON.stringify(response)));
+  		let status = unescape(response['ok']);
   		if (status === "true") {
   			let token = unescape(JSON.parse(response['_bodyText'])['token']);
   			let id = JSON.parse(response['_bodyText'])['user']['id'];

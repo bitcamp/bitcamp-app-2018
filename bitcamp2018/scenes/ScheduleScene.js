@@ -26,7 +26,6 @@ import {
 
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
-import firebaseApp from '../shared/firebase';
 
 import scheduleData from '../assets/schedule.json'
 import firebase from 'react-native-firebase';
