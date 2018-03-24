@@ -177,22 +177,22 @@ class ScheduleScene extends Component {
     var thisBinded = this;
     this.itemRef.on('value', async function(snapshot) {
       //this.setState({dataSource:snapshot.val().Schedule});
-      this.data = snapshot.val().Schedule;
-      thisBinded.ds = this.data;
-      thisBinded.setState({dataSource:thisBinded.ds});
+      var data = snapshot.val().Schedule;
+      this.ds = data;
+      this.setState({dataSource:this.ds});
       console.log("NDS");
       console.log(this.state.dataSource);
 
       AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
         if(result == null){
-          AsyncStorage.setItem(STORAGE_KEY, thisBinded.ds, function(error){
+          AsyncStorage.setItem(STORAGE_KEY, this.ds, function(error){
             if (error){
               console.log("Error: " + error);
             }
           });
         }
       });
-    });
+    }).bind(this);
   }
 
   _renderScheduleTabs(){
