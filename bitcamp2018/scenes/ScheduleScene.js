@@ -10,6 +10,7 @@ import {
   AsyncStorage,
   ImageBackground,
   Platform,
+  TouchableHighlight,
 } from 'react-native';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -49,7 +50,9 @@ class EventCard extends Component {
 
   triggerButtonPress(){
 
-    console.log("hello world");
+    //changes icon to favorited
+    this.setState((prevState, props) => {return {favorited : !prevState.favorited}});
+
   }
 
   render() {
@@ -77,12 +80,14 @@ class EventCard extends Component {
                         {this.props.title}
                       </BoldAleoText>
                       <View style = {styles.starIcon}>
-                        <Icon
-                          name = {this.state.favorited ? 'star' : 'star-o'}
-                          size = {24}
-                          color={colors.bitcampOrange}
-                          onPress = {this.triggerButtonPress()}
-                        />
+                        <TouchableHighlight onPress = {this.triggerButtonPress.bind(this)} activeOpacity = {1}
+                        underlayColor = {'#ffffff'}>
+                          <Icon
+                            name = {this.state.favorited ? 'star' : 'star-o'}
+                            size = {24}
+                            color={colors.bitcampOrange}
+                          />
+                        </TouchableHighlight>
                       </View>
                     </View>
                     <Text style={styles.timeText}>
