@@ -38,7 +38,7 @@ class CustomTabBarOverlay extends Component {
             >
               <Icon
                 name={tab}
-                size={24}
+                size={28}
                 color={this.props.activeTab === i ?
                   colors.yellowOrange : colors.lightBrown}
               />
@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     ...Platform.select({
       ios: {
-        paddingBottom: 10,
+        paddingBottom: 8,
       },
       android: {
-        paddingBottom: 12,
+        paddingBottom: 10,
       },
     }),
-    paddingTop: 10,
+    paddingTop: 8,
     borderTopColor: colors.cloudWhite,
     borderTopWidth: 4,
   },
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   tabs: {
     // borderTopColor: colors.lightBrown,
     borderTopWidth: 0,
-    height: 45,
+    // height: 45,
     flexDirection: 'row',
     backgroundColor: colors.cloudWhite,
     // paddingTop: 8,

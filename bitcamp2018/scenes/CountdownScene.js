@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   numbers: {
-    fontSize: 42,
+    fontSize: 44,
     color: colors.midnightBlue,
   },
   dhms: {
