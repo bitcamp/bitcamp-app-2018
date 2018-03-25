@@ -43,13 +43,14 @@ const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
 const STORAGE_KEY = '@bitcampapp:schedule'; // the @ may need to be modified...
 
-class AnnouncementsScene extends Component {
+class FaqScene extends Component {
 
   constructor(props) {
     super(props);
   }
 
   _renderRow(rowData) {
+    console.log(rowData)
     return (
       <View style={styles.singleCard}>
         <Card>
@@ -63,14 +64,11 @@ class AnnouncementsScene extends Component {
 
           <CardContent>
             <View style={styles.cardContent}>
-              <Text style={styles.timeText}>
-                5:00PM, April 5
-              </Text>
               <BoldAleoText style={styles.heading}>
-                eee
+                {rowData.item.heading}
               </BoldAleoText>
               <Text style={styles.description}>
-                fesfes
+                {rowData.item.description}
               </Text>
             </View>
           </CardContent>
@@ -83,18 +81,38 @@ class AnnouncementsScene extends Component {
   }
 
   render() {
-    const fakeData = [
+    const data = [
       {
-        heading: 'hello',
-        description: 'world',
+        heading: `Where is Bitcamp?`,
+        description: `We are proud to host Bitcamp at the Xfinity Center on the University of Maryland campus! This expansive sports arena is a unique spot for any event, and we’re excited to be back again!`
       },
       {
-        heading: 'hello',
-        description: 'world',
+        heading: `How does travel work?`,
+        description: `We'll have buses covering the hike from Stony Brook, NYU, GWU, Georgetown, American, and UMBC. If your school isn't covered, you can apply for travel reimbursement at www.bit.camp/travel-reimbursement`
       },
       {
-        heading: 'hello',
-        description: 'world',
+        heading: `How do teams work?`,
+        description: `Projects are submitted by teams to DevPost. You don't need to finalize your team until project submissions are due during the event. You may work individually or in a team of up to four campers. Don’t have a team in mind? No problem! Hacking will kick off with an optional team formation event.`
+      },
+      {
+        heading: 'What is Slack?',
+        description: `Throughout the event, we will be using Slack as the main form of communication for announcements, updates, and more.`,
+      },
+      {
+        heading: 'What if I have no experience or ideas?',
+        description: `Don't be afraid if you don't think you have enough experience, a team, or an idea. Everyone has a first hackathon, and we would love for Bitcamp to be yours! Mentors who are well-versed in a variety of topics will also be there to help you, whether it be finding a team, fleshing out an idea, or just figuring out where to begin.`,
+      },
+      {
+        heading: 'What is Devpost?',
+        description: 'After the 36 hours, you’ll be submitting your project to DevPost for judging! Find more information on Slack or on the Bitcamp website (www.bit.camp)',
+      },
+      {
+        heading: `Are there any guidelines?`,
+        description: `Don't bring any firearms, knives, weapons, drugs, or alcohol. Don't use an old project. Start a new trail instead! Also, please read the Major League Hacking Code of Conduct and the Bitcamp Terms, Code of Conduct, and Release Waiver. Organizers will enforce this code throughout the event. We are expecting cooperation from all participants to help ensure a safe environment for everybody (TL;DR be nice).`
+      },
+      {
+        heading: `Other questions?`,
+        description: `Send us an email at hello@bit.camp or message us on Slack or Facebook`
       },
     ]
     return (
@@ -103,9 +121,9 @@ class AnnouncementsScene extends Component {
        source={require('./images/background.png')}>
         <View style={styles.container}>
           <FlatList
-            data={fakeData}
-            renderItem={this._renderRow}
-            keyExtractor = {(item, index) => index}
+            data={data}
+            renderItem={(rowData) => this._renderRow(rowData)}
+            keyExtractor = {(item, index) => index.toString()}
           />
         </View>
       </ImageBackground>
@@ -179,4 +197,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AnnouncementsScene;
+export default FaqScene;
