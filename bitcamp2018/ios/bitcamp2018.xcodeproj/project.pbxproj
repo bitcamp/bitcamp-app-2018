@@ -43,7 +43,7 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* bitcamp2018Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* bitcamp2018Tests.m */; };
 		2E95BB1C5108476C8945F9BD /* libRNPhotoView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60EF3F6CE3694CFA946F28BD /* libRNPhotoView.a */; };
-		3FF816962066ECB0003866AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8166B2066ECB0003866AD /* GoogleService-Info.plist */; };
+		3FF8181E206738D6003866AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8181D206738D6003866AD /* GoogleService-Info.plist */; };
 		49CC6014D74F42B9B3889136 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B5332836E04E5AB2DBC7AC /* libRNFirebase.a */; };
 		529C64A2E388489F86488D3B /* Aleo-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD76C896F189442D95B5A5A1 /* Aleo-Italic.ttf */; };
 		548316C710AB435289DDADC0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAB5B8E5E6014DD688F10B92 /* FontAwesome.ttf */; };
@@ -52,6 +52,7 @@
 		5FEE0D32B96F45E38D808DDA /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71026FB6750B41118EE50D74 /* Ionicons.ttf */; };
 		67352DD8E5D947219562BBA8 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 920EFE9E46B6406E9AE504BA /* Entypo.ttf */; };
 		746AAD3C51C240DA9D95B5C7 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE27964AB7D94304A8691F2F /* rubicon-icon-font.ttf */; };
+		76A6382062EB1EC1E53DA30E /* libPods-bitcamp2018Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FD5A5350DEAE851ED29D148 /* libPods-bitcamp2018Tests.a */; };
 		7C661FB2A4E34454A406A331 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 422B5732B373442B9F49B57A /* Zocial.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8B403BE9A18F46A798CCA920 /* Aleo-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B2E182A128B4AC3BDFC5B76 /* Aleo-Light.ttf */; };
@@ -60,7 +61,9 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		AFB4973606644CE09165F551 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17420AE9CFC8455BBF2D5CEE /* EvilIcons.ttf */; };
 		B40575AB9E1446C695811E5C /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4599A2D6F3A450FB342722D /* Foundation.ttf */; };
+		B512A21375631D79E1D12349 /* libPods-bitcamp2018.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2BEAEF0AA6C22280F52516C /* libPods-bitcamp2018.a */; };
 		B905B6D72F7F4E429D445DDD /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD1312BD176F41FB95D99607 /* SimpleLineIcons.ttf */; };
+		B94A19D4E344B1369AC19B31 /* libPods-bitcamp2018-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36339848071F1BB7B9D70B1F /* libPods-bitcamp2018-tvOSTests.a */; };
 		C99B8F6497C6411BAD2B011A /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52A004091B52490CA419A85B /* Octicons.ttf */; };
 		CB9B4A8C3B364948BC9110CD /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19551E77CD0F4D1C91FF62C1 /* MaterialIcons.ttf */; };
 		CEEE1D5F8964404285588BBA /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3EC5373A32B045718CB167EB /* SimpleLineIcons.ttf */; };
@@ -413,31 +416,39 @@
 		17420AE9CFC8455BBF2D5CEE /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		19551E77CD0F4D1C91FF62C1 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		1DD689048295496E862FB589 /* Aleo-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Aleo-Bold.ttf"; path = "../assets/fonts/Aleo-Bold.ttf"; sourceTree = "<group>"; };
+		1FD5A5350DEAE851ED29D148 /* libPods-bitcamp2018Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bitcamp2018Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2139A066F1A14897B24D5001 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		217CD2F783354138BE001F57 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		28B2C9DFAD9178D5E2189E80 /* Pods-bitcamp2018Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitcamp2018Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bitcamp2018Tests/Pods-bitcamp2018Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C415DE3BB4748A890506C52 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* bitcamp2018-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "bitcamp2018-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* bitcamp2018-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "bitcamp2018-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E6A8BF3EE584579B7BD104C /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
+		36339848071F1BB7B9D70B1F /* libPods-bitcamp2018-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bitcamp2018-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E9899F3B886472196A25666 /* Aleo-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Aleo-BoldItalic.ttf"; path = "../assets/fonts/Aleo-BoldItalic.ttf"; sourceTree = "<group>"; };
 		3EC5373A32B045718CB167EB /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		3FF8166B2066ECB0003866AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "bitcamp2018/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3FF817CE206730EA003866AD /* bitcamp2018.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = bitcamp2018.entitlements; path = bitcamp2018/bitcamp2018.entitlements; sourceTree = "<group>"; };
+		3FF8181D206738D6003866AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "bitcamp2018/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		422B5732B373442B9F49B57A /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		50DE877AF5CD4C13B865CA2D /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		52A004091B52490CA419A85B /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		60EF3F6CE3694CFA946F28BD /* libRNPhotoView.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNPhotoView.a; sourceTree = "<group>"; };
+		669B1232A4ECA35A95DA5CDC /* Pods-bitcamp2018.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitcamp2018.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bitcamp2018/Pods-bitcamp2018.debug.xcconfig"; sourceTree = "<group>"; };
 		71026FB6750B41118EE50D74 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		72C0E21B6BB34F7FB8DB067A /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		72CD23D2E184AC0D1F7A9940 /* Pods-bitcamp2018-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitcamp2018-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bitcamp2018-tvOSTests/Pods-bitcamp2018-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7B2E182A128B4AC3BDFC5B76 /* Aleo-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Aleo-Light.ttf"; path = "../assets/fonts/Aleo-Light.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		8A85F668495AFB462B1AC358 /* Pods-bitcamp2018-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitcamp2018-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bitcamp2018-tvOSTests/Pods-bitcamp2018-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		920EFE9E46B6406E9AE504BA /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		A0CC416F2D6B45108F829A18 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		AD1312BD176F41FB95D99607 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		AD76C896F189442D95B5A5A1 /* Aleo-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Aleo-Italic.ttf"; path = "../assets/fonts/Aleo-Italic.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		AF83037795771536CE73DA31 /* Pods-bitcamp2018Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitcamp2018Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bitcamp2018Tests/Pods-bitcamp2018Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B35CC78B0AA74074ABDC0C06 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		B4FC2FEB65004E108B3E3A4C /* libRCTOrientation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOrientation.a; sourceTree = "<group>"; };
 		B957AFC538A84579A1581420 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
@@ -448,7 +459,9 @@
 		E4599A2D6F3A450FB342722D /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		E9B5332836E04E5AB2DBC7AC /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		ECACEE624EB542D4AC52B093 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
+		F2BEAEF0AA6C22280F52516C /* libPods-bitcamp2018.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bitcamp2018.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3A2D68C31FB4B85BB1014C5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		F9AADD0236CAD452B16ECCF5 /* Pods-bitcamp2018.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitcamp2018.release.xcconfig"; path = "Pods/Target Support Files/Pods-bitcamp2018/Pods-bitcamp2018.release.xcconfig"; sourceTree = "<group>"; };
 		FAB5B8E5E6014DD688F10B92 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		FCFABB9BFE8A4A8EB61E7932 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		FF3B14A01A6045EC8F1A7A62 /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
@@ -460,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
+				76A6382062EB1EC1E53DA30E /* libPods-bitcamp2018Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +499,7 @@
 				2E95BB1C5108476C8945F9BD /* libRNPhotoView.a in Frameworks */,
 				F6E4E9AE9B364121BA64C121 /* libRNVectorIcons.a in Frameworks */,
 				49CC6014D74F42B9B3889136 /* libRNFirebase.a in Frameworks */,
+				B512A21375631D79E1D12349 /* libPods-bitcamp2018.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +522,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B94A19D4E344B1369AC19B31 /* libPods-bitcamp2018-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,7 +611,8 @@
 		13B07FAE1A68108700A75B9A /* bitcamp2018 */ = {
 			isa = PBXGroup;
 			children = (
-				3FF8166B2066ECB0003866AD /* GoogleService-Info.plist */,
+				3FF8181D206738D6003866AD /* GoogleService-Info.plist */,
+				3FF817CE206730EA003866AD /* bitcamp2018.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -634,6 +651,9 @@
 			isa = PBXGroup;
 			children = (
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
+				F2BEAEF0AA6C22280F52516C /* libPods-bitcamp2018.a */,
+				36339848071F1BB7B9D70B1F /* libPods-bitcamp2018-tvOSTests.a */,
+				1FD5A5350DEAE851ED29D148 /* libPods-bitcamp2018Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -751,6 +771,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				8C6CDB6A4AA3465C9BE1B120 /* Resources */,
 				3FF8160B2066E607003866AD /* Recovered References */,
+				DF5E24EC872177F0D3640032 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -813,6 +834,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DF5E24EC872177F0D3640032 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				669B1232A4ECA35A95DA5CDC /* Pods-bitcamp2018.debug.xcconfig */,
+				F9AADD0236CAD452B16ECCF5 /* Pods-bitcamp2018.release.xcconfig */,
+				8A85F668495AFB462B1AC358 /* Pods-bitcamp2018-tvOSTests.debug.xcconfig */,
+				72CD23D2E184AC0D1F7A9940 /* Pods-bitcamp2018-tvOSTests.release.xcconfig */,
+				28B2C9DFAD9178D5E2189E80 /* Pods-bitcamp2018Tests.debug.xcconfig */,
+				AF83037795771536CE73DA31 /* Pods-bitcamp2018Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -820,9 +854,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "bitcamp2018Tests" */;
 			buildPhases = (
+				3389004D0C885D72E02C79F9 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				07B4D505963C1A0289314C3A /* [CP] Embed Pods Frameworks */,
+				26B148CB53D61B3D81CA3C50 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -838,10 +875,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "bitcamp2018" */;
 			buildPhases = (
+				C01EAC3A3098AC35FA28C4E8 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				896A9639D3EF87DF4BC67234 /* [CP] Embed Pods Frameworks */,
+				A63CE1968D870796200B7B68 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -874,9 +914,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "bitcamp2018-tvOSTests" */;
 			buildPhases = (
+				78ABAF4E70D4A3E3CF3FA19B /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
+				2725FBDB24F60C07F1C32038 /* [CP] Embed Pods Frameworks */,
+				65B68A51A7EF4083975D5D8A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -899,7 +942,19 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 62964L3HF7;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 62964L3HF7;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1337,7 +1392,7 @@
 				B40575AB9E1446C695811E5C /* Foundation.ttf in Resources */,
 				5FEE0D32B96F45E38D808DDA /* Ionicons.ttf in Resources */,
 				FF235957FD2547919213A04A /* MaterialIcons.ttf in Resources */,
-				3FF816962066ECB0003866AD /* GoogleService-Info.plist in Resources */,
+				3FF8181E206738D6003866AD /* GoogleService-Info.plist in Resources */,
 				A2E199538D014A258C0D11F7 /* Octicons.ttf in Resources */,
 				2A3793EF1ABB40FCAD3489BA /* Roboto_medium.ttf in Resources */,
 				0F2D2FAF11E54333968078AC /* Roboto.ttf in Resources */,
@@ -1379,6 +1434,51 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		07B4D505963C1A0289314C3A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bitcamp2018Tests/Pods-bitcamp2018Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		26B148CB53D61B3D81CA3C50 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bitcamp2018Tests/Pods-bitcamp2018Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2725FBDB24F60C07F1C32038 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bitcamp2018-tvOSTests/Pods-bitcamp2018-tvOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1392,6 +1492,105 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		3389004D0C885D72E02C79F9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bitcamp2018Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65B68A51A7EF4083975D5D8A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bitcamp2018-tvOSTests/Pods-bitcamp2018-tvOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78ABAF4E70D4A3E3CF3FA19B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bitcamp2018-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		896A9639D3EF87DF4BC67234 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bitcamp2018/Pods-bitcamp2018-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A63CE1968D870796200B7B68 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bitcamp2018/Pods-bitcamp2018-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C01EAC3A3098AC35FA28C4E8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bitcamp2018-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1460,8 +1659,10 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28B2C9DFAD9178D5E2189E80 /* Pods-bitcamp2018Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 62964L3HF7;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1489,9 +1690,11 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF83037795771536CE73DA31 /* Pods-bitcamp2018Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 62964L3HF7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1515,10 +1718,13 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 669B1232A4ECA35A95DA5CDC /* Pods-bitcamp2018.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = bitcamp2018/bitcamp2018.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 62964L3HF7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1534,17 +1740,21 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bitcamp.bitcamp18;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitcamp.bitcamp2018;
 				PRODUCT_NAME = bitcamp2018;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9AADD0236CAD452B16ECCF5 /* Pods-bitcamp2018.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = bitcamp2018/bitcamp2018.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 62964L3HF7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1560,8 +1770,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bitcamp.bitcamp18;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitcamp.bitcamp2018;
 				PRODUCT_NAME = bitcamp2018;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1638,6 +1849,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A85F668495AFB462B1AC358 /* Pods-bitcamp2018-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1660,6 +1872,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72CD23D2E184AC0D1F7A9940 /* Pods-bitcamp2018-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;

@@ -40,7 +40,9 @@ import { colors } from './shared/styles';
 import Modal from "react-native-modal";
 import QRCode from 'react-native-qrcode';
 import aleofy from './shared/aleo';
+
 import firebase from 'react-native-firebase';
+import type { Notification } from 'react-native-firebase'
 
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
@@ -120,13 +122,40 @@ class App extends Component {
 
   componentDidMount(){
     this.getID();
-    FCM = firebase.messaging();
-    FCM.requestPermissions();
-    FCM.onMessage(function(payload) {
-      console.log('Message received. ' + JSON.stringify(payload));
-      // ...
+
+    const notification = new firebase.notifications.Notification()
+        .setNotificationId('notificationId')
+        .setTitle('My notification title')
+        .setBody('My notification body')
+        .setData({
+          key1: 'value1',
+          key2: 'value2',
     });
 
+    firebase.notifications().displayNotification(notification);
+
+    firebase.messaging().hasPermission().then(enabled => {
+      if (enabled) {
+        this.waitForNotification()
+      } else {
+
+        firebase.messaging().requestPermission()
+          .then(() => {
+            this.waitForNotification();
+            console.log("Cool!");
+          })
+          .catch(error => {
+            console.log("You suck");
+          });
+      }
+    });
+  }
+
+  waitForNotification(){
+    firebase.notifications().onNotification((notification: Notification) => {
+      console.log(notification.title);
+      firebase.notifications().displayNotification(notification);
+    });
   }
 
 
