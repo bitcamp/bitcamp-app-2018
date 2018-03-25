@@ -104,6 +104,10 @@ class FaqScene extends Component {
   render() {
     const data = [
       {
+        heading: `What is Bitcamp?`,
+        description: `Bitcamp is a hackathon that values participant experience and mentorship over competitiveness and points. Come to have fun with your friends, learn something new, eat s’mores, and have a generally awesome time. We have all sorts of crazy activities planned for you...come find out the rest!`
+      },
+      {
         heading: `Where is Bitcamp?`,
         description: `We are proud to host Bitcamp at the Xfinity Center on the University of Maryland campus! This expansive sports arena is a unique spot for any event, and we’re excited to be back again!`
       },
