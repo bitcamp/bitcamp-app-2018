@@ -38,7 +38,7 @@ class CustomTabBarOverlay extends Component {
             >
               <Icon
                 name={tab}
-                size={28}
+                size={24}
                 color={this.props.activeTab === i ?
                   colors.yellowOrange : colors.lightBrown}
               />

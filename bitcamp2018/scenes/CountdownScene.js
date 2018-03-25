@@ -159,11 +159,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   numbers: {
-    fontSize: 60,
+    fontSize: 42,
     color: colors.midnightBlue,
   },
   dhms: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.darkBrown,
   },
   api: {
