@@ -9,6 +9,7 @@ import {
   Image,
   AsyncStorage,
   ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
 
 import Accordion from './Accordion'
@@ -25,9 +26,10 @@ import {
 
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
-import firebaseApp from '../shared/firebase';
+// import firebaseApp from '../shared/firebase';
+import Modal from "react-native-modal";
 
-import scheduleData from '../assets/schedule.json'
+// import scheduleData from '../assets/schedule.json'
 
 /*// Initialize Firebase
 const firebaseConfig = {
@@ -47,35 +49,54 @@ class FaqScene extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isModalVisible: false,
+      modalQuestion: "",
+      modalAnswer: "",
+    }
   }
+
+  _toggleModal = (question, answer) => {
+    this.setState({
+      isModalVisible: !this.state.isModalVisible,
+      modalQuestion: question,
+      modalAnswer: answer,
+    });
+  }
+
+  _closeModal = () =>
+    this.setState({ isModalVisible: false });
+
 
   _renderRow(rowData) {
     console.log(rowData)
     return (
       <View style={styles.singleCard}>
-        <Card>
-          <View style = {{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-          <View style = {{ flex: 1, flexDirection: 'column'}}>
-
-          <CardContent>
-            <View style={styles.cardContent}>
-              <BoldAleoText style={styles.heading}>
-                {rowData.item.heading}
-              </BoldAleoText>
-              <Text style={styles.description}>
-                {rowData.item.description}
-              </Text>
+        <TouchableOpacity
+          onPress={() => { this._toggleModal(rowData.item.heading, rowData.item.description); }}
+        >
+          <Card>
+            <View style = {{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <View style = {{ flex: 1, flexDirection: 'column'}}>
+                <CardContent>
+                  <View style={styles.cardContent}>
+                    <BoldAleoText style={styles.heading}>
+                      {rowData.item.heading}
+                    </BoldAleoText>
+                    {/* <Text style={styles.description}> */}
+                      {/* {rowData.item.description} */}
+                    {/* </Text> */}
+                  </View>
+                </CardContent>
+              </View>
             </View>
-          </CardContent>
-        </View>
-      </View>
-
-        </Card>
+          </Card>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -95,12 +116,12 @@ class FaqScene extends Component {
         description: `Projects are submitted by teams to DevPost. You don't need to finalize your team until project submissions are due during the event. You may work individually or in a team of up to four campers. Don’t have a team in mind? No problem! Hacking will kick off with an optional team formation event.`
       },
       {
-        heading: 'What is Slack?',
-        description: `Throughout the event, we will be using Slack as the main form of communication for announcements, updates, and more.`,
-      },
-      {
         heading: 'What if I have no experience or ideas?',
         description: `Don't be afraid if you don't think you have enough experience, a team, or an idea. Everyone has a first hackathon, and we would love for Bitcamp to be yours! Mentors who are well-versed in a variety of topics will also be there to help you, whether it be finding a team, fleshing out an idea, or just figuring out where to begin.`,
+      },
+      {
+        heading: 'What is Slack?',
+        description: `Throughout the event, we will be using Slack as the main form of communication for announcements, updates, and more.`,
       },
       {
         heading: 'What is Devpost?',
@@ -126,6 +147,30 @@ class FaqScene extends Component {
             keyExtractor = {(item, index) => index.toString()}
           />
         </View>
+        <View>
+          <Modal
+            isVisible={this.state.isModalVisible}
+            backdropColor={'white'}
+            backdropOpacity={0.95}
+            animationInTiming={250}
+
+            animationIn="fadeIn"
+            animationOut="fadeOut"
+            animationOutTiming={250}
+            backdropTransitionInTiming={250}
+            backdropTransitionOutTiming={250}
+            avoidKeyboard={true}
+            onBackdropPress={() => this.setState({ isModalVisible: false })}
+          >
+            <BoldAleoText style={styles.modalHeading}>
+              {this.state.modalQuestion}
+            </BoldAleoText>
+            <Text style={styles.modalDescription}>
+              {this.state.modalAnswer}
+            </Text>
+          </Modal>
+        </View>
+
       </ImageBackground>
     )
   }
@@ -167,6 +212,11 @@ const styles = StyleSheet.create({
     opacity: .8,
     color: colors.midnightBlue,
   },
+  modalDescription: {
+    fontSize: 18,
+    opacity: .8,
+    color: colors.midnightBlue,
+  },
   timeText: {
     fontSize: 12,
     fontWeight: 'bold',
@@ -176,7 +226,11 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 18,
     color: colors.mediumBlue,
-    marginBottom: 10,
+  },
+  modalHeading: {
+    fontSize: 24,
+    color: colors.mediumBlue,
+    marginBottom: 12,
   },
   cardContent: {
     flex: 1,
