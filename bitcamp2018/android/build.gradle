@@ -25,3 +25,21 @@ allprojects {
         }
     }
 }
+subprojects {
+    ext {
+        playServicesVersion = '11.8.0'
+    }
+
+    project.configurations.all {
+        resolutionStrategy {
+            eachDependency { details ->
+                // Force dependencies to use the same version.
+                def versionSelector = details.requested
+                if (versionSelector.group == 'com.google.firebase'
+                        || versionSelector.group == 'com.google.android.gms') {
+                    details.useVersion playServicesVersion
+                }
+            }
+        }
+    }
+}

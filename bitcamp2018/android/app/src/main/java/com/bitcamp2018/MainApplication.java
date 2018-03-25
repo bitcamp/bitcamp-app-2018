@@ -4,8 +4,10 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
-import io.invertase.firebase.database.RNFirebaseDatabasePackage; // <-- Add this line
+import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
+
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactnative.photoview.PhotoViewPackage;
 import com.github.yamill.orientation.OrientationPackage;
@@ -14,6 +16,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +39,8 @@ public class MainApplication extends Application implements ReactApplication {
             new OrientationPackage(),
             new RNFetchBlobPackage(),
             new RNFirebaseDatabasePackage(), // <-- Add this line
-            new RNFirebaseMessagingPackage()
+            new RNFirebaseMessagingPackage(),
+            new RNFirebaseNotificationsPackage()
       );
     }
 
