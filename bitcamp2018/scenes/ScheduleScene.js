@@ -88,8 +88,9 @@ class EventCard extends Component {
 
 
 
+          //use moment().add(10, 'seconds') to make it 10 seconds from now for testing
           firebase.notifications().scheduleNotification(notification, {
-            fireDate: moment().add(5, 'seconds').valueOf()
+            fireDate: moment(this.props.startTime).subtract(10, 'minutes').valueOf()
           });
 
     }
@@ -302,7 +303,7 @@ class ScheduleScene extends Component {
 
 
                 firebase.notifications().scheduleNotification(notification, {
-                  fireDate: moment().add(5, 'seconds').valueOf()
+                  fireDate: moment(eventObj.startTime).subtract(10, 'minutes').valueOf()
                 });
               }
             });
