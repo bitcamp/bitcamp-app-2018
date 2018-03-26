@@ -39,7 +39,8 @@ const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
 const STORAGE_KEY = '@bitcampapp:schedule'; // the @ may need to be modified...
 const EVENT_FAVORITED_KEY_PREFIX = '@bitcampapp:isFavorited';
-const EVENT_ID_PREFIX = 'eventNotification-'
+const EVENT_ID_PREFIX = 'eventNotification-';
+const channel = new firebase.notifications.Android.Channel('test-channel', 'Test-Channel', firebase.notifications.Android.Importance.Max).setDescription('My apps test channel');
 
 class EventCard extends Component {
 
@@ -86,11 +87,17 @@ class EventCard extends Component {
             type: 'eventAlert'
           });
 
+        if (Platform.OS == 'android') {
+
+          notification.android.setChannelId('test-channel');
+        }
+
 
 
           //use moment().add(10, 'seconds') to make it 10 seconds from now for testing
+          //use moment(this.props.startTime).subtract(10, 'minutes') for actual time
           firebase.notifications().scheduleNotification(notification, {
-            fireDate: moment(this.props.startTime).subtract(10, 'minutes').valueOf()
+            fireDate: moment().add(5, 'seconds').valueOf()
           });
 
     }
@@ -173,6 +180,8 @@ class ScheduleScene extends Component {
     this.state = {
        dataSource: this.ds.Schedule,
     };
+
+    firebase.notifications().android.createChannel(channel);
 
     this.itemRef = firebase.database().ref();
     this.fetchPrelim = this.fetchPrelim.bind(this);
@@ -301,9 +310,13 @@ class ScheduleScene extends Component {
                     type: 'eventAlert'
                 });
 
+                if (Platform.OS == 'android') {
+
+                  notification.android.setChannelId('test-channel');
+                }
 
                 firebase.notifications().scheduleNotification(notification, {
-                  fireDate: moment(eventObj.startTime).subtract(10, 'minutes').valueOf()
+                  fireDate: moment().add(5, 'seconds').valueOf()
                 });
               }
             });

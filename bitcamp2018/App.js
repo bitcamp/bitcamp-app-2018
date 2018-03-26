@@ -141,9 +141,15 @@ class App extends Component {
           key1: 'value1',
           key2: 'value2',
     });
-    console.log("this is a notification.");
+    if (Platform.OS == 'android') {
 
-    firebase.notifications().displayNotification(notification);
+      notification.android.setChannelId('test-channel');
+      //notification.android.setVibrate([0, 100, 1000]);
+    }
+
+
+    firebase.notifications().displayNotification(notification)
+      .then(() => {}, (err) => {console.log(err); throw err;});
 
     firebase.messaging().hasPermission().then(enabled => {
       if (enabled) {
