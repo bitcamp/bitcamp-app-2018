@@ -123,6 +123,16 @@ class App extends Component {
   componentDidMount(){
     this.getID();
 
+    if(Platform.OS === 'android'){
+      console.log("INSIDE ANDROID.");
+      // Build a channel
+      const channel = new firebase.notifications.Android.Channel('test-channel', 'Test Channel', firebase.notifications.Android.Importance.Max)
+        .setDescription('My apps test channel');
+
+      // Create the channel
+      firebase.notifications().android.createChannel(channel);
+    }
+
     const notification = new firebase.notifications.Notification()
         .setNotificationId('notificationId')
         .setTitle('My notification title')
@@ -131,8 +141,15 @@ class App extends Component {
           key1: 'value1',
           key2: 'value2',
     });
+    if (Platform.OS == 'android') {
 
-    firebase.notifications().displayNotification(notification);
+      notification.android.setChannelId('test-channel');
+      //notification.android.setVibrate([0, 100, 1000]);
+    }
+
+
+    firebase.notifications().displayNotification(notification)
+      .then(() => {}, (err) => {console.log(err); throw err;});
 
     firebase.messaging().hasPermission().then(enabled => {
       if (enabled) {
@@ -153,6 +170,7 @@ class App extends Component {
 
   waitForNotification(){
     firebase.notifications().onNotification((notification: Notification) => {
+      console.log(notification);
       console.log(notification.title);
       firebase.notifications().displayNotification(notification);
     });

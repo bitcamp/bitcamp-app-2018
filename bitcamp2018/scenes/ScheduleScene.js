@@ -10,11 +10,13 @@ import {
   AsyncStorage,
   ImageBackground,
   Platform,
+  TouchableHighlight,
 } from 'react-native';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Accordion from './Accordion'
 import moment from 'moment'
+import hash from 'object-hash'
 import ScheduleSceneTabBarOverlay from './ScheduleSceneTabBarOverlay';
 
 import {
@@ -36,6 +38,9 @@ import firebase from 'react-native-firebase';
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
 const STORAGE_KEY = '@bitcampapp:schedule'; // the @ may need to be modified...
+const EVENT_FAVORITED_KEY_PREFIX = '@bitcampapp:isFavorited';
+const EVENT_ID_PREFIX = 'eventNotification-';
+const channel = new firebase.notifications.Android.Channel('test-channel', 'Test-Channel', firebase.notifications.Android.Importance.Max).setDescription('My apps test channel');
 
 class EventCard extends Component {
 
@@ -45,11 +50,70 @@ class EventCard extends Component {
     this.state = {
       favorited: false
     };
+
+    AsyncStorage.getItem(EVENT_FAVORITED_KEY_PREFIX + this.props.eventKey.toString(), (err, results) => {
+      //retrieve whether the event was favorited and update state to reflect change
+      if(results != null && results != 'null'){
+        console.log("myId: " + this.props.eventKey.toString() + " isFavorited: " + results)
+        this.setState((prevState, props) => {return {favorited : JSON.parse(results)}});
+      } else {
+        this.setState((prevState, props) => {return {favorited : false}});
+
+        //update status to not favorited
+        AsyncStorage.setItem(EVENT_FAVORITED_KEY_PREFIX + this.props.eventKey.toString(), JSON.stringify(false), function(error){
+          if(error){
+            console.log(error);
+          }
+        });
+      }
+    });
   }
 
   triggerButtonPress(){
 
-    console.log("hello world");
+    //retrieve the notification and cancel it
+    if(this.state.favorited) {
+
+      firebase.notifications().cancelNotification(EVENT_ID_PREFIX +  this.props.eventKey.toString());
+
+    // set up a new notification
+    } else {
+
+        const notification = new firebase.notifications.Notification()
+          .setNotificationId(EVENT_ID_PREFIX + this.props.eventKey.toString())
+          .setTitle(this.props.title)
+          .setBody('10 minutes until event start!')
+          .setData({
+            type: 'eventAlert'
+          });
+
+        if (Platform.OS == 'android') {
+
+          notification.android.setChannelId('test-channel');
+        }
+
+
+
+          //use moment().add(10, 'seconds') to make it 10 seconds from now for testing
+          //use moment(this.props.startTime).subtract(10, 'minutes') for actual time
+          firebase.notifications().scheduleNotification(notification, {
+            fireDate: moment().add(5, 'seconds').valueOf()
+          });
+
+    }
+
+    //swaps icon
+    this.setState((prevState, props) => {return {favorited : !prevState.favorited}},
+      () => {
+        //callback to update the state of the store
+        //console.log("myId: " + this.props.eventKey.toString() + " setting isFavorited: " + this.state.favorited.toString());
+        //update status of notification
+        AsyncStorage.setItem(EVENT_FAVORITED_KEY_PREFIX + this.props.eventKey.toString(), JSON.stringify(this.state.favorited), function(error){
+          if(error){
+            console.log(error);
+          }
+        });
+      });
   }
 
   render() {
@@ -77,12 +141,14 @@ class EventCard extends Component {
                         {this.props.title}
                       </BoldAleoText>
                       <View style = {styles.starIcon}>
-                        <Icon
-                          name = {this.state.favorited ? 'star' : 'star-o'}
-                          size = {24}
-                          color={colors.bitcampOrange}
-                          onPress = {this.triggerButtonPress()}
-                        />
+                        <TouchableHighlight onPress = {this.triggerButtonPress.bind(this)} activeOpacity = {1}
+                        underlayColor = {'#ffffff'}>
+                          <Icon
+                            name = {this.state.favorited ? 'star' : 'star-o'}
+                            size = {24}
+                            color={colors.bitcampOrange}
+                          />
+                        </TouchableHighlight>
                       </View>
                     </View>
                     <Text style={styles.timeText}>
@@ -115,6 +181,8 @@ class ScheduleScene extends Component {
        dataSource: this.ds.Schedule,
     };
 
+    firebase.notifications().android.createChannel(channel);
+
     this.itemRef = firebase.database().ref();
     this.fetchPrelim = this.fetchPrelim.bind(this);
     this.fetchData = this.fetchData.bind(this);
@@ -135,10 +203,11 @@ class ScheduleScene extends Component {
 
     AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
         if(result != null){
-          console.log("Result:")
-          console.log(result);
+          console.log('No connection to firebase')
+          // console.log("Result:")
+          // console.log(result);
           this.ds = JSON.parse(result);
-          console.log(this.ds);
+          // console.log(this.ds);
           this.setState({dataSource:this.ds.Schedule});
         }
 
@@ -147,24 +216,114 @@ class ScheduleScene extends Component {
   }
 
   fetchData(timeoutObj){
-    // var thisBinded = this;
+    //console.log('Waiting on firebase');
+
     this.itemRef.on('value', async (snapshot) => {
-      //this.setState({dataSource:snapshot.val().Schedule});
+
+      //console.log('Got firebase response!');
       var data = snapshot.val();
-      this.ds = data;
-      console.log(data);
-      this.setState({dataSource:this.ds.Schedule});
 
-      clearTimeout(timeoutObj);
+      AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
 
-      console.log("Updating store:")
-      console.log(this.ds);
-      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(this.ds), function(error){
-        if (error){
-          throw error;
+        //console.log('Got old schedule!');
+
+        clearTimeout(timeoutObj);
+
+        //console.log('Storing received schedule on phone.');
+        //store new schedule on phone
+        AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data), function(error){
+          if (error){
+            console.log(error);
+          }
+        });
+
+        oldSchedule = result;
+        newSchedule = JSON.stringify(data);
+
+        this.ds = data;
+        this.setState({dataSource:this.ds.Schedule});
+
+        //console.log('Checking old schedule for changes');
+
+        if(result != null && result != 'null'){
+          // if we already had a schedule, correlate old stuff
+          // this could take a while so we want to do it after showing state
+          // hopefully the user does not try to add another schedule during this time
+
+          result = JSON.parse(result);
+
+          //console.log(oldSchedule);
+          //console.log(newSchedule);
+
+          if(hash.MD5(oldSchedule) != hash.MD5(newSchedule)){
+            console.log('Schedule change detected!');
+            this.updateScheduledNotifications(result.Schedule, data.Schedule);
+          }
+
         }
       });
+
     })
+  }
+
+  updateScheduledNotifications(oldSchedule, newSchedule){
+    //console.log(JSON.stringify(oldSchedule));
+    //map event id's to epoch times in oldSchedule
+
+    startTimes = {}
+    for(let eventArray of oldSchedule){
+      for(let eventObj of eventArray[1]){
+        // eventObj = eventArray[eventIndex];
+        //console.log(eventObj);
+
+        startTimes[eventObj.key] = eventObj.startTime;
+      }
+    }
+
+    //console.log(JSON.stringify(startTimes));
+
+    for(let eventArray of newSchedule){
+      for(let eventObj of eventArray[1]){
+
+        //console.log(eventObj);
+        //console.log(startTimes[eventObj.key]);
+        //console.log(eventObj.startTime);
+        //start time for particular event was changed
+        if(startTimes[eventObj.key] != null && startTimes[eventObj.key] != eventObj.startTime){
+          console.log('Time change found for event id ' + eventObj.key.toString());
+          AsyncStorage.getItem(EVENT_FAVORITED_KEY_PREFIX + eventObj.key.toString(),
+            (err, result) => {
+              if (err) {
+                console.log(err);
+                //throw err;
+              }
+              if(result == 'true'){
+                console.log("Updating notification time for " + eventObj.key.toString());
+                //cancel current notification for this event id
+                firebase.notifications().cancelNotification(EVENT_ID_PREFIX +  eventObj.key.toString());
+
+                const notification = new firebase.notifications.Notification()
+                  .setNotificationId(EVENT_ID_PREFIX + eventObj.key.toString())
+                  .setTitle(eventObj.title)
+                  .setBody('10 minutes until event start!')
+                  .setData({
+                    type: 'eventAlert'
+                });
+
+                if (Platform.OS == 'android') {
+
+                  notification.android.setChannelId('test-channel');
+                }
+
+                firebase.notifications().scheduleNotification(notification, {
+                  fireDate: moment().add(5, 'seconds').valueOf()
+                });
+              }
+            });
+        }
+      }
+    }
+
   }
 
   _renderScheduleTabs(){
@@ -227,6 +386,7 @@ class ScheduleScene extends Component {
   _renderRow(rowData) {
     return (
       <EventCard
+        eventKey = {rowData.item.key}
         sizeLabel = {rowData.item.sizeLabel}
         title = {rowData.item.title}
         startTime = {rowData.item.startTime}

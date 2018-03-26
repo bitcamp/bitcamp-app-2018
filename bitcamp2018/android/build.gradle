@@ -25,6 +25,7 @@ allprojects {
         }
     }
 }
+
 subprojects {
     ext {
         playServicesVersion = '11.8.0'

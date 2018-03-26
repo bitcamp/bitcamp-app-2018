@@ -8,6 +8,8 @@
 6. For iOS: install Xcode and run `react-native run-ios`
 7. Try editing `App.js` and reloading the app
 8. **NEW** You might need to run `react-native link` to get dependencies to work.
+9. To set up pods on iOS, run `$ brew install cocoapods` on macOS
+1. Then navigate to `./ios/` folder and run `$ pod install`
 
 Most of this comes from the [React Native Docs](https://facebook.github.io/react-native/docs/getting-started.html).
 
