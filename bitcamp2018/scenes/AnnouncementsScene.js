@@ -105,7 +105,7 @@ class AnnouncementsScene extends Component {
           <FlatList
             data={fakeData}
             renderItem={this._renderRow}
-            keyExtractor = {(item, index) => index}
+            keyExtractor = {(item, index) => index.toString()}
           />
         </View>
       </ImageBackground>

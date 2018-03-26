@@ -141,7 +141,6 @@ class App extends Component {
           key1: 'value1',
           key2: 'value2',
     });
-
     console.log("this is a notification.");
 
     firebase.notifications().displayNotification(notification);
