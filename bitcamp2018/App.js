@@ -132,7 +132,7 @@ class App extends Component {
           key2: 'value2',
     });
 
-    firebase.notifications().displayNotification(notification);
+    // firebase.notifications().displayNotification(notification);
 
     firebase.messaging().hasPermission().then(enabled => {
       if (enabled) {
