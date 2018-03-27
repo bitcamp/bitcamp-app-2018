@@ -332,7 +332,7 @@ class ScheduleScene extends Component {
     //use moment().add(10, 'seconds') to make it 10 seconds from now for testing
     //use moment(startTime).subtract(10, 'minutes') for actual time
     firebase.notifications().scheduleNotification(notification, {
-      fireDate: moment().add(5, 'seconds').valueOf()
+      fireDate:  moment(startTime).subtract(10, 'minutes').valueOf()
     });
   }
   _renderScheduleTabs(){
