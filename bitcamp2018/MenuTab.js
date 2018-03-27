@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Platform, View } from 'react-native';
 
 import ScheduleScene from './scenes/ScheduleScene';
-import AnnouncementsScene from './scenes/AnnouncementsScene';
+import FaqScene from './scenes/FaqScene';
 import MapScene from './scenes/MapScene';
 // import MentorsScene from './scenes/MentorsScene';
 import CountdownScene from './scenes/CountdownScene';
@@ -20,12 +20,7 @@ export default function MenuTab(props) {
   let menuTabPosition = 'bottom';
   let iconPrefix = 'md';
   let style = { flex: 1 };
-  let iOS = true;
 
-  if (Platform.OS === 'android') {
-    // iconPrefix = 'md';
-    iOS = false;
-  }
   //{!iOS && (<MentorsScene     tabLabel={`${iconPrefix}-help-circle`} />)}
   //<MentorsScene     tabLabel={`${iconPrefix}-help-circle`} />
 
@@ -45,7 +40,7 @@ export default function MenuTab(props) {
       >
         <CountdownScene   tabLabel={`${iconPrefix}-home`} />
         <ScheduleScene    tabLabel={`${iconPrefix}-calendar`} />
-        <AnnouncementsScene  tabLabel={`${iconPrefix}-trophy`} />
+        <FaqScene  tabLabel={`${iconPrefix}-information-circle`} />
         <MapScene         tabLabel={`${iconPrefix}-map`} />
         {/* <MentorsScene     tabLabel={`logo-twitter`} /> */}
       </ScrollableTabView>

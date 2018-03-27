@@ -51,7 +51,7 @@ const ID = '@bitcampapp:userid';
 const pageNumberTitles = [
   "Bitcamp 2018",
   "Schedule",
-  "Announcements",
+  "FAQ",
   "Map",
   // "Twitter"
 ]
