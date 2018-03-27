@@ -51,6 +51,9 @@ class EventCard extends Component {
       favorited: false
     };
 
+    this.customizeNotification = this.props.customizeNotification;
+    this.scheduleNotification = this.props.scheduleNotification;
+
     AsyncStorage.getItem(EVENT_FAVORITED_KEY_PREFIX + this.props.eventKey.toString(), (err, results) => {
       //retrieve whether the event was favorited and update state to reflect change
       if(results != null && results != 'null'){
@@ -87,19 +90,8 @@ class EventCard extends Component {
             type: 'eventAlert'
           });
 
-        if (Platform.OS == 'android') {
-
-          notification.android.setChannelId('test-channel');
-        }
-
-
-
-          //use moment().add(10, 'seconds') to make it 10 seconds from now for testing
-          //use moment(this.props.startTime).subtract(10, 'minutes') for actual time
-          firebase.notifications().scheduleNotification(notification, {
-            fireDate: moment().add(5, 'seconds').valueOf()
-          });
-
+        this.customizeNotification(notification);
+        this.scheduleNotification(notification, this.props.startTime);
     }
 
     //swaps icon
@@ -310,14 +302,10 @@ class ScheduleScene extends Component {
                     type: 'eventAlert'
                 });
 
-                if (Platform.OS == 'android') {
+                this.customizeNotification(notification);
+                this.scheduleNotification(notification, eventObj.startTime);
 
-                  notification.android.setChannelId('test-channel');
-                }
 
-                firebase.notifications().scheduleNotification(notification, {
-                  fireDate: moment().add(5, 'seconds').valueOf()
-                });
               }
             });
         }
@@ -326,6 +314,27 @@ class ScheduleScene extends Component {
 
   }
 
+  customizeNotification(notification){
+
+    if (Platform.OS === 'android') {
+
+      notification.android.setChannelId('test-channel');
+      notification.android.setVibrate([100, 200, 100, 750]);
+      notification.android.setCategory(firebase.notifications.Android.Category.Reminder);
+      //#ff6f3f in decimal
+      notification.android.setLights(16740159, 500, 100);
+      //notification.android.setVisibility(firebase.notifications.Android.Visibility.Public);
+    }
+  }
+
+  scheduleNotification(notification, startTime){
+
+    //use moment().add(10, 'seconds') to make it 10 seconds from now for testing
+    //use moment(startTime).subtract(10, 'minutes') for actual time
+    firebase.notifications().scheduleNotification(notification, {
+      fireDate: moment().add(5, 'seconds').valueOf()
+    });
+  }
   _renderScheduleTabs(){
     var thisBinded = this;
     return this.state.dataSource.
@@ -394,7 +403,9 @@ class ScheduleScene extends Component {
         startTimeFormatted = {this.normalizeTimeLabel(rowData.item.startTime)}
         endTimeFormatted = {this.normalizeTimeLabel(rowData.item.endTime)}
         location = {rowData.item.location}
-        description = {rowData.item.description}/>);
+        description = {rowData.item.description}
+        customizeNotification = {this.customizeNotification}
+        scheduleNotification = {this.scheduleNotification}/>);
   }
 
   render() {

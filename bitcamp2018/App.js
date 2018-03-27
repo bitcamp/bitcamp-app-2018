@@ -133,23 +133,6 @@ class App extends Component {
       firebase.notifications().android.createChannel(channel);
     }
 
-    const notification = new firebase.notifications.Notification()
-        .setNotificationId('notificationId')
-        .setTitle('My notification title')
-        .setBody('My notification body')
-        .setData({
-          key1: 'value1',
-          key2: 'value2',
-    });
-    if (Platform.OS == 'android') {
-
-      notification.android.setChannelId('test-channel');
-      //notification.android.setVibrate([0, 100, 1000]);
-    }
-
-
-    firebase.notifications().displayNotification(notification)
-      .then(() => {}, (err) => {console.log(err); throw err;});
 
     firebase.messaging().hasPermission().then(enabled => {
       if (enabled) {
@@ -164,15 +147,22 @@ class App extends Component {
           .catch(error => {
             console.log("You suck");
           });
-      }
-    });
-  }
+        }
+      }).catch(err => {console.log(err); throw err;});
+
+    }
+
 
   waitForNotification(){
     firebase.notifications().onNotification((notification: Notification) => {
       console.log(notification);
       console.log(notification.title);
-      firebase.notifications().displayNotification(notification);
+      if(notification.title == null) {
+        notification.setTitle('Bitcamp 2018');
+      }
+
+      firebase.notifications().displayNotification(notification)
+        .catch(error => {console.log(error)});
     });
   }
 
