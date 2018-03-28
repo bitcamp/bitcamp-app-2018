@@ -72,31 +72,33 @@ class FaqScene extends Component {
     console.log(rowData)
     return (
       <View style={styles.singleCard}>
+        <View style={styles.cardShadow}>
         <TouchableOpacity
           onPress={() => { this._toggleModal(rowData.item.heading, rowData.item.description); }}
         >
-          <Card>
-            <View style = {{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}>
-              <View style = {{ flex: 1, flexDirection: 'column'}}>
-                <CardContent>
-                  <View style={styles.cardContent}>
-                    <BoldAleoText style={styles.heading}>
-                      {rowData.item.heading}
-                    </BoldAleoText>
-                    {/* <Text style={styles.description}> */}
-                      {/* {rowData.item.description} */}
-                    {/* </Text> */}
-                  </View>
-                </CardContent>
+            <Card>
+              <View style = {{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <View style = {{ flex: 1, flexDirection: 'column'}}>
+                  <CardContent>
+                    <View style={styles.cardContent}>
+                      <BoldAleoText style={styles.heading}>
+                        {rowData.item.heading}
+                      </BoldAleoText>
+                      {/* <Text style={styles.description}> */}
+                        {/* {rowData.item.description} */}
+                      {/* </Text> */}
+                    </View>
+                  </CardContent>
+                </View>
               </View>
-            </View>
-          </Card>
+            </Card>
         </TouchableOpacity>
+      </View>
       </View>
     )
   }
@@ -249,14 +251,18 @@ const styles = StyleSheet.create({
   },
   singleCard: {
     margin: 6,
-    marginBottom: 0,
+    marginBottom: 4,
+  },
+  cardShadow: {
+    backgroundColor : '#ffffff',
+    elevation: 2,
   },
   content: {
     paddingTop: 10,
     paddingRight: 10,
     paddingBottom: 10,
     paddingLeft: 10,
-    color: '#444',
+    color: '#444444',
   },
   text: {
     flex: 1,

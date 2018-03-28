@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image, Dimensions } from 'react-native';
+import { View, ScrollView, Text, Image, Dimensions, ImageBackground } from 'react-native';
 import PhotoView from 'react-native-photo-view';
 
 const window = Dimensions.get('window');
 
 function MapScene() {
-  let styles = {width: window.width, height: window.height, overflow:'visible'};
+  let styles = {
+    width: window.width,
+    height: window.height - 100,
+  };
 
   return(
-    <View>
+    <ImageBackground
+      style={{
+        flex: 1,
+      }}
+      source={require('./images/background.png')}
+     >
+
       <PhotoView
         source={require('./images/floor_plan_final.png')}
-        minimumZoomScale={1}
-        maximumZoomScale={3.5}
+        minimumZoomScale={0.9}
+        maximumZoomScale={5}
         androidScaleType="fitCenter"
-        onLoad={() => console.log("Image loaded!")}
         style={styles} />
-    </View>
+  </ImageBackground>
   );
 }
 
