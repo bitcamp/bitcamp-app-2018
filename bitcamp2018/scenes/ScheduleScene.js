@@ -195,12 +195,15 @@ class ScheduleScene extends Component {
 
     AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
         if(result != null){
-          console.log('No connection to firebase')
+          //console.log('No connection to firebase')
           // console.log("Result:")
           // console.log(result);
           this.ds = JSON.parse(result);
           // console.log(this.ds);
           this.setState({dataSource:this.ds.Schedule});
+        }
+        else{
+          this.setState({datasource:scheduleData.Schedule});
         }
 
         //alert user that there is no connection

@@ -115,7 +115,7 @@ class App extends Component {
       email: "",
       password: "",
       id: this.savedData,
-      loaded: false,
+      name: "",
     }
     this.getID = this.getID.bind(this);
   }
@@ -201,8 +201,10 @@ class App extends Component {
   		if (status === "true") {
   			let token = unescape(responseJson['token']);
   			let id = unescape(responseJson['user']['id']);
-        console.log("TOKEN: " + token + "ID: " + id);
-  			this.setState({ id: id });
+        let username = unescape(responseJson['user']['profile']['firstName']);
+        console.log("GIVENNAME: " + username);
+  			this.setState({ name: username });
+        this.setState({ id: id });
         AsyncStorage.setItem(ID, this.state.id, function(error){
           if (error){
             console.log("Error: " + error);
@@ -299,6 +301,7 @@ class App extends Component {
         }
     });
     this.setState({id: ""});
+    this.setState({name: ""});
     this._closeModal();
   }
 
@@ -306,6 +309,7 @@ class App extends Component {
     <View style={{padding: 20, alignItems:'center', justifyContent: 'center'}}>
         <BoldAleoText
             style={{fontSize: 27, color: colors.midnightBlue}}>
+            Hi {this.state.name}!{"\n"}{"\n"}
             Your QR Code
         </BoldAleoText>
         <View style={styles.qr}>
