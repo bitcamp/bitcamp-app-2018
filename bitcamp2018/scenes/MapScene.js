@@ -12,19 +12,17 @@ function MapScene() {
 
   return(
     <ImageBackground
-      style={{
-        flex: 1,
-      }}
+      style={{ flex: 1, }}
       source={require('./images/background.png')}
-     >
-
+    >
       <PhotoView
         source={require('./images/floor_plan_final.png')}
         minimumZoomScale={0.9}
         maximumZoomScale={5}
         androidScaleType="fitCenter"
-        style={styles} />
-  </ImageBackground>
+        style={styles}
+      />
+    </ImageBackground>
   );
 }
 
