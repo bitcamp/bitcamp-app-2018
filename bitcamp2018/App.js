@@ -47,6 +47,7 @@ import type { Notification } from 'react-native-firebase'
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
 const ID = '@bitcampapp:userid';
+const storedName = '@bitcampapp:firstName';
 const androidChannel = 'bitcamp-notifications'
 
 const pageNumberTitles = [
@@ -224,6 +225,12 @@ class App extends Component {
             console.log("Error: " + error);
           }
         });
+        AsyncStorage.setItem(storedName, this.state.name, function(error){
+          if (error){
+            console.log("Error: " + error);
+         }
+        });
+        console.log("STATENAME: " + this.state.name);
   		} else {
   			Alert.alert(
   			  "Incorrect credentials.",
@@ -300,16 +307,23 @@ class App extends Component {
     var thisBinded = this;
     thisBinded.savedData = "";
     thisBinded.savedData = await AsyncStorage.getItem(ID);
+    thisBinded.firstName = await AsyncStorage.getItem(storedName);
     console.log("DATA: " + JSON.stringify(thisBinded.savedData));
     thisBinded.savedData = JSON.stringify(thisBinded.savedData);
     if (thisBinded.savedData != null && thisBinded.savedData != "" && thisBinded.savedData != "null") {
       console.log("INSIDE");
       thisBinded.setState({id: thisBinded.savedData});
+      thisBinded.setState({name: thisBinded.firstName});
     }
   }
 
   async _logout_qr() {
     await AsyncStorage.removeItem(ID, function (err){
+        if (err){
+          console.log("Error: " + err);
+        }
+    });
+    await AsyncStorage.removeItem(storedName, function (err){
         if (err){
           console.log("Error: " + err);
         }
