@@ -149,8 +149,7 @@ class App extends Component {
           });
         }
       }).catch(err => {console.log(err); throw err;});
-
-    }
+  }
 
 
   waitForNotification(){
@@ -371,6 +370,7 @@ class App extends Component {
 	          backdropTransitionOutTiming={250}
 	          avoidKeyboard={true}
             onBackdropPress={() => this.setState({ isModalVisible: false })}
+            onBackButtonPress={() => this.setState({ isModalVisible: false })}
         	>
         	{content}
         </Modal>

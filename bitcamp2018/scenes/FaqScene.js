@@ -167,7 +167,6 @@ class FaqScene extends Component {
             backdropColor={'white'}
             backdropOpacity={0.95}
             animationInTiming={250}
-
             animationIn="fadeIn"
             animationOut="fadeOut"
             animationOutTiming={250}
@@ -175,6 +174,7 @@ class FaqScene extends Component {
             backdropTransitionOutTiming={250}
             avoidKeyboard={true}
             onBackdropPress={() => this.setState({ isModalVisible: false })}
+            onBackButtonPress={() => this.setState({ isModalVisible: false })}
           >
             <BoldAleoText style={styles.modalHeading}>
               {this.state.modalQuestion}
