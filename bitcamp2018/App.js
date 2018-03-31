@@ -47,7 +47,7 @@ import type { Notification } from 'react-native-firebase'
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
 const ID = '@bitcampapp:userid';
-const storedName = '@bitcampapp:firstName';
+const androidChannel = 'bitcamp-notifications'
 
 const pageNumberTitles = [
   "Bitcamp 2018",
@@ -109,7 +109,6 @@ class App extends Component {
 
     super(props);
     this.savedData = "";
-    this.firstName = "";
 
     this.state = {
       title: pageNumberTitles[0],
@@ -117,7 +116,7 @@ class App extends Component {
       email: "",
       password: "",
       id: this.savedData,
-      name: this.firstName,
+      name: "",
     }
     this.getID = this.getID.bind(this);
   }
@@ -128,8 +127,8 @@ class App extends Component {
     if(Platform.OS === 'android'){
       console.log("INSIDE ANDROID.");
       // Build a channel
-      const channel = new firebase.notifications.Android.Channel('bitcamp-notifications', 'Test Channel', firebase.notifications.Android.Importance.Max)
-        .setDescription('bitcamp-notifications');
+      const channel = new firebase.notifications.Android.Channel(androidChannel, 'bitcamp Announcements', firebase.notifications.Android.Importance.Max)
+        .setDescription('Announcements from the bitcamp team');
 
       // Create the channel
       firebase.notifications().android.createChannel(channel);
@@ -160,6 +159,18 @@ class App extends Component {
       console.log(notification.title);
       if(notification.title == null) {
         notification.setTitle('Bitcamp 2018');
+      }
+
+      if(Platform.OS === 'android') {
+
+        if(notification.android.channelId == null){
+          notification.android.setChannelId(androidChannel);
+        }
+
+        notification.android.setVibrate([100, 200, 100, 500]);
+        notification.android.setCategory(firebase.notifications.Android.Category.Reminder);
+        notification.android.setLights(16740159, 500, 100);
+
       }
 
       firebase.notifications().displayNotification(notification)
@@ -211,12 +222,6 @@ class App extends Component {
             console.log("Error: " + error);
           }
         });
-        AsyncStorage.setItem(storedName, this.state.name, function(error){
-          if (error){
-            console.log("Error: " + error);
-          }
-        });
-        console.log("STATENAME: " + this.state.name);
   		} else {
   			Alert.alert(
   			  "Incorrect credentials.",
@@ -293,24 +298,16 @@ class App extends Component {
     var thisBinded = this;
     thisBinded.savedData = "";
     thisBinded.savedData = await AsyncStorage.getItem(ID);
-    thisBinded.firstName = await AsyncStorage.getItem(storedName);
-    console.log("RETRIVEDNAME: " + thisBinded.firstName);
+    console.log("DATA: " + JSON.stringify(thisBinded.savedData));
     thisBinded.savedData = JSON.stringify(thisBinded.savedData);
-    thisBinded.firstName = (thisBinded.firstName)
     if (thisBinded.savedData != null && thisBinded.savedData != "" && thisBinded.savedData != "null") {
       console.log("INSIDE");
       thisBinded.setState({id: thisBinded.savedData});
-      thisBinded.setState({name: thisBinded.firstName});
     }
   }
 
   async _logout_qr() {
     await AsyncStorage.removeItem(ID, function (err){
-        if (err){
-          console.log("Error: " + err);
-        }
-    });
-    await AsyncStorage.removeItem(storedName, function (err){
         if (err){
           console.log("Error: " + err);
         }

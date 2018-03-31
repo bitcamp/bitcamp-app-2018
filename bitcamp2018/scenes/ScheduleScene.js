@@ -322,7 +322,7 @@ class ScheduleScene extends Component {
     if (Platform.OS === 'android') {
 
       notification.android.setChannelId('test-channel');
-      notification.android.setVibrate([100, 200, 100, 750]);
+      notification.android.setVibrate([100, 200, 100, 500]);
       notification.android.setCategory(firebase.notifications.Android.Category.Reminder);
       //#ff6f3f in decimal
       notification.android.setLights(16740159, 500, 100);

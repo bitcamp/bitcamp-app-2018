@@ -8,7 +8,6 @@
           "endTime": "2018-04-06 08:30",
           "key": 1,
           "location": "By the bonfire",
-          "pictureUrl": "https://i.imgur.com/9enlRkH.png",
           "startTime": "2018-04-06 08:00",
           "title": "Fake Introduction Talk"
         },
@@ -17,7 +16,6 @@
           "endTime": "2018-04-06 09:00",
           "key": 2,
           "location": "Mordor",
-          "pictureUrl": "https://vignette.wikia.nocookie.net/lotr/images/6/6a/Mordor.png/revision/latest?cb=20050929122727",
           "startTime": "2018-04-06 08:00",
           "title": "Get to know each other"
         },
@@ -26,7 +24,6 @@
           "endTime": "2018-04-06 09:00",
           "key": 3,
           "location": "Everywhere",
-          "pictureUrl": "https://i.imgur.com/skSpO.jpg",
           "startTime": "2018-04-06 08:30",
           "title": "Get your snacks"
         }
@@ -40,7 +37,6 @@
           "endTime": "2018-04-06 08:30",
           "key": 4,
           "location": "By the bonfire",
-          "pictureUrl": "https://i.imgur.com/mPHKdox.jpg",
           "startTime": "2018-04-06 08:00",
           "title": "Closing Ceremony"
         },
@@ -49,7 +45,6 @@
           "endTime": "2018-04-06 09:00",
           "key": 5,
           "location": "Everywhere",
-          "pictureUrl": "https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/challenge_thumbnails/000/497/926/datas/original.png",
           "startTime": "2018-04-06 08:30",
           "title": "Meme sesh"
         }
@@ -63,7 +58,6 @@
           "endTime": "2018-04-06 08:30",
           "key": 6,
           "location": "By the bonfire",
-          "pictureUrl": "https://pbs.twimg.com/profile_images/714235145306390528/8iKJ6UeV_400x400.jpg",
           "startTime": "2018-04-06 08:00",
           "title": "Iribe Strip tease"
         },
@@ -72,7 +66,6 @@
           "endTime": "2018-04-06 09:00",
           "key": 7,
           "location": "Everywhere",
-          "pictureUrl": "https://beta.techcrunch.com/wp-content/uploads/2017/02/gettyimages-495845075.jpg?w=1390&crop=1",
           "startTime": "2018-04-06 08:30",
           "title": "Vincent Talks about a swamp"
         }
