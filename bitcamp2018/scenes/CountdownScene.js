@@ -85,54 +85,46 @@ class CountdownScene extends Component {
     return (
         <ImageBackground
          style={styles.container}
-         source={require('./images/background.png')}>
-
-        <Image
-          source={require('./images/flame.gif')}
-          style={styles.fire}
-        />
-        <Image
-          source={require('./images/logs.png')}
-          style={styles.logs}
-        />
-        <View style={styles.row}>
-          <TimerText style={styles.timerHeading}>Time Remaining</TimerText>
-        </View>
-        <View style={[styles.row, styles.timer]}>
-          <View style={styles.col}>
-            <TimerText style={numberStyles}>{daysText}</TimerText>
-            <TimerText style={styles.dhms}>days</TimerText>
+         source={require('./images/background.png')}
+        >
+          <Image
+            source={require('./images/flame.gif')}
+            style={styles.fire}
+          />
+          <Image
+            source={require('./images/logs.png')}
+            style={styles.logs}
+          />
+          <View style={styles.row}>
+            <TimerText style={styles.timerHeading}>Time Remaining</TimerText>
           </View>
-          <TimerText style={numberStyles}>:</TimerText>
-          <View style={styles.col}>
-            <TimerText style={numberStyles}>{hoursText}</TimerText>
-            <TimerText style={styles.dhms}>hours</TimerText>
+          <View style={[styles.row, styles.timer]}>
+            <View style={styles.col}>
+              <TimerText style={numberStyles}>{daysText}</TimerText>
+              <TimerText style={styles.dhms}>days</TimerText>
+            </View>
+            <TimerText style={numberStyles}>:</TimerText>
+            <View style={styles.col}>
+              <TimerText style={numberStyles}>{hoursText}</TimerText>
+              <TimerText style={styles.dhms}>hours</TimerText>
+            </View>
+            <TimerText style={numberStyles}>:</TimerText>
+            <View style={styles.col}>
+              <TimerText style={numberStyles}>{minutesText}</TimerText>
+              <TimerText style={styles.dhms}>minutes</TimerText>
+            </View>
+            <TimerText style={numberStyles}>:</TimerText>
+            <View style={styles.col}>
+              <TimerText style={numberStyles}>{secondsText}</TimerText>
+              <TimerText style={styles.dhms}>seconds</TimerText>
+            </View>
           </View>
-          <TimerText style={numberStyles}>:</TimerText>
-          <View style={styles.col}>
-            <TimerText style={numberStyles}>{minutesText}</TimerText>
-            <TimerText style={styles.dhms}>minutes</TimerText>
-          </View>
-          <TimerText style={numberStyles}>:</TimerText>
-          <View style={styles.col}>
-            <TimerText style={numberStyles}>{secondsText}</TimerText>
-            <TimerText style={styles.dhms}>seconds</TimerText>
-          </View>
-        </View>
         </ImageBackground>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  scene: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  circle: {
-    marginBottom: 15,
-  },
   fire: {
     height:90,
     width:90
@@ -141,10 +133,6 @@ const styles = StyleSheet.create({
     height:65,
     width:150,
   },
-  fireBackground: {
-    alignItems: 'center'
-  },
-  // text sizes
   shadow: {
     textAlign: 'center'
   },

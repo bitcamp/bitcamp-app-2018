@@ -54,8 +54,7 @@ const pageNumberTitles = [
   "Bitcamp 2018",
   "Schedule",
   "FAQ",
-  "Map",
-  // "Twitter"
+  "Map"
 ]
 
 const styles = StyleSheet.create({
@@ -123,10 +122,12 @@ class App extends Component {
   }
 
   componentDidMount(){
+    Orientation.lockToPortrait();
+
     this.getID();
 
     if(Platform.OS === 'android'){
-      console.log("INSIDE ANDROID.");
+
       // Build a channel
       const channel = new firebase.notifications.Android.Channel(androidChannel, 'bitcamp Announcements', firebase.notifications.Android.Importance.Max)
         .setDescription('Announcements from the bitcamp team');
@@ -135,7 +136,7 @@ class App extends Component {
       firebase.notifications().android.createChannel(channel);
     }
 
-
+    // request permissions if not provided
     firebase.messaging().hasPermission().then(enabled => {
       if (enabled) {
         this.waitForNotification()
@@ -154,6 +155,7 @@ class App extends Component {
   }
 
 
+  // notification listener that is called when a notification is recieved
   waitForNotification(){
     firebase.notifications().onNotification((notification: Notification) => {
       console.log(notification);
@@ -168,32 +170,36 @@ class App extends Component {
           notification.android.setChannelId(androidChannel);
         }
 
+        // if notification is recieved while app is open, provide these properties to present a complete notification
         notification.android.setVibrate([100, 200, 100, 500]);
         notification.android.setCategory(firebase.notifications.Android.Category.Reminder);
         notification.android.setLights(16740159, 500, 100);
         notification.android.setColor('#FF6F3F');
-        //notification.android.setColorized(true);
 
       }
 
+      // if something goes wrong
       firebase.notifications().displayNotification(notification)
         .catch(error => {console.log(error)});
     });
   }
 
-
+  // change page title of the current screen
   changeHeaderTitle(pageNumber) {
     this.setState({
       title: pageNumberTitles[pageNumber]
     })
   }
 
+  // closes / opens modal
   _toggleModal = () =>
     this.setState({ isModalVisible: !this.state.isModalVisible });
 
+  // close momdal
   _closeModal = () =>
     this.setState({ isModalVisible: false });
 
+  // hits the endpoint to check to see if the user is part of the hackathon
   async _sendData(){
   	let password = this.state.password;
   	let email = this.state.email;
@@ -210,14 +216,11 @@ class App extends Component {
   		  }),
   		});
       let responseJson = await response.json();
-      console.log("RESPONSE: " + JSON.stringify(responseJson));
-      console.log("RESPONSE: " + JSON.stringify(response));
   		let status = unescape(response['ok']);
   		if (status === "true") {
   			let token = unescape(responseJson['token']);
   			let id = unescape(responseJson['user']['id']);
         let username = unescape(responseJson['user']['profile']['firstName']);
-        console.log("GIVENNAME: " + username);
   			this.setState({ name: username });
         this.setState({ id: id });
         AsyncStorage.setItem(ID, this.state.id, function(error){
@@ -230,7 +233,6 @@ class App extends Component {
             console.log("Error: " + error);
          }
         });
-        console.log("STATENAME: " + this.state.name);
   		} else {
   			Alert.alert(
   			  "Incorrect credentials.",
@@ -252,9 +254,8 @@ class App extends Component {
         );
       }
   	}
-	//let responseJson = await response.json();
 
-
+  // helper method that renders a button (returns jsx)
   _renderButton = (text, btnStyles, onPress) => (
     <Button
       primary
@@ -265,7 +266,7 @@ class App extends Component {
     </Button>
   );
 
-
+  // this method is called if the user is not logged in.
    _renderModalContent = () => (
     <View style={{padding: 20}}>
       <AleoText
@@ -302,21 +303,20 @@ class App extends Component {
     </View>
   );
 
+   // this method is called to retrieve data from the phone's storage
   async getID() {
-    console.log("HERE");
     var thisBinded = this;
     thisBinded.savedData = "";
     thisBinded.savedData = await AsyncStorage.getItem(ID);
     thisBinded.firstName = await AsyncStorage.getItem(storedName);
-    console.log("DATA: " + JSON.stringify(thisBinded.savedData));
     thisBinded.savedData = JSON.stringify(thisBinded.savedData);
     if (thisBinded.savedData != null && thisBinded.savedData != "" && thisBinded.savedData != "null") {
-      console.log("INSIDE");
       thisBinded.setState({id: thisBinded.savedData});
       thisBinded.setState({name: thisBinded.firstName});
     }
   }
 
+  // clears the storage of the phone and sets the state to empty
   async _logout_qr() {
     await AsyncStorage.removeItem(ID, function (err){
         if (err){
@@ -333,6 +333,7 @@ class App extends Component {
     this._closeModal();
   }
 
+  // this method is called if there is no user logged in
   _renderQRContent = () => (
     <View style={{padding: 20, alignItems:'center', justifyContent: 'center'}}>
         <BoldAleoText
@@ -357,6 +358,7 @@ class App extends Component {
     </View>
   );
 
+  // determines what to call for the modal and also displays the wrapper for all pages
   render() {
     if(this.state.id === ""){
       content = this._renderModalContent();
