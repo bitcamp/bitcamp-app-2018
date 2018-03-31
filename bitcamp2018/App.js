@@ -47,6 +47,7 @@ import type { Notification } from 'react-native-firebase'
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
 const ID = '@bitcampapp:userid';
+const stored-name = '@bitcampapp:firstName'
 
 const pageNumberTitles = [
   "Bitcamp 2018",
@@ -209,6 +210,11 @@ class App extends Component {
             console.log("Error: " + error);
           }
         });
+        AsyncStorage.setItem(ID, this.state.name, function(error){
+          if (error){
+            console.log("Error: " + error);
+          }
+        });
   		} else {
   			Alert.alert(
   			  "Incorrect credentials.",
@@ -285,16 +291,24 @@ class App extends Component {
     var thisBinded = this;
     thisBinded.savedData = "";
     thisBinded.savedData = await AsyncStorage.getItem(ID);
+    let name = await AsyncStorage.getItem(stored-name);
+    console.log("GIVENNAME: " + name);
     console.log("DATA: " + JSON.stringify(thisBinded.savedData));
     thisBinded.savedData = JSON.stringify(thisBinded.savedData);
     if (thisBinded.savedData != null && thisBinded.savedData != "" && thisBinded.savedData != "null") {
       console.log("INSIDE");
       thisBinded.setState({id: thisBinded.savedData});
+      thisBinded.setstate({name: name});
     }
   }
 
   async _logout_qr() {
     await AsyncStorage.removeItem(ID, function (err){
+        if (err){
+          console.log("Error: " + err);
+        }
+    });
+    await AsyncStorage.removeItem(stored-name, function (err){
         if (err){
           console.log("Error: " + err);
         }
