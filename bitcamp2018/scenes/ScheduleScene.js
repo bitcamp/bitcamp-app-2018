@@ -329,9 +329,8 @@ class ScheduleScene extends Component {
       notification.android.setChannelId('test-channel');
       notification.android.setVibrate([100, 200, 100, 500]);
       notification.android.setCategory(firebase.notifications.Android.Category.Reminder);
-      //#ff6f3f in decimal
       notification.android.setLights(16740159, 500, 100);
-      //notification.android.setVisibility(firebase.notifications.Android.Visibility.Public);
+      notification.android.setColor('#FF6F3F')
     }
   }
 
