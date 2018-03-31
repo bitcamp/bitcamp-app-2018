@@ -111,10 +111,10 @@ class FaqScene extends Component {
       },
       {
         heading: `Where is Bitcamp?`,
-        description: `We are proud to host Bitcamp at the Xfinity Center on the University of Maryland campus! This expansive sports arena is a unique spot for any event, and we’re excited to be back again!`
+        description: `We are proud to host Bitcamp at the Xfinity Center, located at 8500 Paint Branch Dr, College Park, MD 20740.`
       },
       {
-        heading: `How does travel work?`,
+        heading: `How can I travel to Bitcamp?`,
         description: `We'll have buses covering the hike from Stony Brook, NYU, GWU, Georgetown, American, and UMBC. If your school isn't covered, you can apply for travel reimbursement at www.bit.camp/travel-reimbursement`
       },
       {
@@ -126,11 +126,11 @@ class FaqScene extends Component {
         description: `Your QR code is your unique identifier to allow for faster check-ins at Bitcamp this year. Tap the QR code icon to the right of the heading above to log in and access it. Use the email and password you used to apply for Bitcamp.`
       },
       {
-        heading: `What are the stars next to each schedule event? `,
-        description: `Tap the stars to favorite events that you are interested in. Favorited events will notify your phone with reminders so you don't miss them!`
+        heading: `What are the stars next to each scheduled event? `,
+        description: `Tap the stars to mark events that you are interested in. Favorited events will notify your phone with reminders so you don't miss them!`
       },
       {
-        heading: 'What if I have no experience or ideas?',
+        heading: 'What if I have no coding experience or ideas?',
         description: `Don't be afraid if you don't think you have enough experience, a team, or an idea. Everyone has a first hackathon, and we would love for Bitcamp to be yours! Mentors who are well-versed in a variety of topics will also be there to help you, whether it be finding a team, fleshing out an idea, or just figuring out where to begin.`,
       },
       {
@@ -142,8 +142,8 @@ class FaqScene extends Component {
         description: 'After the 36 hours, you’ll be submitting your project to DevPost for judging! Find more information on Slack or on the Bitcamp website (www.bit.camp)',
       },
       {
-        heading: `Are there any guidelines?`,
-        description: `Don't bring any firearms, knives, weapons, drugs, or alcohol. Don't use an old project. Start a new trail instead! Also, please read the Major League Hacking Code of Conduct and the Bitcamp Terms, Code of Conduct, and Release Waiver. Organizers will enforce this code throughout the event. We are expecting cooperation from all participants to help ensure a safe environment for everybody (TL;DR be nice).`
+        heading: `What are the Guidelines for Bitcamp and MLH?`,
+        description: `Don't bring any firearms, knives, weapons, drugs, or alcohol. Don't use an old project. Start a new trail instead! Also, please read the Major League Hacking Code of Conduct and the Bitcamp Terms, Code of Conduct, and Release Waiver on the Bitcamp website. Organizers will enforce this code throughout the event. We are expecting cooperation from all participants to help ensure a safe environment for everybody (TL;DR be nice).`
       },
       {
         heading: `Other questions?`,
