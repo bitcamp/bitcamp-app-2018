@@ -19,7 +19,7 @@ function MapScene() {
      >
 
       <PhotoView
-        source={require('./images/floor_plan_final.png')}
+        source={require('../assets/floor_plan_2018.png')}
         minimumZoomScale={0.9}
         maximumZoomScale={5}
         androidScaleType="fitCenter"
