@@ -20,6 +20,9 @@
     <meta-data
     android:name="com.google.firebase.messaging.default_notification_color"
     android:resource="#FF6F3F" />
+    <meta-data
+    android:name="com.google.firebase.messaging.default_notification_channel_id"
+    android:value="@string/default_notification_channel_id"/>
     <activity
       android:name=".MainActivity"
       android:label="@string/app_name"
