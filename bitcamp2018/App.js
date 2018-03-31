@@ -308,7 +308,11 @@ class App extends Component {
   _renderQRContent = () => (
     <View style={{padding: 20, alignItems:'center', justifyContent: 'center'}}>
         <BoldAleoText
-            style={{fontSize: 27, color: colors.midnightBlue}}>
+            style={{
+              fontSize: 27,
+              color: colors.midnightBlue,
+              textAlign: 'center',
+            }}>
             Hi {this.state.name}!{"\n"}{"\n"}
             Your QR Code
         </BoldAleoText>
