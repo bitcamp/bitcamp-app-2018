@@ -37,11 +37,12 @@ import firebase from 'react-native-firebase';
 
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
-const STORAGE_KEY = '@bitcampapp:schedule'; // the @ may need to be modified...
+const STORAGE_KEY = '@bitcampapp:schedule';
 const EVENT_FAVORITED_KEY_PREFIX = '@bitcampapp:isFavorited';
 const EVENT_ID_PREFIX = 'eventNotification-';
 const channel = new firebase.notifications.Android.Channel('test-channel', 'Test-Channel', firebase.notifications.Android.Importance.Max).setDescription('My apps test channel');
 
+// Each event card displayed for each day
 class EventCard extends Component {
 
   constructor(props) {
@@ -108,6 +109,7 @@ class EventCard extends Component {
       });
   }
 
+  // renders each card
   render() {
     return (
       <View
@@ -119,13 +121,7 @@ class EventCard extends Component {
           <View style = {styles.cardShadow}>
             <Card>
               <View style = {styles.cardLayout}>
-                {/* <View style={styles.cardImgContainer}>
-                  <CardImage>
-                    <Image
-                      source={{uri: rowData.item.pictureUrl}}
-                      style={styles.cardImg} />
-                  </CardImage>
-                </View> */}
+                {}
                 <View style = {styles.cardText}>
                   <CardContent>
                     <View style = {styles.cardHeader}>
@@ -168,6 +164,7 @@ class EventCard extends Component {
   }
 }
 
+// this class displays the whole schedule by combining the day list, and event list
 class ScheduleScene extends Component {
 
   constructor(props) {
@@ -187,49 +184,37 @@ class ScheduleScene extends Component {
 
   }
 
-
+  // calls the methods to populate the data source
   componentDidMount() {
     // make sure we aren't overwriting Firebase data with locally cached data
     let timeoutObj = setTimeout(() => {this.fetchPrelim()}, 5000)
-
     this.fetchData(timeoutObj)
 
   }
 
+  // this method either gets info from the phone or the hardcoded schedule stored in JSON
   fetchPrelim(){
 
     AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
         if(result != null){
-          //console.log('No connection to firebase')
-          // console.log("Result:")
-          // console.log(result);
           this.ds = JSON.parse(result);
-          // console.log(this.ds);
           this.setState({dataSource:this.ds.Schedule});
         }
         else{
           this.setState({datasource:scheduleData.Schedule});
         }
-
-        //alert user that there is no connection
     });
   }
 
+  // this method is called to obtain the schedule from firebase
   fetchData(timeoutObj){
-    //console.log('Waiting on firebase');
 
     this.itemRef.on('value', async (snapshot) => {
 
-      //console.log('Got firebase response!');
       var data = snapshot.val();
-
       AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
-
-        //console.log('Got old schedule!');
-
+        
         clearTimeout(timeoutObj);
-
-        //console.log('Storing received schedule on phone.');
         //store new schedule on phone
         AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data), function(error){
           if (error){
@@ -243,8 +228,6 @@ class ScheduleScene extends Component {
         this.ds = data;
         this.setState({dataSource:this.ds.Schedule});
 
-        //console.log('Checking old schedule for changes');
-
         if(result != null && result != 'null'){
           // if we already had a schedule, correlate old stuff
           // this could take a while so we want to do it after showing state
@@ -252,11 +235,7 @@ class ScheduleScene extends Component {
 
           result = JSON.parse(result);
 
-          //console.log(oldSchedule);
-          //console.log(newSchedule);
-
           if(hash.MD5(oldSchedule) != hash.MD5(newSchedule)){
-            console.log('Schedule change detected!');
             this.updateScheduledNotifications(result.Schedule, data.Schedule);
           }
 
@@ -266,28 +245,20 @@ class ScheduleScene extends Component {
     })
   }
 
+  // if the schedule changes, update the notifications
   updateScheduledNotifications(oldSchedule, newSchedule){
-    //console.log(JSON.stringify(oldSchedule));
     //map event id's to epoch times in oldSchedule
 
     startTimes = {}
     for(let eventArray of oldSchedule){
       for(let eventObj of eventArray[1]){
-        // eventObj = eventArray[eventIndex];
-        //console.log(eventObj);
-
         startTimes[eventObj.key] = eventObj.startTime;
       }
     }
 
-    //console.log(JSON.stringify(startTimes));
-
     for(let eventArray of newSchedule){
       for(let eventObj of eventArray[1]){
 
-        //console.log(eventObj);
-        //console.log(startTimes[eventObj.key]);
-        //console.log(eventObj.startTime);
         //start time for particular event was changed
         if(startTimes[eventObj.key] != null && startTimes[eventObj.key] != eventObj.startTime){
           console.log('Time change found for event id ' + eventObj.key.toString());
@@ -295,7 +266,6 @@ class ScheduleScene extends Component {
             (err, result) => {
               if (err) {
                 console.log(err);
-                //throw err;
               }
               if(result == 'true'){
                 console.log("Updating notification time for " + eventObj.key.toString());
@@ -322,6 +292,7 @@ class ScheduleScene extends Component {
 
   }
 
+  // this creates a notification to our properties
   customizeNotification(notification){
 
     if (Platform.OS === 'android') {
@@ -334,6 +305,7 @@ class ScheduleScene extends Component {
     }
   }
 
+  // this sets a notification
   scheduleNotification(notification, startTime){
 
     //use moment().add(10, 'seconds') to make it 10 seconds from now for testing
@@ -342,6 +314,8 @@ class ScheduleScene extends Component {
       fireDate:  moment(startTime).subtract(10, 'minutes').valueOf()
     });
   }
+
+  // renders each day for the top
   _renderScheduleTabs(){
     var thisBinded = this;
     return this.state.dataSource.
@@ -349,6 +323,7 @@ class ScheduleScene extends Component {
 
   }
 
+  // renders the schedule array
   _renderScheduleForDay(scheduleArray){
 
     alteredData = scheduleArray[1].sort((event1, event2) => {
@@ -393,12 +368,12 @@ class ScheduleScene extends Component {
     );
   }
 
-
+  // formats the time for each event
   normalizeTimeLabel(t){
     return moment(t).format("h:mm A")
   }
 
-
+  // renders each row item for the event
   _renderRow(rowData) {
     return (
       <EventCard
@@ -415,6 +390,7 @@ class ScheduleScene extends Component {
         scheduleNotification = {this.scheduleNotification}/>);
   }
 
+  // renders all the lists and event rows
   render() {
     return (
       <ImageBackground
