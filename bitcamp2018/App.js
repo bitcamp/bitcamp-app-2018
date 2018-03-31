@@ -47,7 +47,7 @@ import type { Notification } from 'react-native-firebase'
 const AleoText = aleofy(Text);
 const BoldAleoText = aleofy(Text, 'Bold');
 const ID = '@bitcampapp:userid';
-const stored-name = '@bitcampapp:firstName'
+const storedName = '@bitcampapp:firstName';
 
 const pageNumberTitles = [
   "Bitcamp 2018",
@@ -109,6 +109,7 @@ class App extends Component {
 
     super(props);
     this.savedData = "";
+    this.firstName = "";
 
     this.state = {
       title: pageNumberTitles[0],
@@ -116,7 +117,7 @@ class App extends Component {
       email: "",
       password: "",
       id: this.savedData,
-      name: "",
+      name: this.firstName,
     }
     this.getID = this.getID.bind(this);
   }
@@ -210,11 +211,12 @@ class App extends Component {
             console.log("Error: " + error);
           }
         });
-        AsyncStorage.setItem(ID, this.state.name, function(error){
+        AsyncStorage.setItem(storedName, this.state.name, function(error){
           if (error){
             console.log("Error: " + error);
           }
         });
+        console.log("STATENAME: " + this.state.name);
   		} else {
   			Alert.alert(
   			  "Incorrect credentials.",
@@ -291,14 +293,14 @@ class App extends Component {
     var thisBinded = this;
     thisBinded.savedData = "";
     thisBinded.savedData = await AsyncStorage.getItem(ID);
-    let name = await AsyncStorage.getItem(stored-name);
-    console.log("GIVENNAME: " + name);
-    console.log("DATA: " + JSON.stringify(thisBinded.savedData));
+    thisBinded.firstName = await AsyncStorage.getItem(storedName);
+    console.log("RETRIVEDNAME: " + thisBinded.firstName);
     thisBinded.savedData = JSON.stringify(thisBinded.savedData);
+    thisBinded.firstName = JSON.stringify(thisBinded.firstName)
     if (thisBinded.savedData != null && thisBinded.savedData != "" && thisBinded.savedData != "null") {
       console.log("INSIDE");
       thisBinded.setState({id: thisBinded.savedData});
-      thisBinded.setstate({name: name});
+      thisBinded.setstate({name: thisBinded.firstName});
     }
   }
 
@@ -308,7 +310,7 @@ class App extends Component {
           console.log("Error: " + err);
         }
     });
-    await AsyncStorage.removeItem(stored-name, function (err){
+    await AsyncStorage.removeItem(storedName, function (err){
         if (err){
           console.log("Error: " + err);
         }
