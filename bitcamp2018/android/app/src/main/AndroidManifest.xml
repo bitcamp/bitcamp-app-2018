@@ -15,11 +15,11 @@
     <!-- Set the default notification icon -->
     <meta-data
     android:name="com.google.firebase.messaging.default_notification_icon"
-    android:resource="@mipmap/ic_launcher" />
+    android:resource="@mipmap/ic_launcher"/>
     <!-- Set the default notification color to Bitcamp Orange-->
     <meta-data
     android:name="com.google.firebase.messaging.default_notification_color"
-    android:resource="#FF6F3F" />
+    android:resource="@string/default_notification_icon"/>
     <meta-data
     android:name="com.google.firebase.messaging.default_notification_channel_id"
     android:value="@string/default_notification_channel_id"/>
