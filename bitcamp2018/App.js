@@ -123,6 +123,8 @@ class App extends Component {
   }
 
   componentDidMount(){
+    Orientation.lockToPortrait();
+
     this.getID();
 
     if(Platform.OS === 'android'){
