@@ -296,11 +296,11 @@ class App extends Component {
     thisBinded.firstName = await AsyncStorage.getItem(storedName);
     console.log("RETRIVEDNAME: " + thisBinded.firstName);
     thisBinded.savedData = JSON.stringify(thisBinded.savedData);
-    thisBinded.firstName = JSON.stringify(thisBinded.firstName)
+    thisBinded.firstName = (thisBinded.firstName)
     if (thisBinded.savedData != null && thisBinded.savedData != "" && thisBinded.savedData != "null") {
       console.log("INSIDE");
       thisBinded.setState({id: thisBinded.savedData});
-      thisBinded.setstate({name: thisBinded.firstName});
+      thisBinded.setState({name: thisBinded.firstName});
     }
   }
 
