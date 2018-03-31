@@ -144,7 +144,12 @@ class EventCard extends Component {
                       </View>
                     </View>
                     <Text style={styles.timeText}>
-                      {this.props.startTimeFormatted} - {this.props.endTimeFormatted}
+                      {
+                        (this.props.startTimeFormatted) == (this.props.endTimeFormatted) ?
+                        `${this.props.startTimeFormatted}`
+                        :
+                        `${this.props.startTimeFormatted} - ${this.props.endTimeFormatted}`
+                      }
                     </Text>
                     <Text style={styles.location}>
                       {this.props.location}

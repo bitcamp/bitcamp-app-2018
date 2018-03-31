@@ -4,71 +4,174 @@
       "Friday",
       [
         {
-          "description": "Meet everyone by the bonfire to kickoff bitcamp 2018",
-          "endTime": "2018-04-06 08:30",
+          "description": "",
+          "endTime": "2018-04-06 17:00",
           "key": 1,
-          "location": "By the bonfire",
-          "startTime": "2018-04-06 08:00",
-          "title": "Fake Introduction Talk"
+          "location": "Xfinity Center Gate A",
+          "startTime": "2018-04-06 17:00",
+          "title": "Non-UMD Hacker Check-in Opens"
         },
         {
-          "description": "It's time to make some groups",
-          "endTime": "2018-04-06 09:00",
+          "description": "",
+          "endTime": "2018-04-06 17:00",
           "key": 2,
-          "location": "Mordor",
-          "startTime": "2018-04-06 08:00",
-          "title": "Get to know each other"
+          "location": "Xfinity Center Gate A",
+          "startTime": "2018-04-06 17:00",
+          "title": "Mentor Check-in Opens"
         },
         {
-          "description": "I love chocolate chip cookies",
-          "endTime": "2018-04-06 09:00",
+          "description": "",
+          "endTime": "2018-04-06 18:00",
           "key": 3,
-          "location": "Everywhere",
-          "startTime": "2018-04-06 08:30",
-          "title": "Get your snacks"
-        }
+          "location": "Xfinity Center Gate A",
+          "startTime": "2018-04-06 18:00",
+          "title": "UMD Hacker Check-in Opens"
+        },
+        {
+          "description": "",
+          "key": 44,
+          "location": "Canteen",
+          "endTime": "2018-04-06 18:00",
+          "startTime": "2018-04-06 18:00",
+          "title": "Dinner"
+        },
+        {
+          "description": "",
+          "key": 55,
+          "endTime": "2018-04-06 19:00",
+          "location": "Campgrounds",
+          "startTime": "2018-04-06 19:00",
+          "title": "Sponsorship Fair"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-06 19:30",
+          "key": 66,
+          "location": "Campgrounds",
+          "startTime": "2018-04-06 19:30",
+          "title": "Opening Ceremony"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-06 21:00",
+          "key": 77,
+          "location": "Campgrounds",
+          "startTime": "2018-04-06 21:00",
+          "title": "Dessert"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-06 21:00",
+          "key": 77,
+          "location": "Campgrounds",
+          "startTime": "2018-04-06 21:00",
+          "title": "Hacking Starts"
+        },
       ]
     ],
     [
       "Saturday",
       [
         {
-          "description": "Meet everyone by the bonfire to kickoff bitcamp 2018",
-          "endTime": "2018-04-06 08:30",
+          "description": "",
+          "endTime": "2018-04-07 08:30",
           "key": 4,
-          "location": "By the bonfire",
-          "startTime": "2018-04-06 08:00",
-          "title": "Closing Ceremony"
+          "location": "Canteen",
+          "startTime": "2018-04-07 08:30",
+          "title": "Breakfast"
         },
         {
-          "description": "I love chocolate chip cookies8",
-          "endTime": "2018-04-06 09:00",
+          "description": "",
           "key": 5,
-          "location": "Everywhere",
-          "startTime": "2018-04-06 08:30",
-          "title": "Meme sesh"
-        }
+          "location": "Canteen",
+          "startTime": "2018-04-07 12:30",
+          "title": "Lunch"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-07 16:00",
+          "key": 555,
+          "location": "Campfire",
+          "startTime": "2018-04-07 16:00",
+          "title": "Colorwar"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-07 18:00",
+          "key": 777,
+          "location": "Canteen",
+          "startTime": "2018-04-07 18:00",
+          "title": "Dinner"
+        },
       ]
     ],
     [
       "Sunday",
       [
         {
-          "description": "Meet everyone by the bonfire to kickoff bitcamp 2018",
-          "endTime": "2018-04-06 08:30",
-          "key": 6,
-          "location": "By the bonfire",
-          "startTime": "2018-04-06 08:00",
-          "title": "Iribe Strip tease"
+          "description": "",
+          "endTime": "2018-04-08 08:00",
+          "key": 4444,
+          "location": "Canteen",
+          "startTime": "2018-04-08 08:00",
+          "title": "Breakfast"
         },
         {
-          "description": "I love chocolate chip cookies8",
-          "endTime": "2018-04-06 09:00",
-          "key": 7,
-          "location": "Everywhere",
-          "startTime": "2018-04-06 08:30",
-          "title": "Vincent Talks about a swamp"
-        }
+          "description": "",
+          "endTime": "2018-04-08 08:00",
+          "key": 7777,
+          "location": "Campgrounds",
+          "startTime": "2018-04-08 08:00",
+          "title": "Devpost Submission Deadline"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-08 09:00",
+          "key": 8888,
+          "location": "Campgrounds",
+          "startTime": "2018-04-08 09:00",
+          "title": "Hacking Ends"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-08 10:00",
+          "key": 9999,
+          "location": "Campgrounds",
+          "startTime": "2018-04-08 10:00",
+          "title": "Expo A"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-08 11:00",
+          "key": 9988,
+          "location": "Campgrounds",
+          "startTime": "2018-04-08 11:00",
+          "title": "Expo B"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-08 12:00",
+          "key": 9998,
+          "location": "Canteen",
+          "startTime": "2018-04-09 12:00",
+          "title": "Lunch"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-08 3:30",
+          "key": 9997,
+          "location": "Campgrounds",
+          "startTime": "2018-04-08 13:00",
+          "title": "Closing Ceremony"
+        },
+        {
+          "description": "",
+          "endTime": "2018-04-08 4:15",
+          "key": 9996,
+          "location": "Campgrounds",
+          "startTime": "2018-04-08 4:15",
+          "title": "Buses Leave"
+        },
       ]
     ]
   ]
