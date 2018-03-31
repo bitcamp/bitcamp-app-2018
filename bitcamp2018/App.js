@@ -126,8 +126,8 @@ class App extends Component {
     if(Platform.OS === 'android'){
       console.log("INSIDE ANDROID.");
       // Build a channel
-      const channel = new firebase.notifications.Android.Channel('test-channel', 'Test Channel', firebase.notifications.Android.Importance.Max)
-        .setDescription('My apps test channel');
+      const channel = new firebase.notifications.Android.Channel('bitcamp-notifications', 'Test Channel', firebase.notifications.Android.Importance.Max)
+        .setDescription('bitcamp-notifications');
 
       // Create the channel
       firebase.notifications().android.createChannel(channel);
