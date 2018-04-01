@@ -7,7 +7,7 @@ const window = Dimensions.get('window');
 function MapScene() {
   let styles = {
     width: window.width,
-    height: window.height - 100,
+    height: window.height - 120,
   };
 
   return(

@@ -30,6 +30,7 @@ build/
 local.properties
 *.iml
 */Pods
+android/gradle.properties
 # node.js
 #
 node_modules/
