@@ -175,6 +175,7 @@ class App extends Component {
         notification.android.setCategory(firebase.notifications.Android.Category.Reminder);
         notification.android.setLights(16740159, 500, 100);
         notification.android.setColor('#FF6F3F');
+        notification.android.setPriority(firebase.notifications.Android.Priority.Max);
 
       }
 

@@ -213,7 +213,7 @@ class ScheduleScene extends Component {
 
       var data = snapshot.val();
       AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
-        
+
         clearTimeout(timeoutObj);
         //store new schedule on phone
         AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data), function(error){
@@ -301,7 +301,9 @@ class ScheduleScene extends Component {
       notification.android.setVibrate([100, 200, 100, 500]);
       notification.android.setCategory(firebase.notifications.Android.Category.Reminder);
       notification.android.setLights(16740159, 500, 100);
-      notification.android.setColor('#FF6F3F')
+      notification.android.setColor('#FF6F3F');
+      notification.android.setPriority(firebase.notifications.Android.Priority.Max);
+
     }
   }
 
