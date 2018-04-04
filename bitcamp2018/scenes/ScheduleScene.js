@@ -172,6 +172,7 @@ class ScheduleScene extends Component {
     this.ds = scheduleData;
 
     this.state = {
+       loaded: false,
        dataSource: this.ds.Schedule,
     };
 
@@ -187,8 +188,9 @@ class ScheduleScene extends Component {
   // calls the methods to populate the data source
   componentDidMount() {
     // make sure we aren't overwriting Firebase data with locally cached data
-    let timeoutObj = setTimeout(() => {this.fetchPrelim()}, 5000)
-    this.fetchData(timeoutObj)
+    //let timeoutObj = setTimeout(() => {this.fetchPrelim()}, 5000
+    this.fetchPrelim();
+    this.fetchData();
 
   }
 
@@ -198,23 +200,22 @@ class ScheduleScene extends Component {
     AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
         if(result != null){
           this.ds = JSON.parse(result);
-          this.setState({dataSource:this.ds.Schedule});
+          this.setState({loaded: true, dataSource:this.ds.Schedule});
         }
         else{
-          this.setState({datasource:scheduleData.Schedule});
+          this.setState({loaded: true, datasource:scheduleData.Schedule});
         }
     });
   }
 
   // this method is called to obtain the schedule from firebase
-  fetchData(timeoutObj){
+  fetchData(){
 
     this.itemRef.on('value', async (snapshot) => {
 
       var data = snapshot.val();
       AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
 
-        clearTimeout(timeoutObj);
         //store new schedule on phone
         AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data), function(error){
           if (error){
@@ -226,7 +227,7 @@ class ScheduleScene extends Component {
         newSchedule = JSON.stringify(data);
 
         this.ds = data;
-        this.setState({dataSource:this.ds.Schedule});
+        this.setState({loaded : true, dataSource:this.ds.Schedule});
 
         if(result != null && result != 'null'){
           // if we already had a schedule, correlate old stuff
@@ -327,6 +328,13 @@ class ScheduleScene extends Component {
 
   // renders the schedule array
   _renderScheduleForDay(scheduleArray){
+
+    if(this.state.loaded === false){
+      return (<View
+          key = {scheduleArray[0]}
+          tabLabel={scheduleArray[0]}
+        />);
+    }
 
     alteredData = scheduleArray[1].sort((event1, event2) => {
       start1 = moment(event1.startTime);

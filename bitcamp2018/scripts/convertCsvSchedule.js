@@ -55,23 +55,3 @@ fs.readFile(scheduleFile, 'utf8', (err, data) => {
     fs.writeFileSync('scheduleOutput.json', out);
   }
 });
-
-// 	f.each_line do |line|
-//
-// 		if lineNum > 0
-// 			fields = line.split ","
-// 			dayMap[fields[0]].push({
-// 					"description" => fields[1],
-// 					"endTime" => ,
-// 					"key" => ,
-// 					"location" => ,
-// 					"startTime" => ,
-// 					"title" =>
-// 				})
-// 		end
-// 	end
-// end
-//
-// File.open("filtered_" + mossFile, 'w') do |file|
-// 	file.write(output_file)
-// end
