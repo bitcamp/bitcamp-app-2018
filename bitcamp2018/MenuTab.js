@@ -14,6 +14,8 @@ import CustomTabBarOverlay from './CustomTabBarOverlay';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { colors } from './shared/styles';
 
+import { isIphoneX } from 'react-native-iphone-x-helper'
+
 export default function MenuTab(props) {
 
   // ios styles
@@ -24,29 +26,37 @@ export default function MenuTab(props) {
   //{!iOS && (<MentorsScene     tabLabel={`${iconPrefix}-help-circle`} />)}
   //<MentorsScene     tabLabel={`${iconPrefix}-help-circle`} />
 
-  return (
-    <View style={{
+  let innerTabView = (<ScrollableTabView
+    tabBarPosition={menuTabPosition}
+    style={style}
+    initialPage={0}
+    locked = {true}
+    renderTabBar={() => <CustomTabBarOverlay />}
+    tabBarPosition="bottom"
+    onChangeTab={(event) => {
+      props.changeHeaderTitle(event.i)
+    }}
+  >
+    <CountdownScene   tabLabel={`${iconPrefix}-home`} />
+    <ScheduleScene    tabLabel={`${iconPrefix}-calendar`} />
+    <FaqScene  tabLabel={`${iconPrefix}-information-circle`} />
+    <MapScene         tabLabel={`${iconPrefix}-map`} />
+    {/* <MentorsScene     tabLabel={`logo-twitter`} /> */}
+  </ScrollableTabView>);
+
+  if(isIphoneX()){
+    return (<View style={{
       flex:1,
       paddingBottom: 34,
     }}>
-      {/* {iOS && topBar} */}
-      <ScrollableTabView
-        tabBarPosition={menuTabPosition}
-        style={style}
-        initialPage={0}
-        locked = {true}
-        renderTabBar={() => <CustomTabBarOverlay />}
-        tabBarPosition="bottom"
-        onChangeTab={(event) => {
-          props.changeHeaderTitle(event.i)
-        }}
-      >
-        <CountdownScene   tabLabel={`${iconPrefix}-home`} />
-        <ScheduleScene    tabLabel={`${iconPrefix}-calendar`} />
-        <FaqScene  tabLabel={`${iconPrefix}-information-circle`} />
-        <MapScene         tabLabel={`${iconPrefix}-map`} />
-        {/* <MentorsScene     tabLabel={`logo-twitter`} /> */}
-      </ScrollableTabView>
-    </View>
-  );
+      {innerTabView}
+    </View>);
+  }
+  else {
+    return (<View style={{
+      flex:1,
+    }}>
+      {innerTabView}
+    </View>);
+  }
 }
