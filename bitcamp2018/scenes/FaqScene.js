@@ -67,8 +67,8 @@ const data = [
     description: `Your QR code is your unique identifier to allow for faster check-ins at Bitcamp this year. Tap the QR code icon to the right of the heading above to log in and access it. Use the email and password you used to apply for Bitcamp.`
   },
   {
-    heading: `What are the stars next to each scheduled event? `,
-    description: `Tap the stars to mark events that you are interested in. Favorited events will notify your phone with reminders so you don't miss them!`
+    heading: `What are the bells next to each scheduled event? `,
+    description: `Tap the bells to mark events that you are interested in. Favorited events will notify your phone with reminders so you don't miss them!`
   },
   {
     heading: 'What if I have no coding experience or ideas?',
