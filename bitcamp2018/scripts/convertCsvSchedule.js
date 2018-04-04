@@ -21,7 +21,7 @@ fs.readFile(scheduleFile, 'utf8', (err, data) => {
   } else {
 
     //console.log(data);
-    data = data.replace("\"", "");
+    data = data.replace(/"/g, "");
     let lines = data.split("\r\n");
     //console.log(lines);
     example = lines[12].split(',');
