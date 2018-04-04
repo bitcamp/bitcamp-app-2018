@@ -25,7 +25,10 @@ export default function MenuTab(props) {
   //<MentorsScene     tabLabel={`${iconPrefix}-help-circle`} />
 
   return (
-    <View style={{flex:1}}>
+    <View style={{
+      flex:1,
+      paddingBottom: 34,
+    }}>
       {/* {iOS && topBar} */}
       <ScrollableTabView
         tabBarPosition={menuTabPosition}
