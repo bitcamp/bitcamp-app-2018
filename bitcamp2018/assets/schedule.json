@@ -36,7 +36,7 @@
           "title": "Dinner"
         },
         {
-          "description": "",
+          "description": "Interact with sponsors and get tons of swag!",
           "endTime": "2018-04-06 20:30",
           "key": 100005,
           "location": "Campgrounds",
@@ -68,7 +68,7 @@
           "title": "Dessert"
         },
         {
-          "description": "",
+          "description": "Learn the ins and outs of hackathons and how to make the best of your first hackathon experience!",
           "endTime": "2018-04-06 22:00",
           "key": 100009,
           "location": "Cabin",
@@ -76,7 +76,7 @@
           "title": "Hackathon 101 Workshop"
         },
         {
-          "description": "",
+          "description": "Form teams based on your passions!",
           "endTime": "2018-04-06 22:30",
           "key": 100010,
           "location": "Campfire",
@@ -84,7 +84,7 @@
           "title": "Team Formation"
         },
         {
-          "description": "",
+          "description": "What it takes to raise funding for a hackathon project",
           "endTime": "2018-04-06 23:00",
           "key": 100011,
           "location": "Cabin",
@@ -92,7 +92,7 @@
           "title": "Turn a Hackathon Project into a VC-Funded Product"
         },
         {
-          "description": "Participants will learn how to develop an iconic brand and how to use design elements cohesively in logos and all brand materials.",
+          "description": "How to develop an iconic brand and use design elements cohesively in logos and all brand materials",
           "endTime": "2018-04-07 00:00",
           "key": 100012,
           "location": "Cabin",
@@ -105,7 +105,7 @@
       "Saturday",
       [
         {
-          "description": "",
+          "description": "nom nom nom",
           "endTime": "2018-04-07 03:00",
           "key": 100013,
           "location": "Canteen",
@@ -113,7 +113,7 @@
           "title": "Insomnia Cookies"
         },
         {
-          "description": "",
+          "description": "How to develop a website!",
           "endTime": "2018-04-07 01:00",
           "key": 100014,
           "location": "Cabin",
@@ -134,7 +134,7 @@
           "key": 100016,
           "location": "Cabin",
           "startTime": "2018-04-07 01:30",
-          "title": "Hungry Hungry Hippos"
+          "title": "Lifesize Hungry Hungry Hippos"
         },
         {
           "description": "",
@@ -145,7 +145,7 @@
           "title": "Breakfast"
         },
         {
-          "description": "",
+          "description": "Learn about life as an attorney in tech",
           "endTime": "2018-04-07 09:30",
           "key": 100018,
           "location": "Campfire",
@@ -153,7 +153,7 @@
           "title": "Attorney AMA"
         },
         {
-          "description": "",
+          "description": "Add the power of location to your application with a comprehensive mapping platform",
           "endTime": "2018-04-07 10:30",
           "key": 100019,
           "location": "Cabin",
@@ -161,7 +161,7 @@
           "title": "Amp Up Your Apps With Maps by Esri"
         },
         {
-          "description": "",
+          "description": "See MSFT Director Ludovic showcase Office Add-ins that integrate with popular productivity apps",
           "endTime": "2018-04-07 11:30",
           "key": 100020,
           "location": "Cabin",
@@ -169,7 +169,7 @@
           "title": "Discover the Office 365 Developer Platform by Microsoft"
         },
         {
-          "description": "",
+          "description": "Hear from alumni entrepreneurs who have launched startups",
           "endTime": "2018-04-07 12:00",
           "key": 100021,
           "location": "Campfire",
@@ -177,7 +177,7 @@
           "title": "Entrepeneurship Panel"
         },
         {
-          "description": "Learn about how to integrate online information gathering tools into your hacks",
+          "description": "How to integrate online information gathering tools into your hacks",
           "endTime": "2018-04-07 12:30",
           "key": 100022,
           "location": "Cabin",
@@ -193,7 +193,7 @@
           "title": "Lunch"
         },
         {
-          "description": "GIF workshop using Illustrator and Photoshop to explore visual concepts and motion. ",
+          "description": "Using Illustrator and Photoshop to explore visual concepts and motion",
           "endTime": "2018-04-07 13:30",
           "key": 100024,
           "location": "Cabin",
@@ -201,7 +201,7 @@
           "title": "GIFs Workshop"
         },
         {
-          "description": "",
+          "description": "Discover the connection between bananas and great UX design! Prize entry too!",
           "endTime": "2018-04-07 14:30",
           "key": 100025,
           "location": "Cabin",
@@ -209,7 +209,7 @@
           "title": "Go Bananas Over UX by FINRA"
         },
         {
-          "description": "",
+          "description": "Chat with 1517 Fund about anything entrepreneurship",
           "endTime": "2018-04-07 17:00",
           "key": 100026,
           "location": "1517 Fund Booth",
@@ -217,7 +217,7 @@
           "title": "Office Hours with 1517 Fund"
         },
         {
-          "description": "",
+          "description": "Hear the empowering stories of women in the tech industry",
           "endTime": "2018-04-07 15:00",
           "key": 100027,
           "location": "Cabin",
@@ -225,7 +225,7 @@
           "title": "Women in Tech Fireside Chat"
         },
         {
-          "description": "",
+          "description": "Round table discussion of modern mobile and social tech to improve quality of Behavioral Healthcare",
           "endTime": "2018-04-07 15:30",
           "key": 100028,
           "location": "Cabin",
@@ -233,7 +233,7 @@
           "title": "Using Technology to Improve Healthcare by Credible Behaviorial Health"
         },
         {
-          "description": "",
+          "description": "A rapid-fire live-design competition",
           "endTime": "2018-04-07 18:00",
           "key": 100029,
           "location": "Campfire",
@@ -249,12 +249,12 @@
           "title": "How 2 Blink LEDs Workshop"
         },
         {
-          "description": "",
+          "description": "Learn about the world of Venture Capital",
           "endTime": "2018-04-07 17:30",
           "key": 100031,
           "location": "Cabin",
           "startTime": "2018-04-07 17:00",
-          "title": "Venture Capital and the Art of Funding Your Startup -  Mike Volpi"
+          "title": "Venture Capital and the Art of Funding Your Startup - Mike Volpi"
         },
         {
           "description": "",
@@ -265,7 +265,7 @@
           "title": "Dinner"
         },
         {
-          "description": "",
+          "description": "Learn how to approach design problems with design thinking!",
           "endTime": "2018-04-07 18:30",
           "key": 100033,
           "location": "Cabin",
@@ -273,7 +273,7 @@
           "title": "Design Thinking Workshop"
         },
         {
-          "description": "Dive into the intricacies of the CS job interview process - what to expect before the interview",
+          "description": "What to expect before an interview",
           "endTime": "2018-04-07 19:30",
           "key": 100034,
           "location": "Cabin",
@@ -281,7 +281,7 @@
           "title": "The Coding Interview Workshop"
         },
         {
-          "description": "Building a self driving car with python and machine learning.",
+          "description": "Building a self driving car with python and machine learning",
           "endTime": "2018-04-07 20:30",
           "key": 100035,
           "location": "Cabin",
@@ -289,7 +289,7 @@
           "title": "Self-Driving Cars Workshop"
         },
         {
-          "description": "",
+          "description": "Learn how to dance!",
           "endTime": "2018-04-07 20:30",
           "key": 100036,
           "location": "Campfire",
@@ -297,7 +297,7 @@
           "title": "Ballroom Dancing"
         },
         {
-          "description": "",
+          "description": "Launch and configure your own blockchain in a matter of minutes with ARK Blockchain",
           "endTime": "2018-04-07 20:30",
           "key": 100037,
           "location": "Cabin",
@@ -305,7 +305,7 @@
           "title": "Ark-IoT Blockchain Workshop"
         },
         {
-          "description": "",
+          "description": "nom nom nom",
           "endTime": "2018-04-07 23:00",
           "key": 100038,
           "location": "Canteen",
@@ -313,7 +313,7 @@
           "title": "Insomnia Cookies"
         },
         {
-          "description": "An intro to blockchain technology - the tech that powers bitcoin and almost all other cryptocurrencies today.",
+          "description": "Intro to the tech that powers bitcoin and almost all other cryptocurrencies",
           "endTime": "2018-04-07 22:30",
           "key": 100039,
           "location": "Cabin",
@@ -334,7 +334,7 @@
       "Sunday",
       [
         {
-          "description": "",
+          "description": "Thank you to Applied Predictive Technologies for sponsoring our s'mores event!",
           "endTime": "2018-04-08 03:00",
           "key": 100041,
           "location": "Campfire II",
@@ -350,7 +350,7 @@
           "title": "MLH Cup Stacking"
         },
         {
-          "description": "",
+          "description": "Take a break from hacking and play some games!",
           "endTime": "2018-04-08 01:30",
           "key": 100043,
           "location": "Campfire",
@@ -410,7 +410,7 @@
           "endTime": "2018-04-08 15:00",
           "key": 100050,
           "location": "Campfire",
-          "startTime": "2018-04-08 01:00",
+          "startTime": "2018-04-08 13:00",
           "title": "Closing Ceremony"
         }
       ]
