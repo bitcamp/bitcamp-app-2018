@@ -27,7 +27,7 @@ import {
   CardAction
 } from 'react-native-card-view';
 
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { colors } from '../shared/styles';
 import aleofy from '../shared/aleo';
@@ -132,7 +132,7 @@ class EventCard extends Component {
                         <TouchableHighlight onPress = {this.triggerButtonPress.bind(this)} activeOpacity = {1}
                         underlayColor = {'#ffffff'}>
                           <Icon
-                            name = {this.state.favorited ? 'star' : 'star-o'}
+                            name = {this.state.favorited ? 'bell-ring' : 'bell-outline'}
                             size = {24}
                             color={colors.bitcampOrange}
                           />

@@ -139,6 +139,13 @@ class App extends Component {
     // request permissions if not provided
     firebase.messaging().hasPermission().then(enabled => {
       if (enabled) {
+        firebase.messaging().getToken()
+          .then(fcmToken => {
+            if (fcmToken) {
+              console.log(fcmToken);
+              // user doesn't have a device token yet
+            }
+          });
         this.waitForNotification()
       } else {
 
