@@ -34,7 +34,7 @@ import {
   Input,
   Icon
 } from 'native-base';
-import Orientation from 'react-native-orientation';
+// import Orientation from 'react-native-orientation';
 import MenuTab from './MenuTab';
 import { colors } from './shared/styles';
 import Modal from "react-native-modal";
@@ -122,7 +122,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    Orientation.lockToPortrait();
+    // Orientation.lockToPortrait();
 
     this.getID();
 

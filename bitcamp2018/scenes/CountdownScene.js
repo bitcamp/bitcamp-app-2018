@@ -39,8 +39,8 @@ class CountdownScene extends Component {
   }
 
   render() {
-    const eventTime      = moment("2018-04-06 07:00"); // when hacking begins
-    const endHackingTime = moment("2018-04-08 12:00"); // when hacking ends
+    const eventTime      = moment("2018-04-06 19:00"); // when hacking begins
+    const endHackingTime = moment("2018-04-08 09:00"); // when hacking ends
 
     let numberStyles = styles.numbers;
     let remain;  // the time remaining until the next 'event' (either hacking begins or hacking ends)
